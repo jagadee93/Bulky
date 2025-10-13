@@ -1,0 +1,56 @@
+﻿@model List<Category>
+
+
+
+<partial name="_Notification" />
+<div class="container">
+
+
+   
+    <div class="row pt-4 pb-3">
+        <div class="row col-6">
+            <h1 class="text-primary">CategoryList</h1>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Category" asp-action="Create" class="btn btn-primary"> <i class="bi bi-plus-circle"></i>Create New Category</a>
+        </div>
+    </div>
+
+
+    <table class="table table-bordered table-striped align-content-center">
+        <thead style="text-align:center">
+            <tr>
+                <th>
+                    CategoryName
+                </th>
+                <th>
+                    DisplayOrder
+                </th>
+                <th>
+                    Actions
+                </th>
+
+            </tr>
+        </thead>
+        <tbody style="text-align:center">
+            @foreach (Category category in Model.OrderBy(u => u.DisplayOrder))
+            {
+                <tr>
+                    <td>@category.Name</td>
+                    <td>@category.DisplayOrder</td>
+
+                      <td>
+                          <div class="w-75 btn-group flex-row justify-content-center" role="group">
+                            <a asp-action="Edit" class="me-3 btn btn-primary" title="Edit" asp-route-Id="@category.Id"><i class="bi bi-pencil-square"></i>Edit</a>
+                            <a asp-action="Delete" title="Delete" class="btn btn-danger" asp-route-Id="@category.Id"><i class="bi bi-x-square"></i>Delete</a>
+                          </div>
+                      </td>
+
+             
+
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
