@@ -1,0 +1,41 @@
+##############################
+# Visual Studio / .NET Ignore
+##############################
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+bin/
+obj/
+out/
+
+# Visual Studio cache/options directory
+.vs/
+
+# Packages
+*.nupkg
+**/packages/*
+!**/packages/build/
+!**/packages/repositories.config
+
+# Publish output
+publish/
+**/wwwroot/lib/
+**/wwwroot/js/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# Rider / VSCode
+.idea/
+.vscode/
