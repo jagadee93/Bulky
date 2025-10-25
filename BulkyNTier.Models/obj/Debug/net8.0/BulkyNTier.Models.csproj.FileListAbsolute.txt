@@ -1,0 +1,12 @@
+D:\Programming\ASP.NET\BulkyNTier\BulkyNTier.Models\bin\Debug\net8.0\BulkyNTier.Models.deps.json
+D:\Programming\ASP.NET\BulkyNTier\BulkyNTier.Models\bin\Debug\net8.0\BulkyNTier.Models.dll
+D:\Programming\ASP.NET\BulkyNTier\BulkyNTier.Models\bin\Debug\net8.0\BulkyNTier.Models.pdb
+D:\Programming\ASP.NET\BulkyNTier\BulkyNTier.Models\obj\Debug\net8.0\BulkyNTier.Models.csproj.AssemblyReference.cache
+D:\Programming\ASP.NET\BulkyNTier\BulkyNTier.Models\obj\Debug\net8.0\BulkyNTier.Models.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programming\ASP.NET\BulkyNTier\BulkyNTier.Models\obj\Debug\net8.0\BulkyNTier.Models.AssemblyInfoInputs.cache
+D:\Programming\ASP.NET\BulkyNTier\BulkyNTier.Models\obj\Debug\net8.0\BulkyNTier.Models.AssemblyInfo.cs
+D:\Programming\ASP.NET\BulkyNTier\BulkyNTier.Models\obj\Debug\net8.0\BulkyNTier.Models.csproj.CoreCompileInputs.cache
+D:\Programming\ASP.NET\BulkyNTier\BulkyNTier.Models\obj\Debug\net8.0\BulkyNTier.Models.dll
+D:\Programming\ASP.NET\BulkyNTier\BulkyNTier.Models\obj\Debug\net8.0\refint\BulkyNTier.Models.dll
+D:\Programming\ASP.NET\BulkyNTier\BulkyNTier.Models\obj\Debug\net8.0\BulkyNTier.Models.pdb
+D:\Programming\ASP.NET\BulkyNTier\BulkyNTier.Models\obj\Debug\net8.0\ref\BulkyNTier.Models.dll
