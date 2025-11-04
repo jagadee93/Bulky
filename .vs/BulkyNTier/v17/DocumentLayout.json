@@ -3,6 +3,26 @@
   "WorkspaceRootPath": "D:\\Programming\\ASP.NET\\BulkyNTier\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.dataaccess\\repository\\cateogoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|solutionrelative:bulkyntier.dataaccess\\repository\\cateogoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.dataaccess\\repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|solutionrelative:bulkyntier.dataaccess\\repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.dataaccess\\repository\\irepository\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|solutionrelative:bulkyntier.dataaccess\\repository\\irepository\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.dataaccess\\repository\\irepository\\icategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|solutionrelative:bulkyntier.dataaccess\\repository\\irepository\\icategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.dataaccess\\bulkyntier.dataaccess.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|solutionrelative:bulkyntier.dataaccess\\bulkyntier.dataaccess.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|solutionrelative:bulkyntier\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
@@ -69,10 +89,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|solutionrelative:bulkyntier\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.dataaccess\\bulkyntier.dataaccess.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|solutionrelative:bulkyntier.dataaccess\\bulkyntier.dataaccess.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -82,50 +98,67 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CateogoryRepository.cs",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Repository\\CateogoryRepository.cs",
+              "RelativeDocumentMoniker": "BulkyNTier.DataAccess\\Repository\\CateogoryRepository.cs",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Repository\\CateogoryRepository.cs",
+              "RelativeToolTip": "BulkyNTier.DataAccess\\Repository\\CateogoryRepository.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABUAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-31T16:59:04.89Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ICategoryRepository.cs",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Repository\\IRepository\\ICategoryRepository.cs",
+              "RelativeDocumentMoniker": "BulkyNTier.DataAccess\\Repository\\IRepository\\ICategoryRepository.cs",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Repository\\IRepository\\ICategoryRepository.cs",
+              "RelativeToolTip": "BulkyNTier.DataAccess\\Repository\\IRepository\\ICategoryRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-31T16:53:26.474Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "BulkyNTier\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "BulkyNTier\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-25T14:23:49.618Z",
+              "Title": "Repository.cs",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Repository\\Repository.cs",
+              "RelativeDocumentMoniker": "BulkyNTier.DataAccess\\Repository\\Repository.cs",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Repository\\Repository.cs",
+              "RelativeToolTip": "BulkyNTier.DataAccess\\Repository\\Repository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T17:00:06.94Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Views\\Category\\Edit.cshtml",
-              "RelativeDocumentMoniker": "BulkyNTier\\Views\\Category\\Edit.cshtml",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Views\\Category\\Edit.cshtml",
-              "RelativeToolTip": "BulkyNTier\\Views\\Category\\Edit.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-25T14:22:06.701Z",
+              "DocumentIndex": 2,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Repository\\IRepository\\IRepository.cs",
+              "RelativeDocumentMoniker": "BulkyNTier.DataAccess\\Repository\\IRepository\\IRepository.cs",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Repository\\IRepository\\IRepository.cs",
+              "RelativeToolTip": "BulkyNTier.DataAccess\\Repository\\IRepository\\IRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T17:43:11.509Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Views\\Category\\Index.cshtml",
-              "RelativeDocumentMoniker": "BulkyNTier\\Views\\Category\\Index.cshtml",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Views\\Category\\Index.cshtml",
-              "RelativeToolTip": "BulkyNTier\\Views\\Category\\Index.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABIAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-25T14:21:52.924Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "Create.cshtml",
               "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Views\\Category\\Create.cshtml",
               "RelativeDocumentMoniker": "BulkyNTier\\Views\\Category\\Create.cshtml",
@@ -133,12 +166,11 @@
               "RelativeToolTip": "BulkyNTier\\Views\\Category\\Create.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-25T14:21:35.077Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-25T14:21:35.077Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "CategoryController.cs",
               "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Controllers\\CategoryController.cs",
               "RelativeDocumentMoniker": "BulkyNTier\\Controllers\\CategoryController.cs",
@@ -146,12 +178,11 @@
               "RelativeToolTip": "BulkyNTier\\Controllers\\CategoryController.cs",
               "ViewState": "AgIAAGYAAAAAAAAAAAAvwHQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T14:20:52.164Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-25T14:20:52.164Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Program.cs",
               "RelativeDocumentMoniker": "BulkyNTier\\Program.cs",
@@ -159,12 +190,11 @@
               "RelativeToolTip": "BulkyNTier\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T12:50:44.152Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-25T12:50:44.152Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "site.css",
               "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\wwwroot\\css\\site.css",
               "RelativeDocumentMoniker": "BulkyNTier\\wwwroot\\css\\site.css",
@@ -172,12 +202,11 @@
               "RelativeToolTip": "BulkyNTier\\wwwroot\\css\\site.css",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-10-25T14:04:24.751Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-25T14:04:24.751Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "bootstrap.css",
               "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
               "RelativeDocumentMoniker": "BulkyNTier\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
@@ -190,7 +219,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "_ViewImports.cshtml",
               "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Views\\_ViewImports.cshtml",
               "RelativeDocumentMoniker": "BulkyNTier\\Views\\_ViewImports.cshtml",
@@ -198,117 +227,12 @@
               "RelativeToolTip": "BulkyNTier\\Views\\_ViewImports.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-25T14:22:21.077Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-25T14:22:21.077Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "SD.cs",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Utilities\\SD.cs",
-              "RelativeDocumentMoniker": "BulkyNTier.Utilities\\SD.cs",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Utilities\\SD.cs",
-              "RelativeToolTip": "BulkyNTier.Utilities\\SD.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T14:13:45.373Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Category.cs",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Models\\Category.cs",
-              "RelativeDocumentMoniker": "BulkyNTier.Models\\Category.cs",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Models\\Category.cs",
-              "RelativeToolTip": "BulkyNTier.Models\\Category.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAUAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T12:47:31.292Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "20251025135914_seedCategoryTable.cs",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Migrations\\20251025135914_seedCategoryTable.cs",
-              "RelativeDocumentMoniker": "BulkyNTier.DataAccess\\Migrations\\20251025135914_seedCategoryTable.cs",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Migrations\\20251025135914_seedCategoryTable.cs",
-              "RelativeToolTip": "BulkyNTier.DataAccess\\Migrations\\20251025135914_seedCategoryTable.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAABAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T13:59:15.376Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "20251025134840_InitialCreate.cs",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Migrations\\20251025134840_InitialCreate.cs",
-              "RelativeDocumentMoniker": "BulkyNTier.DataAccess\\Migrations\\20251025134840_InitialCreate.cs",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Migrations\\20251025134840_InitialCreate.cs",
-              "RelativeToolTip": "BulkyNTier.DataAccess\\Migrations\\20251025134840_InitialCreate.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T13:48:48.273Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "BulkyNTier",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\BulkyNTier.csproj",
-              "RelativeDocumentMoniker": "BulkyNTier\\BulkyNTier.csproj",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\BulkyNTier.csproj",
-              "RelativeToolTip": "BulkyNTier\\BulkyNTier.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-10-25T13:44:58.422Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\appsettings.json",
-              "RelativeDocumentMoniker": "BulkyNTier\\appsettings.json",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\appsettings.json",
-              "RelativeToolTip": "BulkyNTier\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-25T12:56:41.444Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "BulkyNTier.Models",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Models\\BulkyNTier.Models.csproj",
-              "RelativeDocumentMoniker": "BulkyNTier.Models\\BulkyNTier.Models.csproj",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Models\\BulkyNTier.Models.csproj",
-              "RelativeToolTip": "BulkyNTier.Models\\BulkyNTier.Models.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-10-25T12:43:49.927Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "BulkyNTier.DataAccess\\AppDbContext.cs",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\AppDbContext.cs",
-              "RelativeToolTip": "BulkyNTier.DataAccess\\AppDbContext.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwA0AAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T12:43:48.057Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "BulkyNTier.DataAccess",
+              "DocumentIndex": 4,
+              "Title": "BulkyNTier.DataAccess.csproj",
               "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj",
               "RelativeDocumentMoniker": "BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj",
               "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj",
@@ -319,8 +243,136 @@
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Views\\Category\\Index.cshtml",
+              "RelativeDocumentMoniker": "BulkyNTier\\Views\\Category\\Index.cshtml",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Views\\Category\\Index.cshtml",
+              "RelativeToolTip": "BulkyNTier\\Views\\Category\\Index.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABIAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-25T14:21:52.924Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Views\\Category\\Edit.cshtml",
+              "RelativeDocumentMoniker": "BulkyNTier\\Views\\Category\\Edit.cshtml",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Views\\Category\\Edit.cshtml",
+              "RelativeToolTip": "BulkyNTier\\Views\\Category\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-25T14:22:06.701Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "BulkyNTier\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "BulkyNTier\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-25T14:23:49.618Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "SD.cs",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Utilities\\SD.cs",
+              "RelativeDocumentMoniker": "BulkyNTier.Utilities\\SD.cs",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Utilities\\SD.cs",
+              "RelativeToolTip": "BulkyNTier.Utilities\\SD.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T14:13:45.373Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Category.cs",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Models\\Category.cs",
+              "RelativeDocumentMoniker": "BulkyNTier.Models\\Category.cs",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Models\\Category.cs",
+              "RelativeToolTip": "BulkyNTier.Models\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T12:47:31.292Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "20251025135914_seedCategoryTable.cs",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Migrations\\20251025135914_seedCategoryTable.cs",
+              "RelativeDocumentMoniker": "BulkyNTier.DataAccess\\Migrations\\20251025135914_seedCategoryTable.cs",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Migrations\\20251025135914_seedCategoryTable.cs",
+              "RelativeToolTip": "BulkyNTier.DataAccess\\Migrations\\20251025135914_seedCategoryTable.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T13:59:15.376Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "20251025134840_InitialCreate.cs",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Migrations\\20251025134840_InitialCreate.cs",
+              "RelativeDocumentMoniker": "BulkyNTier.DataAccess\\Migrations\\20251025134840_InitialCreate.cs",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Migrations\\20251025134840_InitialCreate.cs",
+              "RelativeToolTip": "BulkyNTier.DataAccess\\Migrations\\20251025134840_InitialCreate.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T13:48:48.273Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "BulkyNTier.csproj",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\BulkyNTier.csproj",
+              "RelativeDocumentMoniker": "BulkyNTier\\BulkyNTier.csproj",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\BulkyNTier.csproj",
+              "RelativeToolTip": "BulkyNTier\\BulkyNTier.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-10-25T13:44:58.422Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\appsettings.json",
+              "RelativeDocumentMoniker": "BulkyNTier\\appsettings.json",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\appsettings.json",
+              "RelativeToolTip": "BulkyNTier\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-25T12:56:41.444Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "BulkyNTier.Models.csproj",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Models\\BulkyNTier.Models.csproj",
+              "RelativeDocumentMoniker": "BulkyNTier.Models\\BulkyNTier.Models.csproj",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Models\\BulkyNTier.Models.csproj",
+              "RelativeToolTip": "BulkyNTier.Models\\BulkyNTier.Models.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-10-25T12:43:49.927Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "BulkyNTier.DataAccess\\AppDbContext.cs",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\AppDbContext.cs",
+              "RelativeToolTip": "BulkyNTier.DataAccess\\AppDbContext.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwA0AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-25T12:43:48.057Z"
             }
           ]
         }

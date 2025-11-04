@@ -1,4 +1,5 @@
 ﻿using BulkyNTier.DataAccess;
+using BulkyNTier.DataAccess.Repository.IRepository;
 using BulkyNTier.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,15 +7,15 @@ namespace BulkyNTier.Controllers
 {
     public class CategoryController : Controller
     {
-        public readonly AppDbContext _dbContext;
-        public CategoryController(AppDbContext db)
+        public readonly ICategoryRepository _categoryRepository ;
+        public CategoryController(ICategoryRepository db)
         {
-            _dbContext = db;
+             _categoryRepository= db;
         }
 
         public IActionResult Index()
         {
-            List<Category> objCategoryList = _dbContext.Categories.ToList();
+            List<Category> objCategoryList = _categoryRepository.GetAll().ToList();
             return View(objCategoryList);
         }
 
@@ -42,8 +43,8 @@ namespace BulkyNTier.Controllers
 
             if (ModelState.IsValid)
             {
-                _dbContext.Categories.Add(obj);
-                _dbContext.SaveChanges();
+                _categoryRepository.Add(obj);
+                _categoryRepository.Save();
                 TempData["success"] = "Category Created Successfully";
                 return RedirectToAction("Index", "Category");
             }
@@ -57,7 +58,7 @@ namespace BulkyNTier.Controllers
             Console.WriteLine(Id);
 
 
-            Category? obj = _dbContext.Categories.FirstOrDefault(u => u.Id == Id);
+            Category? obj = _categoryRepository.GetFirstOrDefault(u => u.Id == Id);
             if (obj == null || Id == 0 || Id == null)
             {
                 return NotFound();
@@ -81,8 +82,8 @@ namespace BulkyNTier.Controllers
             Console.WriteLine(updatedObj);
             if (ModelState.IsValid)
             {
-                _dbContext.Update(updatedObj);
-                _dbContext.SaveChanges();
+                _categoryRepository.Update(updatedObj);
+                _categoryRepository.Save();
                 TempData["success"] = "Category edited Successfully";
             }
 
@@ -99,15 +100,15 @@ namespace BulkyNTier.Controllers
             {
                 return NotFound();
             }
-            Category? objTobeDeleted = _dbContext.Categories.FirstOrDefault(u => u.Id == id);
+            Category? objTobeDeleted = _categoryRepository.GetFirstOrDefault(u => u.Id == id);
 
             if (objTobeDeleted == null)
             {
                 TempData["error"] = $"Category with {id} could not be found";
             }
 
-            _dbContext.Categories.Remove(objTobeDeleted);
-            _dbContext.SaveChanges();
+            _categoryRepository.Remove(objTobeDeleted);
+            _categoryRepository.Save();
             TempData["success"] = "Category Deleted Successfully";
 
             return RedirectToAction("Index");
