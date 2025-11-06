@@ -2,8 +2,9 @@ using System.Diagnostics;
 using BulkyNTier.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BulkyNTier.Controllers
+namespace BulkyNTier.Areas.Customer.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

@@ -12,13 +12,7 @@ namespace BulkyNTier.DataAccess.Repository
             
         }
 
-        public void Save()
-        {
-
-           _appDbContext.SaveChanges();
-            
-
-        }
+     
 
         public void Update(Category obj)
         {
