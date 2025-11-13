@@ -10,11 +10,13 @@ namespace BulkyNTier.DataAccess.Repository
     public class UnitOfWork : IUnitOfWork
     {
         public ICategoryRepository CategoryRepository {  get; set; }
+        public IProductRepository ProductRepository { get; set; }
         private AppDbContext _db;
         public UnitOfWork(AppDbContext db) {
 
             _db = db;
-            CategoryRepository=new CategoryRepository(_db);
+            CategoryRepository = new CategoryRepository(_db);
+            ProductRepository=new ProductRepository(_db);
         }
 
         

@@ -3,6 +3,7 @@ using BulkyNTier.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BulkyNTier.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251106131057_SeedProductTableToDB")]
+    partial class SeedProductTableToDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,9 +77,6 @@ namespace BulkyNTier.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -103,8 +103,6 @@ namespace BulkyNTier.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
-
                     b.ToTable("Products");
 
                     b.HasData(
@@ -112,7 +110,6 @@ namespace BulkyNTier.DataAccess.Migrations
                         {
                             Id = 101,
                             Author = "J.K Rowling",
-                            CategoryId = 1,
                             Description = "Harry Potter In a Magical world looking to find out sirius Black",
                             ISBN = "127h32g24",
                             ListPrice = 100.0,
@@ -125,7 +122,6 @@ namespace BulkyNTier.DataAccess.Migrations
                         {
                             Id = 102,
                             Author = "Napolean Hill",
-                            CategoryId = 1,
                             Description = "A Schlor trying to teach Economics",
                             ISBN = "12843jur",
                             ListPrice = 300.0,
@@ -134,17 +130,6 @@ namespace BulkyNTier.DataAccess.Migrations
                             Price50 = 200.0,
                             Title = "Think and Grow Rich"
                         });
-                });
-
-            modelBuilder.Entity("BulkyNTier.Models.Product", b =>
-                {
-                    b.HasOne("BulkyNTier.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }

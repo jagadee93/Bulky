@@ -1,0 +1,62 @@
+﻿@model List<Product>
+
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2"> Products List</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pt-4 pb-3">
+            <div class="row col-6">
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="Product" asp-action="Create" class="btn btn-primary"> <i class="bi bi-plus-circle"></i>Create New Product</a>
+            </div>
+        </div>
+
+
+
+        <table class="table table-bordered table-striped align-content-center">
+            <thead style="text-align:center">
+                <tr>
+                    <th>
+                        Book Title
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        ISBN
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody style="text-align:center">
+                @foreach (Product product in Model.OrderBy(u => u.Id))
+                {
+                    <tr>
+                        <td>@product.Title</td>
+                        <td>@product.Description</td>
+
+                        <td>
+                            <div class="w-75 btn-group flex-row justify-content-center" role="group">
+                                <a asp-area="Customer" asp-controller="Product" asp-action="Edit" class="me-3 btn btn-primary" title="Edit" asp-route-Id="@product.Id"><i class="bi bi-pencil-square"></i>Edit</a>
+                                <a asp-area="Customer" asp-controller="Product"  asp-action="Delete" title="Delete" class="btn btn-danger" asp-route-Id="@product.Id"><i class="bi bi-x-square"></i>Delete</a>
+                            </div>
+                        </td>
+
+
+
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
