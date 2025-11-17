@@ -12,7 +12,7 @@
     </div>
 
     <div class="card-body p-4">
-        <form method="post" class="row g-3">
+        <form method="post" class="row g-3" enctype="multipart/form-data">
             <!-- g-3 gives spacing between fields -->
             @*<div asp-validation-summary="ModelOnly"></div>*@
 
@@ -83,9 +83,9 @@
 
             <div class="col-12 col-lg-6">
                 <div class="form-floating">
-                    <input asp-for="Product.ImageURL" class="form-control border-0 shadow" />
+                    <input type="file" class="form-control border-0 shadow" />
                     <label asp-for="Product.ImageURL" class="ms-2"></label>
-                    <span class="text-danger" asp-validation-for="Product.ImageURL"></span>
+                   
                 </div>
             </div>
 
