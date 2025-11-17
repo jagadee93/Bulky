@@ -1,4 +1,4 @@
-﻿@model Product
+﻿@model ProductVM
 
 
 
@@ -19,67 +19,90 @@
             <!-- Each input wrapped in col-12 for small screens, col-lg-6 for large -->
             <div class="col-12 col-lg-6">
                 <div class="form-floating">
-                    <input asp-for="Title" class="form-control border-0 shadow" />
-                    <label class="ms-2">Title</label>
-                    <span class="text-danger" asp-validation-for="Title"></span>
+                    <input asp-for="Product.Title" class="form-control border-0 shadow" />
+                    <label asp-for="Product.Title" class="ms-2"></label>
+                    <span class="text-danger" asp-validation-for="Product.Title"></span>
                 </div>
             </div>
 
             <div class="col-12 col-lg-6">
                 <div class="form-floating">
-                    <input asp-for="Description" class="form-control border-0 shadow" />
-                    <label class="ms-2">Description</label>
-                    <span class="text-danger" asp-validation-for="Description"></span>
+                    <input asp-for="Product.Description" class="form-control border-0 shadow" />
+                    <label asp-for="Product.Description" class="ms-2"></label>
+                    <span class="text-danger" asp-validation-for="Product.Description"></span>
                 </div>
             </div>
 
             <div class="col-12 col-lg-6">
                 <div class="form-floating">
-                    <input asp-for="Author" class="form-control border-0 shadow" />
-                    <label class="ms-2">Author</label>
-                    <span class="text-danger" asp-validation-for="Author"></span>
+                    <input asp-for="Product.Author" class="form-control border-0 shadow" />
+                    <label asp-for="Product.Author" class="ms-2"></label>
+                    <span class="text-danger" asp-validation-for="Product.Author"></span>
                 </div>
             </div>
 
             <div class="col-12 col-lg-6">
                 <div class="form-floating">
-                    <input asp-for="ISBN" class="form-control border-0 shadow" />
-                    <label class="ms-2">ISBN</label>
-                    <span class="text-danger" asp-validation-for="ISBN"></span>
+                    <input asp-for="Product.ISBN" class="form-control border-0 shadow" />
+                    <label asp-for="Product.ISBN" class="ms-2"></label>
+                    <span class="text-danger" asp-validation-for="Product.ISBN"></span>
                 </div>
             </div>
 
             <div class="col-12 col-lg-6">
                 <div class="form-floating">
-                    <input asp-for="ListPrice" class="form-control border-0 shadow" />
-                    <label class="ms-2">List Price</label>
-                    <span class="text-danger" asp-validation-for="ListPrice"></span>
+                    <input asp-for="Product.ListPrice" class="form-control border-0 shadow" />
+                    <label asp-for="Product.ListPrice" class="ms-2"></label>
+                    <span class="text-danger" asp-validation-for="Product.ListPrice"></span>
                 </div>
             </div>
 
             <div class="col-12 col-lg-6">
                 <div class="form-floating">
-                    <input asp-for="Price" class="form-control border-0 shadow" />
-                    <label class="ms-2">Price</label>
-                    <span class="text-danger" asp-validation-for="Price"></span>
+                    <input asp-for="Product.Price" class="form-control border-0 shadow" />
+                    <label asp-for="Product.Price" class="ms-2"></label>
+                    <span class="text-danger" asp-validation-for="Product.Price"></span>
                 </div>
             </div>
 
             <div class="col-12 col-lg-6">
                 <div class="form-floating">
-                    <input asp-for="Price50" class="form-control border-0 shadow" />
-                    <label class="ms-2">Price50</label>
-                    <span class="text-danger" asp-validation-for="Price50"></span>
+                    <input asp-for="Product.Price50" class="form-control border-0 shadow" />
+                    <label asp-for="Product.Price50" class="ms-2"></label>
+                    <span class="text-danger" asp-validation-for="Product.Price50"></span>
                 </div>     
             </div>
 
             <div class="col-12 col-lg-6">
                 <div class="form-floating">
-                    <input asp-for="Price100" class="form-control border-0 shadow" />
-                    <label class="ms-2">Price100</label>
-                    <span class="text-danger" asp-validation-for="Price100"></span>
+                    <input asp-for="Product.Price100" class="form-control border-0 shadow" />
+                    <label asp-for="Product.Price100" class="ms-2"></label>
+                    <span class="text-danger" asp-validation-for="Product.Price100"></span>
                 </div>
             </div>
+
+            <div class="col-12 col-lg-6">
+                <div class="form-floating">
+                    <input asp-for="Product.ImageURL" class="form-control border-0 shadow" />
+                    <label asp-for="Product.ImageURL" class="ms-2"></label>
+                    <span class="text-danger" asp-validation-for="Product.ImageURL"></span>
+                </div>
+            </div>
+
+
+            <div class="col-12 col-lg-6">
+                <div class="form-floating">
+                  @* <select asp-for="CategoryId" asp-items="ViewBag.CategoryList" class="form-select border-0 shadow-1"> *@
+                 @* <select asp-for="CategoryId" asp-items="@(ViewData["CategoryList"] as IEnumerable<SelectListItem> )" class="form-select border-0 shadow-1"> *@
+                    <select asp-for="@Model.Product.CategoryId" asp-items="@Model.CategoryList" class="form-select border-0 shadow-1">
+                        <option disabled>Select Category</option>
+                    </select>
+                    <label asp-for="@Model.Product.CategoryId" class="ms-2"></label>
+                    
+                </div>
+            </div>
+
+
 
             <!-- Buttons -->
             <div class="col-12 d-flex justify-content-start gap-3 pt-3">

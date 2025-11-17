@@ -1,6 +1,8 @@
 ﻿using BulkyNTier.DataAccess.Repository.IRepository;
 using BulkyNTier.Models;
+using BulkyNTier.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BulkyNTier.Areas.Customer.Controllers
 {
@@ -18,24 +20,71 @@ namespace BulkyNTier.Areas.Customer.Controllers
 
         public IActionResult Create()
         {
-            return View();
+
+            //IEnumerable<SelectListItem> categoryList = _unitOfWork.CategoryRepository.GetAll().
+            //  Select(u => new SelectListItem
+            //  {
+            //      Text = u.Name,
+            //      Value = u.Id.ToString()
+            //  });
+
+            ////ViewBag.CategoryList = categoryList;
+            //ViewData["CategoryList"]=categoryList;
+
+
+            ProductVM productVM = new()
+            {
+                CategoryList = _unitOfWork.CategoryRepository.GetAll().
+                  Select(u => new SelectListItem
+                  {
+                      Text = u.Name,
+                      Value = u.Id.ToString()
+                  }),
+                Product = new Product()
+            };
+
+
+            //IEnumerable< SelectListItem> CategoryList= _unitOfWork.CategoryRepository.GetAll().
+            //  Select(u => new SelectListItem
+            //  {
+            //      Text = u.Name,
+            //      Value = u.Id.ToString()
+            //  });
+
+
+
+            return View(productVM);
         }
 
         [HttpPost]
-        public IActionResult Create(Product product)
+        public IActionResult Create(ProductVM productVM)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.ProductRepository.Add(product);
+                _unitOfWork.ProductRepository.Add(productVM.Product);
                 _unitOfWork.Save();
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            //elsev 
+            //{
+            //    IEnumerable<SelectListItem> CategoryList = _unitOfWork.CategoryRepository.GetAll().Select(u => new SelectListItem
+            //    {
+            //        Text = u.Name,
+            //        Value = u.Id.ToString()
+            //    });
+            //    productVM.CategoryList = CategoryList;
+            //    return View(productVM);
+            //}
+
+            return View();
+
+               
         }
 
         public IActionResult Index()
         {
 
-           var products= _unitOfWork.ProductRepository.GetAll().ToList();
+           List<Product> products= _unitOfWork.ProductRepository.GetAll().ToList();
            return View(products);
         }
 

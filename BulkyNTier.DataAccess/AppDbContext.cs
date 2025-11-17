@@ -27,8 +27,8 @@ namespace BulkyNTier.DataAccess
                 );
 
             modelBuilder.Entity<Product>().HasData(  
-                new Product { Id = 101, Title = "Harry Potter And the Deathly Hallows", Author = "J.K Rowling", Description = "Harry Potter In a Magical world looking to find out sirius Black", ISBN = "127h32g24", ListPrice = 100, Price = 90, Price50 = 60, Price100 = 40 ,CategoryId=1},
-                new Product { Id = 102, Title = "Think and Grow Rich", Author = "Napolean Hill", Description = "A Schlor trying to teach Economics", ISBN = "12843jur", ListPrice = 300, Price = 250, Price50 = 200, Price100 = 150,CategoryId=1 }
+                new Product { Id = 101, Title = "Harry Potter And the Deathly Hallows", Author = "J.K Rowling", Description = "Harry Potter In a Magical world looking to find out sirius Black", ISBN = "127h32g24", ListPrice = 100, Price = 90, Price50 = 60, Price100 = 40 ,CategoryId=1,ImageURL=""},
+                new Product { Id = 102, Title = "Think and Grow Rich", Author = "Napolean Hill", Description = "A Schlor trying to teach Economics", ISBN = "12843jur", ListPrice = 300, Price = 250, Price50 = 200, Price100 = 150,CategoryId=1 ,ImageURL=""}
                 );
 
 
