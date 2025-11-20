@@ -7,9 +7,9 @@ namespace BulkyNTier.DataAccess.Repository.IRepository
     public interface IRepository<T> where T : class
     {
         //T-category
-        IEnumerable<T> GetAll();
+        IEnumerable<T> GetAll(string? includeProperties);
 
-        T GetFirstOrDefault(Expression<Func<T,bool>> filter);
+        T GetFirstOrDefault(Expression<Func<T,bool>> filter,string? includeProperties);
         void Add(T entity);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);

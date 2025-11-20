@@ -16,7 +16,7 @@ namespace BulkyNTier.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Category> objCategoryList = unitOfWork.CategoryRepository.GetAll().ToList();
+            List<Category> objCategoryList = unitOfWork.CategoryRepository.GetAll(includeProperties:null).ToList();
             return View(objCategoryList);
         }
 
@@ -59,7 +59,7 @@ namespace BulkyNTier.Areas.Admin.Controllers
             Console.WriteLine(Id);
 
 
-            Category? obj = unitOfWork.CategoryRepository.GetFirstOrDefault(u => u.Id == Id);
+            Category? obj = unitOfWork.CategoryRepository.GetFirstOrDefault(u => u.Id == Id,includeProperties: null);
             if (obj == null || Id == 0 || Id == null)
             {
                 return NotFound();
@@ -101,7 +101,7 @@ namespace BulkyNTier.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            Category? objTobeDeleted = unitOfWork.CategoryRepository.GetFirstOrDefault(u => u.Id == id);
+            Category? objTobeDeleted = unitOfWork.CategoryRepository.GetFirstOrDefault(u => u.Id == id, includeProperties: null);
 
             if (objTobeDeleted == null)
             {

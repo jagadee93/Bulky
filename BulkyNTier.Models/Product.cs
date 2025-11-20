@@ -9,7 +9,6 @@ namespace BulkyNTier.Models
     public class Product
     {
         [Key]
-        
         public int Id { get; set; }
         [Required]
         public string Title { get; set; }
@@ -36,7 +35,7 @@ namespace BulkyNTier.Models
 
         [ForeignKey("CategoryId")]
         [ValidateNever]
-       public Category Category { get; set; }
+        public Category Category { get; set; }
         [ValidateNever]
         public string ImageURL { get; set; }
     }

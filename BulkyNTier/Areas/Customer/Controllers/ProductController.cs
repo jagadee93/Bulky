@@ -25,7 +25,7 @@ namespace BulkyNTier.Areas.Customer.Controllers
         public IActionResult Index()
         {
 
-            List<Product> products = _unitOfWork.ProductRepository.GetAll().ToList();
+            List<Product> products = _unitOfWork.ProductRepository.GetAll(includeProperties:"Category").ToList();
             return View(products);
         }
 
@@ -37,7 +37,7 @@ namespace BulkyNTier.Areas.Customer.Controllers
         {
             ProductVM productVM = new()
             {
-                CategoryList = _unitOfWork.CategoryRepository.GetAll().
+                CategoryList = _unitOfWork.CategoryRepository.GetAll(includeProperties:null).
                   Select(u => new SelectListItem
                   {
                       Text = u.Name,
@@ -53,7 +53,7 @@ namespace BulkyNTier.Areas.Customer.Controllers
             }
             else
             {
-                productVM.Product = _unitOfWork.ProductRepository.GetFirstOrDefault(u=>u.Id == id);
+                productVM.Product = _unitOfWork.ProductRepository.GetFirstOrDefault(u=>u.Id == id,includeProperties:null);
              
                 return View(productVM);
 
@@ -142,7 +142,7 @@ namespace BulkyNTier.Areas.Customer.Controllers
 
         public IActionResult Delete(int? id)
         {
-            var productToBeDeleted=_unitOfWork.ProductRepository.GetFirstOrDefault(u=>u.Id == id);
+            var productToBeDeleted=_unitOfWork.ProductRepository.GetFirstOrDefault(u=>u.Id == id, includeProperties: null);
             if (productToBeDeleted == null)
             {
                 TempData["error"] = "Product not found";

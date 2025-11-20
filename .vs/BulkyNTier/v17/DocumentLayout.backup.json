@@ -3,68 +3,32 @@
   "WorkspaceRootPath": "D:\\Programming\\ASP.NET\\BulkyNTier\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier\\areas\\customer\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|solutionrelative:bulkyntier\\areas\\customer\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier\\areas\\customer\\views\\product\\upsert.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|solutionrelative:bulkyntier\\areas\\customer\\views\\product\\upsert.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier\\areas\\customer\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|solutionrelative:bulkyntier\\areas\\customer\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier\\areas\\customer\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|solutionrelative:bulkyntier\\areas\\customer\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier\\areas\\customer\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|solutionrelative:bulkyntier\\areas\\customer\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier\\areas\\admin\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|solutionrelative:bulkyntier\\areas\\admin\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.dataaccess\\repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|solutionrelative:bulkyntier.dataaccess\\repository\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier\\areas\\customer\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|solutionrelative:bulkyntier\\areas\\customer\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier\\views\\shared\\_notification.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|solutionrelative:bulkyntier\\views\\shared\\_notification.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|solutionrelative:bulkyntier\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F69AF64C-C25F-48BC-85BA-2E31DACCAD14}|BulkyNTier.Models\\BulkyNTier.Models.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.models\\viewmodels\\productvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F69AF64C-C25F-48BC-85BA-2E31DACCAD14}|BulkyNTier.Models\\BulkyNTier.Models.csproj|solutionrelative:bulkyntier.models\\viewmodels\\productvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F69AF64C-C25F-48BC-85BA-2E31DACCAD14}|BulkyNTier.Models\\BulkyNTier.Models.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F69AF64C-C25F-48BC-85BA-2E31DACCAD14}|BulkyNTier.Models\\BulkyNTier.Models.csproj|solutionrelative:bulkyntier.models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.dataaccess\\repository\\irepository\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|solutionrelative:bulkyntier.dataaccess\\repository\\irepository\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F69AF64C-C25F-48BC-85BA-2E31DACCAD14}|BulkyNTier.Models\\BulkyNTier.Models.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F69AF64C-C25F-48BC-85BA-2E31DACCAD14}|BulkyNTier.Models\\BulkyNTier.Models.csproj|solutionrelative:bulkyntier.models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F69AF64C-C25F-48BC-85BA-2E31DACCAD14}|BulkyNTier.Models\\BulkyNTier.Models.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F69AF64C-C25F-48BC-85BA-2E31DACCAD14}|BulkyNTier.Models\\BulkyNTier.Models.csproj|solutionrelative:bulkyntier.models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F69AF64C-C25F-48BC-85BA-2E31DACCAD14}|BulkyNTier.Models\\BulkyNTier.Models.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F69AF64C-C25F-48BC-85BA-2E31DACCAD14}|BulkyNTier.Models\\BulkyNTier.Models.csproj|solutionrelative:bulkyntier.models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.dataaccess\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|solutionrelative:bulkyntier.dataaccess\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F69AF64C-C25F-48BC-85BA-2E31DACCAD14}|BulkyNTier.Models\\BulkyNTier.Models.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.models\\bulkyntier.models.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{F69AF64C-C25F-48BC-85BA-2E31DACCAD14}|BulkyNTier.Models\\BulkyNTier.Models.csproj|solutionrelative:bulkyntier.models\\bulkyntier.models.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.dataaccess\\repository\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|solutionrelative:bulkyntier.dataaccess\\repository\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.dataaccess\\migrations\\20251113175211_addimgurltoproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|solutionrelative:bulkyntier.dataaccess\\migrations\\20251113175211_addimgurltoproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier\\areas\\admin\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|solutionrelative:bulkyntier\\areas\\admin\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -74,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -82,196 +46,94 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "BulkyNTier\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "BulkyNTier\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-18T10:00:09.65Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ProductController.cs",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Areas\\Customer\\Controllers\\ProductController.cs",
-              "RelativeDocumentMoniker": "BulkyNTier\\Areas\\Customer\\Controllers\\ProductController.cs",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Areas\\Customer\\Controllers\\ProductController.cs",
-              "RelativeToolTip": "BulkyNTier\\Areas\\Customer\\Controllers\\ProductController.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAD4v0MAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-13T17:55:19.918Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Areas\\Customer\\Views\\Product\\Index.cshtml",
-              "RelativeDocumentMoniker": "BulkyNTier\\Areas\\Customer\\Views\\Product\\Index.cshtml",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Areas\\Customer\\Views\\Product\\Index.cshtml",
-              "RelativeToolTip": "BulkyNTier\\Areas\\Customer\\Views\\Product\\Index.cshtml",
-              "ViewState": "AgIAADAAAAAAAAAAAAAAADwAAABXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-13T17:53:41.451Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Upsert.cshtml",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Areas\\Customer\\Views\\Product\\Upsert.cshtml",
-              "RelativeDocumentMoniker": "BulkyNTier\\Areas\\Customer\\Views\\Product\\Upsert.cshtml",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Areas\\Customer\\Views\\Product\\Upsert.cshtml",
-              "RelativeToolTip": "BulkyNTier\\Areas\\Customer\\Views\\Product\\Upsert.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-13T17:53:35.505Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Areas\\Customer\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "BulkyNTier\\Areas\\Customer\\Controllers\\HomeController.cs",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Areas\\Customer\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "BulkyNTier\\Areas\\Customer\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-17T14:55:18.483Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CategoryController.cs",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Areas\\Admin\\Controllers\\CategoryController.cs",
-              "RelativeDocumentMoniker": "BulkyNTier\\Areas\\Admin\\Controllers\\CategoryController.cs",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Areas\\Admin\\Controllers\\CategoryController.cs",
-              "RelativeToolTip": "BulkyNTier\\Areas\\Admin\\Controllers\\CategoryController.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAzwBkAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T17:38:50.271Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "_ViewImports.cshtml",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Areas\\Customer\\Views\\_ViewImports.cshtml",
-              "RelativeDocumentMoniker": "BulkyNTier\\Areas\\Customer\\Views\\_ViewImports.cshtml",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Areas\\Customer\\Views\\_ViewImports.cshtml",
-              "RelativeToolTip": "BulkyNTier\\Areas\\Customer\\Views\\_ViewImports.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-14T18:30:31.493Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "_Notification.cshtml",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Views\\Shared\\_Notification.cshtml",
-              "RelativeDocumentMoniker": "BulkyNTier\\Views\\Shared\\_Notification.cshtml",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Views\\Shared\\_Notification.cshtml",
-              "RelativeToolTip": "BulkyNTier\\Views\\Shared\\_Notification.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-18T10:47:37.874Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ProductVM.cs",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Models\\ViewModels\\ProductVM.cs",
-              "RelativeDocumentMoniker": "BulkyNTier.Models\\ViewModels\\ProductVM.cs",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Models\\ViewModels\\ProductVM.cs",
-              "RelativeToolTip": "BulkyNTier.Models\\ViewModels\\ProductVM.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T17:30:59.331Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
               "Title": "Category.cs",
               "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Models\\Category.cs",
               "RelativeDocumentMoniker": "BulkyNTier.Models\\Category.cs",
               "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Models\\Category.cs",
               "RelativeToolTip": "BulkyNTier.Models\\Category.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAYAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T17:37:15.365Z"
+              "WhenOpened": "2025-11-20T18:18:05.45Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 6,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Areas\\Admin\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "BulkyNTier\\Areas\\Admin\\Controllers\\CategoryController.cs",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Areas\\Admin\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "BulkyNTier\\Areas\\Admin\\Controllers\\CategoryController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T18:12:41.218Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Product.cs",
               "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Models\\Product.cs",
               "RelativeDocumentMoniker": "BulkyNTier.Models\\Product.cs",
               "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Models\\Product.cs",
               "RelativeToolTip": "BulkyNTier.Models\\Product.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAcwCYAAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAkwAsAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T18:22:34.781Z"
+              "WhenOpened": "2025-11-20T18:06:58.306Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "ErrorViewModel.cs",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Models\\ErrorViewModel.cs",
-              "RelativeDocumentMoniker": "BulkyNTier.Models\\ErrorViewModel.cs",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Models\\ErrorViewModel.cs",
-              "RelativeToolTip": "BulkyNTier.Models\\ErrorViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-17T15:26:44.912Z"
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Areas\\Customer\\Views\\Product\\Index.cshtml",
+              "RelativeDocumentMoniker": "BulkyNTier\\Areas\\Customer\\Views\\Product\\Index.cshtml",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Areas\\Customer\\Views\\Product\\Index.cshtml",
+              "RelativeToolTip": "BulkyNTier\\Areas\\Customer\\Views\\Product\\Index.cshtml",
+              "ViewState": "AgIAACUAAAAAAAAAAAAEwDYAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-20T18:01:59.523Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "BulkyNTier.DataAccess\\AppDbContext.cs",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\AppDbContext.cs",
-              "RelativeToolTip": "BulkyNTier.DataAccess\\AppDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAIAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Repository\\Repository.cs",
+              "RelativeDocumentMoniker": "BulkyNTier.DataAccess\\Repository\\Repository.cs",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Repository\\Repository.cs",
+              "RelativeToolTip": "BulkyNTier.DataAccess\\Repository\\Repository.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAvwCoAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-05T17:28:21.399Z"
+              "WhenOpened": "2025-11-20T18:00:54.637Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "BulkyNTier.Models.csproj",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Models\\BulkyNTier.Models.csproj",
-              "RelativeDocumentMoniker": "BulkyNTier.Models\\BulkyNTier.Models.csproj",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.Models\\BulkyNTier.Models.csproj",
-              "RelativeToolTip": "BulkyNTier.Models\\BulkyNTier.Models.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-11-14T17:33:40.99Z"
+              "DocumentIndex": 3,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Repository\\IRepository\\IRepository.cs",
+              "RelativeDocumentMoniker": "BulkyNTier.DataAccess\\Repository\\IRepository\\IRepository.cs",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Repository\\IRepository\\IRepository.cs",
+              "RelativeToolTip": "BulkyNTier.DataAccess\\Repository\\IRepository\\IRepository.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA4AAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T18:00:50.793Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "ProductRepository.cs",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Repository\\ProductRepository.cs",
-              "RelativeDocumentMoniker": "BulkyNTier.DataAccess\\Repository\\ProductRepository.cs",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Repository\\ProductRepository.cs",
-              "RelativeToolTip": "BulkyNTier.DataAccess\\Repository\\ProductRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Areas\\Customer\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "BulkyNTier\\Areas\\Customer\\Controllers\\ProductController.cs",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\Areas\\Customer\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "BulkyNTier\\Areas\\Customer\\Controllers\\ProductController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwBYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T17:32:21.822Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "20251113175211_AddImgURLToProduct.cs",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Migrations\\20251113175211_AddImgURLToProduct.cs",
-              "RelativeDocumentMoniker": "BulkyNTier.DataAccess\\Migrations\\20251113175211_AddImgURLToProduct.cs",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\Migrations\\20251113175211_AddImgURLToProduct.cs",
-              "RelativeToolTip": "BulkyNTier.DataAccess\\Migrations\\20251113175211_AddImgURLToProduct.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-13T17:52:11.261Z"
+              "WhenOpened": "2025-11-20T17:56:57.02Z",
+              "EditorCaption": ""
             }
           ]
         }
