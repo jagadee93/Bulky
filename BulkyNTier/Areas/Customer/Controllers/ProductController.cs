@@ -11,27 +11,30 @@ namespace BulkyNTier.Areas.Customer.Controllers
     {
 
         private IUnitOfWork _unitOfWork;
+        private IWebHostEnvironment _webHostEnvironment;//This already Injected By Default .
 
-        public ProductController(IUnitOfWork unitOfWork)
+
+        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
 
 
-        public IActionResult Create()
+
+        public IActionResult Index()
         {
 
-            //IEnumerable<SelectListItem> categoryList = _unitOfWork.CategoryRepository.GetAll().
-            //  Select(u => new SelectListItem
-            //  {
-            //      Text = u.Name,
-            //      Value = u.Id.ToString()
-            //  });
-
-            ////ViewBag.CategoryList = categoryList;
-            //ViewData["CategoryList"]=categoryList;
+            List<Product> products = _unitOfWork.ProductRepository.GetAll().ToList();
+            return View(products);
+        }
 
 
+
+
+        //Handles Create and Edit 
+        public IActionResult Upsert(int? id)
+        {
             ProductVM productVM = new()
             {
                 CategoryList = _unitOfWork.CategoryRepository.GetAll().
@@ -43,72 +46,98 @@ namespace BulkyNTier.Areas.Customer.Controllers
                 Product = new Product()
             };
 
+            if (id == null || id == 0)
+            {
+                return View(productVM);
 
-            //IEnumerable< SelectListItem> CategoryList= _unitOfWork.CategoryRepository.GetAll().
-            //  Select(u => new SelectListItem
-            //  {
-            //      Text = u.Name,
-            //      Value = u.Id.ToString()
-            //  });
+            }
+            else
+            {
+                productVM.Product = _unitOfWork.ProductRepository.GetFirstOrDefault(u=>u.Id == id);
+             
+                return View(productVM);
 
-
-
-            return View(productVM);
+            }
+           
         }
 
         [HttpPost]
-        public IActionResult Create(ProductVM productVM)
+        public IActionResult Upsert(ProductVM productVM,IFormFile? file)
         {
+
+           
             if (ModelState.IsValid)
             {
-                _unitOfWork.ProductRepository.Add(productVM.Product);
-                _unitOfWork.Save();
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (file != null)//check the file
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file?.FileName);
+                    string productImgPath = Path.Combine(wwwRootPath, @"images\product");
+
+
+                    if (!string.IsNullOrEmpty(productVM.Product.ImageURL)) {
+                        //delete the old image
+                        //Delete the forword slash
+                        string pathOfImageTobeDeleted = Path.Combine(wwwRootPath,productVM.Product.ImageURL.TrimStart('\\'));
+                        if (System.IO.File.Exists(pathOfImageTobeDeleted))
+                        {
+                            System.IO.File.Delete(pathOfImageTobeDeleted);
+                        }
+
+                    }
+
+
+                    //Copy the original File to images Folder
+
+                    using(var fileStream=new FileStream(Path.Combine(productImgPath, fileName), FileMode.Create))
+                    {
+                       file?.CopyTo(fileStream);
+                    }
+
+                    productVM.Product.ImageURL = @"\images\product\" + fileName;
+                }
+
+
+
+
+
+                //Determine wheather it is a create or update ??
+
+                if (productVM.Product.Id == 0)
+                {
+                    _unitOfWork.ProductRepository.Add(productVM.Product);
+                    TempData["success"] = "Product has been Created";
+                }
+                else
+                {
+
+                    _unitOfWork.ProductRepository.Update(productVM.Product);
+                    TempData["success"] = "Product has been updated";
+                }
+
+                    _unitOfWork.Save();
+               
                 return RedirectToAction("Index");
             }
-            //elsev 
-            //{
-            //    IEnumerable<SelectListItem> CategoryList = _unitOfWork.CategoryRepository.GetAll().Select(u => new SelectListItem
-            //    {
-            //        Text = u.Name,
-            //        Value = u.Id.ToString()
-            //    });
-            //    productVM.CategoryList = CategoryList;
-            //    return View(productVM);
-            //}
 
-            return View();
+            return View(productVM);
 
                
         }
 
-        public IActionResult Index()
-        {
+        
 
-           List<Product> products= _unitOfWork.ProductRepository.GetAll().ToList();
-           return View(products);
-        }
-
-        public IActionResult Edit(int? id)
-        {
-            var product=_unitOfWork.ProductRepository.GetFirstOrDefault(u=>u.Id==id);
-            if (product == null)
-            {
-                return View("Error");
-            }
-            return View(product);
-        }
-
-        [HttpPost]
-        public IActionResult Edit(Product productobjTobeUpdated)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.ProductRepository.Update(productobjTobeUpdated);
-                _unitOfWork.Save();
-                return RedirectToAction("Index");
-            }
-            return View();
-        }
+        //[HttpPost]
+        //public IActionResult Edit(Product productobjTobeUpdated)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _unitOfWork.ProductRepository.Update(productobjTobeUpdated);
+        //        _unitOfWork.Save();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View();
+        //}
 
 
         public IActionResult Delete(int? id)
@@ -116,10 +145,12 @@ namespace BulkyNTier.Areas.Customer.Controllers
             var productToBeDeleted=_unitOfWork.ProductRepository.GetFirstOrDefault(u=>u.Id == id);
             if (productToBeDeleted == null)
             {
+                TempData["error"] = "Product not found";
                 return NotFound();
             }
             _unitOfWork.ProductRepository.Remove(productToBeDeleted);
             _unitOfWork.Save();
+            TempData["success"] = "Product has been deleted";
             return RedirectToAction("Index");
         }
 

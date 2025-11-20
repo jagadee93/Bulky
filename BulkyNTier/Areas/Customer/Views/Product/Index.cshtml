@@ -14,7 +14,7 @@
             <div class="row col-6">
             </div>
             <div class="col-6 text-end">
-                <a asp-controller="Product" asp-action="Create" class="btn btn-primary"> <i class="bi bi-plus-circle"></i>Create New Product</a>
+                <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary"> <i class="bi bi-plus-circle"></i>Create New Product</a>
             </div>
         </div>
 
@@ -58,7 +58,7 @@
 
                         <td>
                             <div class="w-75 btn-group flex-row justify-content-center" role="group">
-                                <a asp-area="Customer" asp-controller="Product" asp-action="Edit" class="me-3 btn btn-primary" title="Edit" asp-route-Id="@product.Id"><i class="bi bi-pencil-square"></i>Edit</a>
+                                <a asp-area="Customer" asp-controller="Product" asp-action="Upsert" class="me-3 btn btn-primary" title="Edit" asp-route-Id="@product.Id"><i class="bi bi-pencil-square"></i>Edit</a>
                                 <a asp-area="Customer" asp-controller="Product"  asp-action="Delete" title="Delete" class="btn btn-danger" asp-route-Id="@product.Id"><i class="bi bi-x-square"></i>Delete</a>
                             </div>
                         </td>
