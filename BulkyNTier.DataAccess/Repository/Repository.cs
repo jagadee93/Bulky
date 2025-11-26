@@ -28,7 +28,7 @@ namespace BulkyNTier.DataAccess.Repository
         }
 
 
-        //Category
+        //Category,CoverType
         public IEnumerable<T> GetAll(string? includeProperties=null)
         {
             IQueryable<T> query = dbSet;
