@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\Programming\\ASP.NET\\BulkyNTier\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.dataaccess\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|solutionrelative:bulkyntier.dataaccess\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier\\scaffoldingreadme.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|solutionrelative:bulkyntier\\scaffoldingreadme.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
@@ -13,10 +17,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.dataaccess\\bulkyntier.dataaccess.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|solutionrelative:bulkyntier.dataaccess\\bulkyntier.dataaccess.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier.dataaccess\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{27DB0011-F069-41E2-BCBD-75F2C01DE851}|BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj|solutionrelative:bulkyntier.dataaccess\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{928D1891-8119-424F-A778-CB598822AA76}|BulkyNTier\\BulkyNTier.csproj|d:\\programming\\asp.net\\bulkyntier\\bulkyntier\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -30,21 +30,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ScaffoldingReadMe.txt",
-              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\ScaffoldingReadMe.txt",
-              "RelativeDocumentMoniker": "BulkyNTier\\ScaffoldingReadMe.txt",
-              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\ScaffoldingReadMe.txt",
-              "RelativeToolTip": "BulkyNTier\\ScaffoldingReadMe.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2025-11-29T13:26:53.15Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 4,
@@ -62,6 +49,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "ScaffoldingReadMe.txt",
+              "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\ScaffoldingReadMe.txt",
+              "RelativeDocumentMoniker": "BulkyNTier\\ScaffoldingReadMe.txt",
+              "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\ScaffoldingReadMe.txt",
+              "RelativeToolTip": "BulkyNTier\\ScaffoldingReadMe.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-11-29T13:26:53.15Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "BulkyNTier",
               "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier\\BulkyNTier.csproj",
               "RelativeDocumentMoniker": "BulkyNTier\\BulkyNTier.csproj",
@@ -74,7 +74,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "BulkyNTier.DataAccess",
               "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj",
               "RelativeDocumentMoniker": "BulkyNTier.DataAccess\\BulkyNTier.DataAccess.csproj",
@@ -91,13 +91,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\AppDbContext.cs",
               "RelativeDocumentMoniker": "BulkyNTier.DataAccess\\AppDbContext.cs",
               "ToolTip": "D:\\Programming\\ASP.NET\\BulkyNTier\\BulkyNTier.DataAccess\\AppDbContext.cs",
               "RelativeToolTip": "BulkyNTier.DataAccess\\AppDbContext.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAA2wB0AAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAkAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-29T13:03:38.062Z",
               "EditorCaption": ""
