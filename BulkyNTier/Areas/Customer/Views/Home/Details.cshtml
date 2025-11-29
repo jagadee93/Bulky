@@ -1,0 +1,66 @@
+﻿@model BulkyNTier.Models.Product
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container py-4">
+    <a asp-action="Index" class="text-decoration-none mb-3 d-inline-flex align-items-center">
+        <i class="bi bi-arrow-left me-1"></i> Back to products
+    </a>
+
+    <div class="row g-4 align-items-start">
+        <!-- LEFT: Cover -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm book-card">
+                <img src="@Model.ImageURL"
+                     alt="@Model.Title"
+                     class="card-img-top book-image-large" />
+            </div>
+        </div>
+
+        <!-- RIGHT: Details -->
+        <div class="col-md-8">
+            <div class="card border-0 shadow-sm p-4 h-100 book-details-card">
+                <h2 class="fw-bold mb-1">@Model.Title</h2>
+
+                <p class="text-muted mb-3">
+                    by <span class="fw-semibold">@Model.Author</span>
+                </p>
+
+                <div class="mb-3">
+                    <span class="badge bg-secondary me-2">ISBN: @Model.ISBN</span>
+                    <span class="badge bg-info-subtle text-dark">
+                        Category: @Model.Category?.Name
+                    </span>
+                </div>
+
+                <div class="mb-4">
+                    <span class="fs-3 fw-bold text-success me-3">
+                        ₹@Model.Price
+                    </span>
+                    <span class="fs-6 text-muted text-decoration-line-through">
+                        ₹@Model.ListPrice
+                    </span>
+                    <div class="small text-muted mt-1">
+                        50+ : ₹@Model.Price50 &nbsp;|&nbsp; 100+ : ₹@Model.Price100
+                    </div>
+                </div>
+
+                <h5 class="fw-semibold mb-2">Description</h5>
+                <p class="text-muted" style="white-space: pre-line;">
+                    @Html.Raw(Model.Description)
+                </p>
+
+                <div class="mt-4 d-flex flex-wrap gap-2">
+                    <button class="btn btn-primary px-4">
+                        <i class="bi bi-cart-plus me-1"></i> Add to cart
+                    </button>
+                    <button class="btn btn-outline-secondary px-4">
+                        <i class="bi bi-heart me-1"></i> Add to wishlist
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

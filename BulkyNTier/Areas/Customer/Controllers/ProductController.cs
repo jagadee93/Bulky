@@ -72,15 +72,16 @@ namespace BulkyNTier.Areas.Customer.Controllers
                 if (file != null)//check the file
                 {
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file?.FileName);
-                    string productImgPath = Path.Combine(wwwRootPath, @"images\product");
+                    string productImgPath = Path.Combine(wwwRootPath, @"images/product");
 
 
                     if (!string.IsNullOrEmpty(productVM.Product.ImageURL)) {
                         //delete the old image
                         //Delete the forword slash
-                        string pathOfImageTobeDeleted = Path.Combine(wwwRootPath,productVM.Product.ImageURL.TrimStart('\\'));
+                        string pathOfImageTobeDeleted = Path.Combine(wwwRootPath,productVM.Product.ImageURL.TrimStart('/'));
                         if (System.IO.File.Exists(pathOfImageTobeDeleted))
                         {
+                            
                             System.IO.File.Delete(pathOfImageTobeDeleted);
                         }
 
@@ -94,7 +95,7 @@ namespace BulkyNTier.Areas.Customer.Controllers
                        file?.CopyTo(fileStream);
                     }
 
-                    productVM.Product.ImageURL = @"\images\product\" + fileName;
+                    productVM.Product.ImageURL = @"/images/product/" + fileName;
                 }
 
 
@@ -194,7 +195,7 @@ namespace BulkyNTier.Areas.Customer.Controllers
                     //delete the old image
                     //Delete the forword slash
                     string wwwRootPath = _webHostEnvironment.WebRootPath;
-                    string imgFilePath = Path.Combine(wwwRootPath, productToBeDeleted.ImageURL.TrimStart('\\'));
+                    string imgFilePath = Path.Combine(wwwRootPath, productToBeDeleted.ImageURL.TrimStart('/'));
                     if (System.IO.File.Exists(imgFilePath))
                     {
                         System.IO.File.Delete(imgFilePath);

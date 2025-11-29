@@ -9,6 +9,8 @@ a.navbar-brand {
 
 
 
+
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
     background-color: #1b6ec2;
@@ -536,4 +538,44 @@ bg-success {
         color: #fff;
         background-color: #578553;
         border-color: #578553;
+    }
+
+
+
+.book-card {
+    border-radius: 0.75rem;
+    overflow: hidden;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+    .book-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.15);
+    }
+
+.book-image {
+    height: 260px; /* adjust height as you like */
+    object-fit: cover; /* keeps the cover nicely cropped */
+}
+
+.book-badge {
+    border-radius: 999px;
+    padding-inline: 0.75rem;
+    padding-block: 0.25rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+.book-image-large {
+    height: 420px;
+    object-fit: cover;
+    border-radius: 0.75rem;
+}
+
+.book-details-card {
+    border-radius: 0.75rem;
+}
+
+    .book-details-card h2 {
+        letter-spacing: 0.02em;
     }
