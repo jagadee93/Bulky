@@ -19,6 +19,9 @@ namespace BulkyNTier.DataAccess
 
         public DbSet<Product> Products { get; set; }
 
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
         //Creating Table 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
