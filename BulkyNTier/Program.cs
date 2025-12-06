@@ -3,6 +3,8 @@ using BulkyNTier.DataAccess.Repository;
 using BulkyNTier.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using BulkyNTier.Utilities;
+using IEmailSender = Microsoft.AspNetCore.Identity.UI.Services.IEmailSender;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +21,8 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
 //Adding Roles
 builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
+//Add Email service
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 var app = builder.Build();
 
 
