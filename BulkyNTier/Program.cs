@@ -20,6 +20,15 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
 
 //Adding Roles
 builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = $"/Identity/Account/Login";
+    options.LogoutPath = $"/Identity/Account/Logout";
+    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+
+});
+
 builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 //Add Email service
 builder.Services.AddScoped<IEmailSender, EmailSender>();

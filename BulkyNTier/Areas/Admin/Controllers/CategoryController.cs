@@ -1,11 +1,14 @@
 ﻿using BulkyNTier.DataAccess;
 using BulkyNTier.DataAccess.Repository.IRepository;
 using BulkyNTier.Models;
+using BulkyNTier.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BulkyNTier.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles =SD.Role_Admin)]
     public class CategoryController : Controller
     {
         public readonly IUnitOfWork unitOfWork ;

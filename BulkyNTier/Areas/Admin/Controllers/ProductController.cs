@@ -1,14 +1,17 @@
 ﻿using BulkyNTier.DataAccess.Repository.IRepository;
 using BulkyNTier.Models;
 using BulkyNTier.Models.ViewModels;
+using BulkyNTier.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace BulkyNTier.Areas.Customer.Controllers
+namespace BulkyNTier.Areas.Admin.Controllers
 {
-    [Area("Customer")]
-    public class ProductController : Controller
-    {
+        [Area("Admin")]
+        [Authorize(Roles = SD.Role_Admin)]
+        public class ProductController : Controller
+        {
 
         private IUnitOfWork _unitOfWork;
         private IWebHostEnvironment _webHostEnvironment;//This already Injected By Default .
@@ -19,7 +22,6 @@ namespace BulkyNTier.Areas.Customer.Controllers
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
         }
-
 
 
         public IActionResult Index()
