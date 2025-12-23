@@ -20,6 +20,9 @@ namespace BulkyNTier.DataAccess
         public DbSet<Product> Products { get; set; }
 
 
+        public DbSet<Company> Companies { get; set; }
+
+
         //public DbSet<IdentityUser> ApplicationUsers { get; set; }
 
         //Creating Table 
@@ -39,6 +42,9 @@ namespace BulkyNTier.DataAccess
                 );
 
 
+            modelBuilder.Entity<Company>().HasData(
+                new Company { Id = 10933, Name = "TechMahindra", StreetAddress = "KIADBLayout", PhoneNumber = "35747-8484", PostalCode = "560100", City = "Bengaluru", State = "Karnataka" }
+                );
 
         }
     }
