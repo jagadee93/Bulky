@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 namespace BulkyNTier.DataAccess
 {
-    public class AppDbContext:IdentityDbContext<IdentityUser>
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
         {
@@ -20,7 +20,7 @@ namespace BulkyNTier.DataAccess
         public DbSet<Product> Products { get; set; }
 
 
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        //public DbSet<IdentityUser> ApplicationUsers { get; set; }
 
         //Creating Table 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
