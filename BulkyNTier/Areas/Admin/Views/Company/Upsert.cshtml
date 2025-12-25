@@ -1,0 +1,92 @@
+﻿@model Company
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">@(Model.Id != 0 ? "Edit" : "Create")Comapany</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" asp-action="Upsert" class="row g-3">
+            <!-- g-3 gives spacing between fields -->
+            @*<div asp-validation-summary="ModelOnly"></div>*@
+
+
+            <input asp-for="Id" hidden />
+            <!-- Each input wrapped in col-12 for small screens, col-lg-6 for large -->
+            <div class="col-12 col-lg-12">
+                <div class="form-floating">
+                    <input asp-for="Name" class="form-control border-0 shadow" />
+                    <label asp-for="Name" class="ms-2"></label>
+                    <span class="text-danger" asp-validation-for="Name"></span>
+                </div>
+            </div>
+
+       
+                <!-- Left column: Description -->
+             <div class="col-12 col-lg-8">
+                    <label asp-for="StreetAddress" class="ms-2"></label>
+                    <textarea asp-for="StreetAddress"
+                              class="form-control text-muted"
+                              rows="8"
+                              cols="40">
+                    </textarea>
+             </div>
+
+                
+   
+
+            <div class="col-12 col-lg-6">
+                <div class="form-floating">
+                    <input asp-for="City" class="form-control border-0 shadow" />
+                    <label asp-for="City" class="ms-2"></label>
+                    <span class="text-danger" asp-validation-for="City"></span>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-6">
+                <div class="form-floating">
+                    <input asp-for="State" class="form-control border-0 shadow" />
+                    <label asp-for="State" class="ms-2"></label>
+                    <span class="text-danger" asp-validation-for="State"></span>
+                </div>
+            </div>
+            
+
+            <div class="col-12 col-lg-6">
+                <div class="form-floating">
+                    <input asp-for="PostalCode" class="form-control border-0 shadow" />
+                    <label asp-for="PostalCode" class="ms-2"></label>
+                    <span class="text-danger" asp-validation-for="PostalCode"></span>
+                </div>
+            </div>
+
+
+
+            <!-- Buttons -->
+
+            <div class="col-12 d-flex justify-content-start gap-3 pt-3">
+
+                @if (@Model.Id != 0)
+                {
+                    <button type="submit" asp-action="Upsert" class="btn btn-primary px-4">Update</button>
+                }
+                else
+                {
+                    <button type="submit" asp-action="Upsert" class="btn btn-primary px-4">Create</button>
+                }
+
+                <a asp-area="Admin" asp-controller="Company" asp-action="Index"
+                   class="btn btn-outline-primary border-black px-4">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial.cshtml" />
+    }
+}

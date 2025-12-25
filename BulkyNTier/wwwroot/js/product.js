@@ -1,5 +1,4 @@
-﻿
-//import toastr from ""
+﻿/// <reference path="company.js" />
 
 
 $(function () {
@@ -11,9 +10,9 @@ var datatable;
 
 
 
+
 function LoadTable() {
-    console.log("Loading Data...")
-    datatable=$('#tblData').DataTable({
+    DataTable = $('#tblData').DataTable({
         ajax: { url: '/Admin/Product/getall', dataSrc: '' },
         columns: [
             { data: "title", "width": "12%" },
@@ -30,11 +29,9 @@ function LoadTable() {
                 </div>`;
                 }
             }
-
-
-
         ]
     });
+
 }
 
 

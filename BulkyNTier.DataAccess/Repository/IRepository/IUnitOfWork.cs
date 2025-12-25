@@ -10,6 +10,8 @@ namespace BulkyNTier.DataAccess.Repository.IRepository
     {
         ICategoryRepository CategoryRepository { get; }
         IProductRepository ProductRepository { get; }
+
+        ICompanyRepository CompanyRepository { get; }
         void Save();
     }
 }

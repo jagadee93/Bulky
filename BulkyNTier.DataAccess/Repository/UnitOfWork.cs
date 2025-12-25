@@ -11,12 +11,15 @@ namespace BulkyNTier.DataAccess.Repository
     {
         public ICategoryRepository CategoryRepository {  get; set; }
         public IProductRepository ProductRepository { get; set; }
-        private AppDbContext _db;
+        public ICompanyRepository CompanyRepository { get; set; }
+        private readonly AppDbContext _db;
         public UnitOfWork(AppDbContext db) {
 
             _db = db;
             CategoryRepository = new CategoryRepository(_db);
             ProductRepository=new ProductRepository(_db);
+            CompanyRepository=new CompanyRepository(_db);
+           
         }
 
         

@@ -9,7 +9,7 @@ namespace BulkyNTier.Models
         public int Id { get; set; }
 
         [Required]
-        public required string Name { get; set; }
+        public  string Name { get; set; }
 
         public string? StreetAddress { get; set; } 
 

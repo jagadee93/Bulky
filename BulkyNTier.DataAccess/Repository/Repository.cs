@@ -17,7 +17,7 @@ namespace BulkyNTier.DataAccess.Repository
             _appDbContext = appDbContext;
             this.dbSet = _appDbContext.Set<T>();
             //db.categories== dbSet
-            _appDbContext.Products.Include(u => u.Category).Include(u=>u.CategoryId);
+           // _appDbContext.Products.Include(u => u.Category).Include(u=>u.CategoryId);
         }
 
 

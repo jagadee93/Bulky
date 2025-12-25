@@ -44,6 +44,7 @@ namespace BulkyNTier.DataAccess
 
             modelBuilder.Entity<Company>().HasData(
                 new Company { Id = 10933, Name = "TechMahindra", StreetAddress = "KIADBLayout", PhoneNumber = "35747-8484", PostalCode = "560100", City = "Bengaluru", State = "Karnataka" }
+             
                 );
 
         }
