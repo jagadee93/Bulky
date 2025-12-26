@@ -249,14 +249,7 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
+using BulkyNTier.DataAccess.Repository.IRepository;
 using BulkyNTier.Models;
 using BulkyNTier.Utilities;
 using Microsoft.AspNetCore.Authentication;
@@ -269,6 +262,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace BulkyNTier.Areas.Identity.Pages.Account
 {
@@ -281,6 +282,7 @@ namespace BulkyNTier.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private IUnitOfWork _unitOfWork { get; set; }
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -288,7 +290,10 @@ namespace BulkyNTier.Areas.Identity.Pages.Account
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IUnitOfWork unitOfWork
+            )
+            
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -297,6 +302,7 @@ namespace BulkyNTier.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _roleManager = roleManager;
+            _unitOfWork = unitOfWork;
         }
 
         [BindProperty]
@@ -325,8 +331,13 @@ namespace BulkyNTier.Areas.Identity.Pages.Account
 
             public string Role { get; set; }
 
+            public int? CompanyId { get; set; }
+
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; } = new List<SelectListItem>();
+
+            [ValidateNever]
+            public IEnumerable<SelectListItem> CompaniesList { get; set; } = new List<SelectListItem>();
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -346,7 +357,13 @@ namespace BulkyNTier.Areas.Identity.Pages.Account
                 {
                     Text = x.Name,
                     Value = x.Name
-                }).ToList()
+                }).ToList(),
+
+                 CompaniesList = _unitOfWork.CompanyRepository.GetAll(includeProperties:null).Select(x => new SelectListItem
+                 {
+                       Text = x.Name,
+                       Value = x.Id.ToString()
+                 }).ToList()
             };
 
             ReturnUrl = returnUrl;
@@ -363,6 +380,11 @@ namespace BulkyNTier.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None); // note: corrected variable below
+                                                                                            //Add the company Id
+                if (Input.Role == SD.Role_Company)
+                {
+                  user.CompanyId = Input.CompanyId;
+                }
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
@@ -376,6 +398,9 @@ namespace BulkyNTier.Areas.Identity.Pages.Account
                     {
                         await _userManager.AddToRoleAsync(user, SD.Role_Customer);
                     }
+
+                    
+                  
 
                     _logger.LogInformation("User created a new account with password.");
 
@@ -414,7 +439,14 @@ namespace BulkyNTier.Areas.Identity.Pages.Account
                 {
                     Text = x.Name,
                     Value = x.Name
-                })
+                }),
+                 CompaniesList = _unitOfWork.CompanyRepository.GetAll(includeProperties:null).Select(x => new SelectListItem
+                 {
+                     Text = x.Name,
+                     Value = x.Id.ToString()
+                 })
+
+
             };
             return Page();
         }

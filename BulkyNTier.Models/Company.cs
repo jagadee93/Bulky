@@ -1,5 +1,7 @@
 ﻿
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace BulkyNTier.Models
@@ -20,6 +22,9 @@ namespace BulkyNTier.Models
         public string? PostalCode { get; set; }
 
         public string? PhoneNumber { get; set; }
+
+
+       
 
     }
 }
