@@ -12,6 +12,10 @@ namespace BulkyNTier.DataAccess.Repository
         public ICategoryRepository CategoryRepository {  get; set; }
         public IProductRepository ProductRepository { get; set; }
         public ICompanyRepository CompanyRepository { get; set; }
+        public IShoppingCartRepository ShoppingCartRepository { get; set; }
+
+        public IApplicationUserRepository ApplicationUserRepository { get; set; }
+
         private readonly AppDbContext _db;
         public UnitOfWork(AppDbContext db) {
 
@@ -19,6 +23,8 @@ namespace BulkyNTier.DataAccess.Repository
             CategoryRepository = new CategoryRepository(_db);
             ProductRepository=new ProductRepository(_db);
             CompanyRepository=new CompanyRepository(_db);
+            ShoppingCartRepository=new ShoppingCartRepository(_db);
+            ApplicationUserRepository =new ApplicationUserRepository(_db);
            
         }
 
