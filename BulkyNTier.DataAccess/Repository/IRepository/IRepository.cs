@@ -9,7 +9,7 @@ namespace BulkyNTier.DataAccess.Repository.IRepository
         //T-category
         IEnumerable<T> GetAll(string? includeProperties);
 
-        T GetFirstOrDefault(Expression<Func<T,bool>> filter,string? includeProperties);
+        T GetFirstOrDefault(Expression<Func<T,bool>> filter,string? includeProperties,bool tracked=false);
         void Add(T entity);
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);

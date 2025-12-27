@@ -1,7 +1,7 @@
-﻿@model BulkyNTier.Models.Product
+﻿@model BulkyNTier.Models.ShoppingCart
 
 @{
-    ViewData["Title"] = Model.Title;
+    ViewData["Title"] = Model.Product.Title;
 }
 
 <div class="container py-4">
@@ -13,54 +13,67 @@
         <!-- LEFT: Cover -->
         <div class="col-md-4">
             <div class="card border-0 shadow-sm book-card">
-                <img src="@Model.ImageURL"
-                     alt="@Model.Title"
+                <img src="@Model.Product.ImageURL"
+                     alt="@Model.Product.Title"
                      class="card-img-top book-image-large" />
             </div>
         </div>
 
         <!-- RIGHT: Details -->
-        <div class="col-md-8">
+        <form class="col-md-8"  method="post">
             <div class="card border-0 shadow-sm p-4 h-100 book-details-card">
-                <h2 class="fw-bold mb-1">@Model.Title</h2>
-
+                <h2 class="fw-bold mb-1">@Model.Product.Title</h2>
+                <input asp-for="ProductId" hidden />
                 <p class="text-muted mb-3">
-                    by <span class="fw-semibold">@Model.Author</span>
+                    by <span class="fw-semibold">@Model.Product.Author</span>
                 </p>
 
                 <div class="mb-3">
-                    <span class="badge bg-secondary me-2">ISBN: @Model.ISBN</span>
+                    <span class="badge bg-secondary me-2">ISBN: @Model.Product.ISBN</span>
                     <span class="badge bg-info-subtle text-dark">
-                        Category: @Model.Category?.Name
+                        Category: @Model.Product.Category?.Name
                     </span>
                 </div>
 
                 <div class="mb-4">
                     <span class="fs-3 fw-bold text-success me-3">
-                        ₹@Model.Price
+                        ₹@Model.Product.Price
                     </span>
                     <span class="fs-6 text-muted text-decoration-line-through">
-                        ₹@Model.ListPrice
+                        ₹@Model.Product.ListPrice
                     </span>
                     <div class="small text-muted mt-1">
-                        50+ : ₹@Model.Price50 &nbsp;|&nbsp; 100+ : ₹@Model.Price100
+                        50+ : ₹@Model.Product.Price50 &nbsp;|&nbsp; 100+ : ₹@Model.Product.Price100
                     </div>
                 </div>
 
                 <h5 class="fw-semibold mb-2">Description</h5>
                 <p class="text-muted" style="white-space: pre-line;">
-                    @Html.Raw(Model.Description)
+                    @Html.Raw(Model.Product.Description)
                 </p>
 
                 <div class="mt-4 d-flex flex-wrap gap-2">
-                    <button class="btn btn-primary px-4">
+                    
+
+                    <div class="form-floating">
+                        <input asp-for="Count" class="form-control border-0 shadow" />
+                        <label asp-for="Count" class="ms-2"></label>
+                        <span class="text-danger" asp-validation-for="Count"></span>
+                    </div>
+
+                    <button class="btn btn-primary px-4" asp-controller="Home" asp-action="AddToCart">
                         <i class="bi bi-cart-plus me-1"></i> Add to cart
                     </button>
-                    <button class="btn btn-outline-secondary px-4">
+                    <button asp-asp-controller="Home" asp-action="AddTowishList" class="btn btn-outline-secondary px-4">
                         <i class="bi bi-heart me-1"></i> Add to wishlist
                     </button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial.cshtml" />
+    }
+}
