@@ -29,6 +29,7 @@ namespace BulkyNTier.DataAccess.Repository
         }
 
 
+
         //Category,CoverType
         public IEnumerable<T> GetAll(string? includeProperties=null)
         {
@@ -42,6 +43,46 @@ namespace BulkyNTier.DataAccess.Repository
             }
             return query.ToList();
         }
+
+
+
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter, string? includeProperties = null,bool tracked = false)
+        {
+            IQueryable<T> query;
+
+            // Tracking
+            if (tracked)
+            {
+                query = dbSet;
+            }
+            else
+            {
+                query = dbSet.AsNoTracking();//Disable tracking
+
+            }
+
+            // Filtering
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            // Includes
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var includeProp in includeProperties
+                             .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp.Trim());
+                }
+            }
+
+            return query.ToList();
+        }
+
+
+
+
 
         public T GetFirstOrDefault(Expression<Func<T, bool>> filter,string? includeProperties=null,bool tracked = false)
         {

@@ -579,3 +579,82 @@ bg-success {
     .book-details-card h2 {
         letter-spacing: 0.02em;
     }
+
+
+.cart-container {
+    max-width: 1100px;
+}
+
+.cart-card {
+    border-radius: 12px;
+}
+
+.cart-row:hover {
+    background: #fafafa;
+    transition: .2s;
+}
+
+.cart-img {
+    width: 90px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.08);
+}
+
+.qty-control {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.qty-box {
+    min-width: 36px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.order-summary {
+    border-radius: 14px;
+}
+
+.empty-cart {
+    background: #fff;
+}
+
+.cart-icon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+    .cart-icon i {
+        font-size: 1.5rem;
+    }
+
+.cart-count {
+    position: absolute;
+    top: 1px; /* adjust vertically */
+    right: -6px; /* adjust horizontally */
+    background-color: red;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 600;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-count {
+    transition: transform 0.2s ease;
+}
+
+.cart-icon:hover .cart-count {
+    transform: scale(1.1);
+}
+.cart-count:empty {
+    display: none;
+}
