@@ -1,10 +1,11 @@
-using System.Diagnostics;
-using System.Threading.Tasks;
 using BulkyNTier.DataAccess.Repository.IRepository;
 using BulkyNTier.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace BulkyNTier.Areas.Customer.Controllers
 {
@@ -40,17 +41,21 @@ namespace BulkyNTier.Areas.Customer.Controllers
         [Authorize]
         public async Task<IActionResult> AddToCart(ShoppingCart shoppingCart)
         {
-           var user=await _userManager.GetUserAsync(User);
-            if (user == null)
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+
+            var userId = claimsIdentity?
+                .FindFirst(ClaimTypes.NameIdentifier)?
+                .Value;
+            if (userId == null)
             {
             
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
             }
-            shoppingCart.ApplicationUserId = user.Id;
+            shoppingCart.ApplicationUserId = userId;
 
             //check if the Product already Exists
             var cartFromDb = _unitOfWork.ShoppingCartRepository.GetFirstOrDefault(u =>
-              u.ApplicationUserId == user.Id &&
+              u.ApplicationUserId == userId &&
               u.ProductId == shoppingCart.ProductId,includeProperties:null);
             if (cartFromDb == null)
             {

@@ -55,11 +55,15 @@
                             </li>
                         }
 
-                        <li class="nav-item">
+                        @* <li class="nav-item">
                             <a class="nav-link cart-icon" asp-area="Customer" asp-controller="Cart" asp-action="Index">
                                 <i class="bi bi-cart"></i>
                                 <span class="cart-count">0</span>
                             </a>
+                        </li> *@
+
+                        <li class="nav-item">
+                            @await Component.InvokeAsync("ShoppingCart")
                         </li>
 
 

@@ -5,6 +5,7 @@ using BulkyNTier.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace BulkyNTier.Areas.Customer.Controllers
@@ -26,12 +27,17 @@ namespace BulkyNTier.Areas.Customer.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var user = await _userManager.GetUserAsync(User);
-            if (user != null)
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+
+            var userId = claimsIdentity?
+                .FindFirst(ClaimTypes.NameIdentifier)?
+                .Value;
+
+            if (userId != null)
             {
                 ShoppingCartListVM shoppingCartListVM = new() { };
 
-                IEnumerable<ShoppingCart> carts = _unitOfWork.ShoppingCartRepository.GetAll(u => u.ApplicationUserId == user.Id, includeProperties: "Product");
+                IEnumerable<ShoppingCart> carts = _unitOfWork.ShoppingCartRepository.GetAll(u => u.ApplicationUserId == userId, includeProperties: "Product");
 
                 foreach (var cart in carts)
                 {
