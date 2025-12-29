@@ -24,6 +24,14 @@ namespace BulkyNTier.DataAccess
 
         public DbSet<Company> Companies { get; set; }
 
+        public DbSet<OrderHeader> OrderHeaders { get; set; }
+
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+
+        public DbSet<OrderEvent> OrderEvents { get; set; }
+
+        public DbSet<ShippingAddress> ShippingAddresses { get; set; }
+
 
         //public DbSet<IdentityUser> ApplicationUsers { get; set; }
 
@@ -32,6 +40,20 @@ namespace BulkyNTier.DataAccess
         {
 
             base.OnModelCreating(modelBuilder); //Identity Requirement 
+
+            modelBuilder.Entity<OrderHeader>()
+      .HasOne(o => o.ShippingAddress)
+      .WithMany()
+      .HasForeignKey(o => o.ShippingAddressId)
+      .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<OrderHeader>()
+                .HasOne(o => o.ApplicationUser)
+                .WithMany()
+                .HasForeignKey(o => o.ApplicationUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
             modelBuilder.Entity<Category>().HasData(
                    new Category { Id = 1, Name = "Action", DisplayOrder = 1 },
                     new Category { Id = 2, Name = "Sci-Fi", DisplayOrder = 2 },
