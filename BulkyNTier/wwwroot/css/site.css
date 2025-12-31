@@ -658,3 +658,60 @@ bg-success {
 .cart-count:empty {
     display: none;
 }
+
+
+.checkout-title {
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.address-card {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 14px;
+    margin-bottom: 12px;
+    background: #fff;
+}
+
+    .address-card.active {
+        border-color: #2874f0;
+        background: #f5faff;
+    }
+
+.address-radio {
+    display: flex;
+    cursor: pointer;
+}
+
+    .address-radio input {
+        margin-right: 12px;
+        margin-top: 6px;
+    }
+
+.address-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.address-type {
+    background: #e0e0e0;
+    color: #333;
+    font-size: 12px;
+}
+
+.address-text {
+    font-size: 14px;
+    color: #555;
+    margin-top: 6px;
+}
+
+.btn-orange {
+    background: #fb641b;
+    color: #fff;
+    border: none;
+}
+
+    .btn-orange:hover {
+        background: #e95b17;
+    }

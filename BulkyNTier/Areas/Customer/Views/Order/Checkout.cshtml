@@ -1,0 +1,137 @@
+﻿@model ShippingAddressVM
+<h4 class="checkout-title">Delivery Address</h4>
+@foreach (var address in Model.ShippingAddresses)
+{
+    <div class="address-card @(address.IsDefaultAddress ? "active" : "")">
+        <label class="address-radio"> </label>
+            <input type="radio"
+                   name="OrderHeader.ShippingAddressId"
+                   value="@address.Id"
+                   @(address.IsDefaultAddress ? "checked" : "") />
+
+            <div class="address-content">
+                <div class="address-header">
+                    <strong>@address.Name</strong>
+
+                    <span class="badge address-type">
+                        @address.AddressType
+                    </span>
+
+                    @if (address.IsDefaultAddress)
+                    {
+                        <span class="badge bg-success ms-2">Default</span>
+                    }
+                </div>
+
+                <div class="address-text">
+                    @address.StreetAddress,<br />
+                    @address.City, @address.State - @address.PostalCode<br />
+                    Phone: @address.PhoneNumber
+                </div>
+
+                <button type="submit"
+                        class="btn btn-orange mt-2"
+                        name="OrderHeader.ShippingAddressId"
+                        value="@address.Id">
+                    Deliver Here
+                </button>
+            </div>
+       
+    </div>
+}
+<hr />
+
+<button class="btn btn-link"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#addAddressForm">
+    + Add a new address
+</button>
+
+<div class="collapse mt-3" id="addAddressForm">
+    <div class="card p-3">
+        <h5 class="mb-3">Add New Address</h5>
+
+        <div class="row">
+            <div class="col-md-6 mb-2">
+                <input asp-for="NewShippingAddress.Name"
+                       class="form-control"
+                       placeholder="Name" />
+            </div>
+
+            <div class="col-md-6 mb-2">
+                <input asp-for="NewShippingAddress.PhoneNumber"
+                       class="form-control"
+                       placeholder="10-digit mobile number" />
+            </div>
+
+            <div class="col-md-6 mb-2">
+                <input asp-for="NewShippingAddress.PostalCode"
+                       class="form-control"
+                       placeholder="Pincode" />
+            </div>
+
+            <div class="col-md-6 mb-2">
+                <input asp-for="NewShippingAddress.City"
+                       class="form-control"
+                       placeholder="City / District / Town" />
+            </div>
+
+            <div class="col-12 mb-2">
+                <textarea asp-for="NewShippingAddress.StreetAddress"
+                          class="form-control"
+                          placeholder="Address (Area and Street)"
+                          rows="2"></textarea>
+            </div>
+
+            <div class="col-md-6 mb-2">
+                <select asp-for="NewShippingAddress.State"
+                        class="form-select">
+                    <option value="">-- Select State --</option>
+                    <option>Karnataka</option>
+                    <option>Andhra Pradesh</option>
+                    <option>Tamil Nadu</option>
+                </select>
+            </div>
+
+            <div class="col-md-6 mb-2">
+                <input asp-for="NewShippingAddress.AlternatePhoneNumber"
+                       class="form-control"
+                       placeholder="Alternate Phone (Optional)" />
+            </div>
+        </div>
+
+        <!-- Address Type -->
+        <div class="mt-2">
+            <label class="form-label">Address Type</label><br />
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input"
+                       type="radio"
+                       asp-for="NewShippingAddress.AddressType"
+                       value="Home" />
+                <label class="form-check-label">Home</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input"
+                       type="radio"
+                       asp-for="NewShippingAddress.AddressType"
+                       value="Work" />
+                <label class="form-check-label">Work</label>
+            </div>
+        </div>
+
+        <div class="form-check mt-2">
+            <input asp-for="NewShippingAddress.IsDefaultAddress"
+                   class="form-check-input" />
+            <label class="form-check-label">
+                Set as default address
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-orange mt-3">
+            Save and Deliver Here
+        </button>
+    </div>
+</div>

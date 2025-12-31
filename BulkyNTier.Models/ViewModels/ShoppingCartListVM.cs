@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,8 +10,18 @@ namespace BulkyNTier.Models.ViewModels
 {
     public class ShoppingCartListVM
     {
+        [ValidateNever]
        public IEnumerable<ShoppingCart> ShoppingCartList { get; set; }
-       public double Total { get; set; }
+
+        [ValidateNever]
+        public IEnumerable<ShippingAddress> ShippingAddresses { get; set; }
+
+       public ShippingAddress NewShippingAddress { get; set; }
+        [ValidateNever]
+        public OrderHeader OrderHeader { get; set; }
+
+        [ValidateNever]
+        public int? SelectedShippingAddressId { get; set; }
       
     }
 }

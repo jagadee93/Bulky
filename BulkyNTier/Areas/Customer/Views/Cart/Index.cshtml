@@ -1,10 +1,11 @@
 ﻿
-
+@using BulkyNTier.Models
 @model ShoppingCartListVM
 
 @{
     ViewData["Title"] = "Shopping Cart";
     double total = 0;
+   
 }
 
 <div class="container cart-container py-4">
@@ -26,6 +27,33 @@
     else
     {
         <div class="row g-4">
+
+            @if (Model.ShippingAddresses.Any())
+            {
+                ShippingAddress defaultShippingAddress = @Model.ShippingAddresses.FirstOrDefault();
+                <div class="">
+                    <div><b>Deliver To:</b>@defaultShippingAddress.Name,@defaultShippingAddress.PostalCode <span>@defaultShippingAddress.AddressType</span></div>
+                    <p>@defaultShippingAddress.StreetAddress,@defaultShippingAddress.City</p>
+                </div>
+
+                <div>
+                    <button type="button"
+                            class="btn btn-link"
+                            data-bs-toggle="modal"
+                            data-bs-target="#changeAddressModal">
+                        Change
+                    </button>
+                </div>
+            }
+            else
+            {
+                <button type="button"
+                        class="btn btn-link"
+                   data-bs-toggle="modal"
+                   data-bs-target="#addAddressModal">
+                    + Add new address
+                </button>
+            }
 
             <!-- LEFT: items -->
             <div class="col-lg-8">
@@ -84,35 +112,160 @@
                                     </td>
                                 </tr>
                             }
-
                         </tbody>
                     </table>
+                    <form method="post" action="Checkout">
+                        <input 
+                               asp-for="SelectedShippingAddressId"
+                               name="shippingAddressId"
+                               hidden
+                                />
+                        <button type="submit">checkout</button>
+                    </form>
                 </div>
             </div>
 
             <!-- RIGHT: summary -->
             <div class="col-lg-4">
 
-                <div class="card shadow-sm p-4 order-summary">
-                    <h5 class="fw-bold mb-3">Order Summary</h5>
-
-                    <div class="d-flex justify-content-between mb-2">
-                        <span class="text-muted">Items Total</span>
-                        <span style="text-decoration: line-through" class="fw-bold">₹@total</span>
-                        <span class="fw-bold">₹@Model.Total</span>
-                    </div>
-
-                    <hr />
-
-                    <div class="d-grid mt-3">
-                        <a asp-action="Summary" class="btn btn-primary btn-lg">
-                            Proceed to Checkout
-                        </a>
-                    </div>
-                </div>
+                @await Component.InvokeAsync("PriceDetails")
 
             </div>
 
         </div>
     }
+
+   
+    <div class="modal fade" id="changeAddressModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Choose Delivery Address</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+               
+                    <div class="modal-body">
+
+                        @foreach (var address in Model.ShippingAddresses)
+                        {
+                            <div class="border rounded p-3 mb-2">
+
+                                <input type="radio"
+                                       asp-for="SelectedShippingAddressId"
+                                       name="shippingAddressId"
+                                       value="@address.Id"
+
+                                     />
+
+                                <strong>@address.Name</strong>
+                                <div>@address.StreetAddress, @address.City</div>
+                                <div>@address.PostalCode</div>
+
+                                @if (address.IsDefaultAddress)
+                                {
+                                    <span class="badge bg-success mt-1">Default</span>
+                                }
+                            </div>
+                        }
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Use this address</button>
+                    </div>
+         
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="addAddressModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Shipping Address</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <form asp-controller="Cart" asp-action="Create" method="post">
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input asp-for="NewShippingAddress.Name" class="form-control" />
+                            <span asp-validation-for="NewShippingAddress.Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Phone</label>
+                            <input asp-for="NewShippingAddress.PhoneNumber" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Phone</label>
+                            <input asp-for="NewShippingAddress.AlternatePhoneNumber" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Street Address</label>
+                            <input asp-for="NewShippingAddress.StreetAddress" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">City</label>
+                            <input asp-for="NewShippingAddress.City" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">State</label>
+                            <input asp-for="NewShippingAddress.State" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Postal Code</label>
+                            <input asp-for="NewShippingAddress.PostalCode" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Address Type</label>
+                            <select asp-for="NewShippingAddress.AddressType" asp-items="Html.GetEnumSelectList<AddressType>()" class="form-select">
+                                <option value="">-- Select Address Type --</option>
+                            </select>
+                        </div>
+
+                        <div class="form-check mt-2">
+                            <input asp-for="NewShippingAddress.IsDefaultAddress"
+                                   class="form-check-input"
+                                   type="radio"
+                                   value="true" />
+
+                            <label class="form-check-label">
+                                Set as default address
+                            </label>
+                        </div>
+                    </div>
+
+
+
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Address</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial.cshtml" />
+    }
+}
+

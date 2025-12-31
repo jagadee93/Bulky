@@ -10,9 +10,14 @@ namespace BulkyNTier.DataAccess.Repository.IRepository
     {
         ICategoryRepository CategoryRepository { get; }
         IProductRepository ProductRepository { get; }
-
         ICompanyRepository CompanyRepository { get; }
         IShoppingCartRepository ShoppingCartRepository { get; }
+
+        IShippingAddressRepository ShippingAddressRepository {  get;}
+        IOrderHeaderRepository  OrderHeaderRepository { get; }
+        IOrderDetailRepository OrderDetailRepository {  get; }
+        IOrderEventRepository  OrderEventRepository { get; }
+
         void Save();
     }
 }

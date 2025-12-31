@@ -9,6 +9,12 @@ using System.Threading.Tasks;
 
 namespace BulkyNTier.Models
 {
+    public enum AddressType{
+        Home,
+        Work,
+        Other,
+        Friends,
+    }
     public class ShippingAddress
     {
 
@@ -19,34 +25,36 @@ namespace BulkyNTier.Models
         public string PhoneNumber { get; set; }
 
         [Display(Name ="Alternate Phone"),RegularExpression(@"^\d{10}$", ErrorMessage = "Alternate Phone no must be 10 digits")]
-        public string AlternatePhoneNumber {  get; set; }
+        public string? AlternatePhoneNumber {  get; set; }
 
+        [Required]
+        public AddressType AddressType { get; set; }
 
-        public string AddressType { get; set; }
-
-        [Required,MaxLength(16)]
+        [Required,MaxLength(30)]
         public string StreetAddress { get; set; }
 
-        [Required,MaxLength(15)]
+        [Required,MaxLength(20)]
         public string City { get; set; }
 
-        [Required,MaxLength(20)]
+        [Required,MaxLength(25)]
         
         public string State {  get; set; }
         [Required, RegularExpression(@"^\d{6}$", ErrorMessage = "Postal code must be 6 digits")]
         public string PostalCode { get; set; }
 
-        [MaxLength(16)]
-        public string Country { get; set; }
+        [MaxLength(20)]
+        public string? Country { get; set; }
 
         public bool IsDefaultAddress { get; set; }
 
+        [ValidateNever]
         public string ApplicationUserId { get; set; }
 
         [ForeignKey(nameof(ApplicationUserId))]
         [ValidateNever]
 
         public ApplicationUser ApplicationUser { get; set; }
+
 
 
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using BulkyNTier.Utilities;
 
 namespace BulkyNTier.Areas.Customer.Controllers
 {
@@ -16,6 +17,8 @@ namespace BulkyNTier.Areas.Customer.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<ApplicationUser> _userManager;
+        
+        public ShoppingCartListVM ShoppingCartListVM { get; set; } 
 
         public CartController(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager)
         {
@@ -35,18 +38,37 @@ namespace BulkyNTier.Areas.Customer.Controllers
 
             if (userId != null)
             {
-                ShoppingCartListVM shoppingCartListVM = new() { };
+                IEnumerable<ShippingAddress> shippingAddresses = _unitOfWork.ShippingAddressRepository.GetAll(u => u.ApplicationUserId == userId, includeProperties: null).OrderByDescending(u => u.IsDefaultAddress);
+                if (shippingAddresses == null)
+                {
+                    shippingAddresses = new List<ShippingAddress>();
+
+                }
+                ShoppingCartListVM shoppingCartListVM = new()
+                {
+                    OrderHeader = new(),
+                    ShippingAddresses = shippingAddresses,
+                    NewShippingAddress = new()
+
+                };
 
                 IEnumerable<ShoppingCart> carts = _unitOfWork.ShoppingCartRepository.GetAll(u => u.ApplicationUserId == userId, includeProperties: "Product");
-
+               
                 foreach (var cart in carts)
                 {
-                    cart.Price = GetPriceBasedOnQuantity(cart);
-                    shoppingCartListVM.Total += cart.Price * cart.Count;
+                    Functions functions = new Functions();
+                    cart.Price = functions.GetPriceBasedOnQuantity(cart);
+                    shoppingCartListVM.OrderHeader.OrderTotal += (decimal)cart.Price * cart.Count;
 
                 }
                 shoppingCartListVM.ShoppingCartList = carts;
+               
 
+
+                //Determine the default address to highlight 
+                shoppingCartListVM.SelectedShippingAddressId =
+                 shippingAddresses.FirstOrDefault(a => a.IsDefaultAddress)?.Id
+                ?? shippingAddresses.FirstOrDefault()?.Id;
 
                 return View(shoppingCartListVM);
             }
@@ -110,25 +132,49 @@ namespace BulkyNTier.Areas.Customer.Controllers
         }
 
 
-
-        public double GetPriceBasedOnQuantity(ShoppingCart cart)
+        public IActionResult Create(ShoppingCartListVM shoppingCartVM)
         {
+            var address = shoppingCartVM.NewShippingAddress;
+            
+            var claimsIdentity = User.Identity as ClaimsIdentity;
 
+            var userId = claimsIdentity?
+                .FindFirst(ClaimTypes.NameIdentifier)?
+                .Value;
+            
+            if (userId == null)
+            {
+                return RedirectToAction(nameof(Index), "Cart");
+            }
+            address.ApplicationUserId = userId;
 
-            if (cart.Count <= 50)
-            {
-                return cart.Product.Price;
+            if (ModelState.IsValid) {
+                if (address.IsDefaultAddress)
+                {
+                    var PreviousDefaultAddress = _unitOfWork.ShippingAddressRepository.GetFirstOrDefault(u => u.ApplicationUserId == userId && u.IsDefaultAddress, includeProperties: null);
+                    if (PreviousDefaultAddress != null)
+                    {
+                        PreviousDefaultAddress.IsDefaultAddress = false;
+                        _unitOfWork.ShippingAddressRepository.Update(PreviousDefaultAddress);
+                    }
+                   
+                }
+                _unitOfWork.ShippingAddressRepository.Add(address);
+                _unitOfWork.Save();
+                return RedirectToAction(nameof(Index),"Cart");
             }
-            else if (cart.Count <= 100)
-            {
-                return cart.Product.Price50;
-            }
-            else
-            {
-                return cart.Product.Price100;
-            }
-
+            return RedirectToAction(nameof(Index), "Cart");
         }
+
+
+
+
+        public IActionResult Checkout(ShoppingCartListVM shoppingCartListVM)
+        {
+            return RedirectToAction(nameof(Checkout), "Order");
+        }
+
+       
 
     }
 }

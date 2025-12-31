@@ -15,7 +15,6 @@ namespace BulkyNTier.DataAccess.Repository
         public IShoppingCartRepository ShoppingCartRepository { get; set; }
 
 
-        public IShippingAddressRepository ShippingAddressRepository { get; set; }
 
         public IOrderHeaderRepository OrderHeaderRepository {  get; set; }
 
@@ -25,6 +24,10 @@ namespace BulkyNTier.DataAccess.Repository
 
 
         public IApplicationUserRepository ApplicationUserRepository { get; set; }
+
+        public IShippingAddressRepository ShippingAddressRepository { get; set; }
+
+
 
         private readonly AppDbContext _db;
         public UnitOfWork(AppDbContext db) {
