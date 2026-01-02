@@ -1,0 +1,243 @@
+﻿@model ShoppingCartListVM
+
+
+@{
+    ViewData["Title"] = "Checkout";
+    int? addressId = TempData.Peek("SelectedAddressId") as int?;
+    var defaultShippingId = Model.SelectedShippingAddressId;
+    Model.SelectedShippingAddressId = addressId ?? defaultShippingId;
+}
+
+<div class="container py-4 row">
+    <div class="col-lg-8">
+        <div id="addressListSection">
+            <h5 class="fw-bold mb-3">
+                <span class="badge bg-primary me-2">2</span>
+                DELIVERY ADDRESS
+            </h5>
+            @foreach (var address in Model.ShippingAddresses)
+            {
+                <div class="address-card @(address.IsDefaultAddress ? "active" : "")">
+                    <label class="address-radio"> </label>
+                    <input type="radio"
+                           name="OrderHeader.ShippingAddressId"
+                           value="@address.Id"
+                           @(address.IsDefaultAddress ? "checked" : "") />
+
+                    <div class="address-content">
+                        <div class="address-header">
+                            <strong>@address.Name</strong>
+                            <span class="badge address-type">
+                                @address.AddressType
+                            </span>
+
+                            @if (address.IsDefaultAddress)
+                            {
+                                <span class="badge bg-success ms-2">Default</span>
+                            }
+                        </div>
+
+                        <div class="address-text">
+                            @address.StreetAddress,<br />
+                            @address.City, @address.State - @address.PostalCode<br />
+                            Phone: @address.PhoneNumber
+                        </div>
+
+                        <button type="button"
+                                class="btn btn-orange mt-2 deliver-btn"
+                                data-id="@address.Id"
+                                data-name="@address.Name"
+                                data-type="@address.AddressType"
+                                data-full="@($"{address.StreetAddress}, {address.City}, {address.State} - {address.PostalCode}")"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#orderSummary">
+                            Deliver Here
+                        </button>
+                    </div>
+
+                </div>
+            }
+
+
+        </div>
+
+        <hr />
+        <div id="selectedAddressSection" class="d-none">
+            <div class="address-card selected">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <strong id="selName"></strong>
+                        <span class="badge bg-light text-dark" id="selType"></span>
+
+                        <div id="selFullAddress" class="mt-1 small"></div>
+                    </div>
+
+                    <button type="button"
+                            class="btn btn-link"
+                            id="changeAddressBtn">
+                        CHANGE
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-link"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#addAddressForm">
+            + Add a new address
+        </button>
+
+        <div class="collapse mt-3" id="addAddressForm">
+            <div class="card p-3">
+                <form asp-action="">
+                    <h5 class="mb-3">Add New Address</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <input asp-for="NewShippingAddress.Name"
+                                   class="form-control"
+                                   placeholder="Name" />
+                        </div>
+
+                        <div class="col-md-6 mb-2">
+                            <input asp-for="NewShippingAddress.PhoneNumber"
+                                   class="form-control"
+                                   placeholder="10-digit mobile number" />
+                        </div>
+
+                        <div class="col-md-6 mb-2">
+                            <input asp-for="NewShippingAddress.PostalCode"
+                                   class="form-control"
+                                   placeholder="Pincode" />
+                        </div>
+
+                        <div class="col-md-6 mb-2">
+                            <input asp-for="NewShippingAddress.City"
+                                   class="form-control"
+                                   placeholder="City / District / Town" />
+                        </div>
+
+                        <div class="col-12 mb-2">
+                            <textarea asp-for="NewShippingAddress.StreetAddress"
+                                      class="form-control"
+                                      placeholder="Address (Area and Street)"
+                                      rows="2"></textarea>
+                        </div>
+
+                        <div class="col-md-6 mb-2">
+                            <select asp-for="NewShippingAddress.State"
+                                    class="form-select">
+                                <option value="">-- Select State --</option>
+                                <option>Karnataka</option>
+                                <option>Andhra Pradesh</option>
+                                <option>Tamil Nadu</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-2">
+                            <input asp-for="NewShippingAddress.AlternatePhoneNumber"
+                                   class="form-control"
+                                   placeholder="Alternate Phone (Optional)" />
+                        </div>
+                    </div>
+
+                    <!-- Address Type -->
+                    <div class="mt-2">
+                        <label class="form-label">Address Type</label><br />
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input"
+                                   type="radio"
+                                   asp-for="NewShippingAddress.AddressType"
+                                   value="Home" />
+                            <label class="form-check-label">Home</label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input"
+                                   type="radio"
+                                   asp-for="NewShippingAddress.AddressType"
+                                   value="Work" />
+                            <label class="form-check-label">Work</label>
+                        </div>
+                    </div>
+
+                    <div class="form-check mt-2">
+                        <input asp-for="NewShippingAddress.IsDefaultAddress"
+                               class="form-check-input" />
+                        <label class="form-check-label">
+                            Set as default address
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-orange mt-3">
+                        Save and Deliver Here
+                    </button>
+                </form>
+            </div>
+        </div>
+
+
+
+        <div class="collapse" id="orderSummary">
+            <h5 class="fw-bold mb-3">
+                <span class="badge bg-primary me-2">3</span>
+                ORDER SUMMARY
+            </h5>
+            <div class="">
+                <div class="card cart-card shadow-sm p-3">
+
+                    <div id="cart-container">
+                        @await Component.InvokeAsync("CartTable")
+                    </div>
+
+
+                    <form asp-action"InitiateOrder" method="post">
+                        <div class="d-inline-flex justify-content-lg-around">
+                            <input asp-for="@Model.SelectedShippingAddressId" hidden />
+                            <p>Order Confirmation will be sent user@gmail.com</p>
+                            <button type="submit">Continue</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-lg-4">
+        @await Component.InvokeAsync("PriceDetails")
+    </div>
+</div>
+
+@section Scripts {
+
+
+    
+    @{
+        <partial name="_ValidationScriptsPartial.cshtml" />
+    }
+    <script src="~/js/ShoppingCart.js"></script>
+    <script>
+        $(".deliver-btn").on("click", function () {
+
+            // hide list + show summary
+            $("#addressListSection").addClass("d-none");
+            $("#selectedAddressSection").removeClass("d-none");
+
+            // fill summary
+            $("#selName").text($(this).data("name"));
+            $("#selType").text($(this).data("type"));
+            $("#selFullAddress").text($(this).data("full"));
+
+            // set hidden model value
+            $("input[name='SelectedShippingAddressId']")
+                .val($(this).data("id"));
+        });
+
+        $("#changeAddressBtn").on("click", function () {
+            $("#selectedAddressSection").addClass("d-none");
+            $("#addressListSection").removeClass("d-none");
+        });
+    </script>
+}
+

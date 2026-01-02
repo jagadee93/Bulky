@@ -57,83 +57,30 @@
 
             <!-- LEFT: items -->
             <div class="col-lg-8">
-
                 <div class="card cart-card shadow-sm p-3">
-
-                    <table class="table align-middle mb-0">
-                        <tbody>
-
-                            @foreach (var item in Model.ShoppingCartList)
-                            {
-                                var subtotal = item.Count * item.Price;
-
-                                total += item.Count*item.Product.Price;
-
-
-                                <tr class="cart-row">
-
-                                    <td width="120">
-                                       <a asp-controller="Home" asp-action="Details" asp-route-id="@item.ProductId">
-                                        <img src="@item.Product.ImageURL"
-                                             class="cart-img"
-                                             alt="@item.Product.Title" />
-                                        </a>
-                                    </td>
-
-                                    <td>
-                                        <a asp-controller="Home" asp-action="Details" asp-route-id="@item.ProductId"> <h6 class="fw-semibold mb-1">@item.Product.Title</h6></a>
-                                        <small class="text-muted">ISBN: @item.Product.ISBN</small>
-
-                                        <div class="text-success fw-bold mt-2">
-                                            ₹@item.Price
-                                        </div>
-                                    </td>
-
-                                    <td width="170">
-                                        <div class="qty-control">
-                                            <a asp-action="Minus" asp-route-cartId="@item.Id" class="btn btn-sm btn-light">−</a>
-
-                                            <span class="qty-box">@item.Count</span>
-
-                                            <a asp-action="Plus" asp-route-cartId="@item.Id" class="btn btn-sm btn-light">+</a>
-                                        </div>
-                                    </td>
-
-                                    <td width="140" class="fw-semibold">
-                                        ₹@subtotal
-                                    </td>
-
-                                    <td width="120">
-                                        <a asp-action="RemoveSingleItemFromCart"
-                                           asp-route-cartId="@item.Id"
-                                           class="btn btn-outline-danger btn-sm">
-                                            Remove
-                                        </a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                    <form method="post" action="Checkout">
-                        <input 
-                               asp-for="SelectedShippingAddressId"
-                               name="shippingAddressId"
+                    <div id="cart-container">
+                        @await Component.InvokeAsync("CartTable")
+                    </div>
+                    <form asp-action="InitiateCheckout" asp-controller="Cart" method="post">
+                        <input asp-for="SelectedShippingAddressId"
                                hidden
                                 />
-                        <button type="submit">checkout</button>
+                        <button type="submit">Place Order</button>
                     </form>
                 </div>
             </div>
 
             <!-- RIGHT: summary -->
             <div class="col-lg-4">
-
                 @await Component.InvokeAsync("PriceDetails")
 
             </div>
 
         </div>
     }
+
+
+
 
    
     <div class="modal fade" id="changeAddressModal" tabindex="-1" aria-hidden="true">
@@ -267,5 +214,6 @@
     @{
         <partial name="_ValidationScriptsPartial.cshtml" />
     }
-}
+    <script src="~/js/ShoppingCart.js"></script>
 
+}

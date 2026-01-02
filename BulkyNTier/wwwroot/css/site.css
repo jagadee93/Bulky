@@ -715,3 +715,77 @@ bg-success {
     .btn-orange:hover {
         background: #e95b17;
     }
+
+
+.address-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    transition: all .2s ease;
+    cursor: pointer;
+}
+
+    .address-card:hover {
+        border-color: #2b6cff;
+        box-shadow: 0 4px 14px rgba(0,0,0,.05);
+    }
+
+    .address-card.active {
+        border-color: #2b6cff;
+        background: #f5f8ff;
+    }
+
+.address-header strong {
+    font-size: 15px;
+}
+
+.address-type {
+    background: #eef0f7;
+    font-size: 12px;
+}
+
+
+.btn-orange {
+    background: #ff6200;
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 6px;
+}
+
+    .btn-orange:hover {
+        background: #ff5a00;
+    }
+
+.address-card.selected {
+    border: 2px solid #2b6cff;
+    background: #f7faff;
+}
+
+.selected .badge {
+    background: #e7f0ff;
+    color: #2454d3;
+}
+
+
+.cart-card {
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.cart-row td {
+    vertical-align: middle;
+}
+
+.qty-control {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 4px 10px;
+}
+
+.qty-box {
+    padding: 0 10px;
+    font-weight: 600;
+}

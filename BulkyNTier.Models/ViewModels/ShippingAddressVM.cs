@@ -10,6 +10,7 @@ namespace BulkyNTier.Models.ViewModels
     {
        public IEnumerable<ShippingAddress> ShippingAddresses {  get; set; }
        public ShippingAddress NewShippingAddress {  get; set; }
+       
 
     }
 }

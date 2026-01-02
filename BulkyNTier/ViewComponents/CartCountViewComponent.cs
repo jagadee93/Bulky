@@ -6,12 +6,12 @@ using System.Security.Claims;
 
 namespace BulkyNTier.ViewComponents
 {
-    public class ShoppingCartViewComponent:ViewComponent
+    public class CartCountViewComponent:ViewComponent
     {
         private readonly IUnitOfWork _unitOfWork;
       
 
-        public ShoppingCartViewComponent(IUnitOfWork unitOfWork,UserManager<ApplicationUser> userManager)
+        public CartCountViewComponent(IUnitOfWork unitOfWork,UserManager<ApplicationUser> userManager)
         {
             _unitOfWork = unitOfWork;
         }
