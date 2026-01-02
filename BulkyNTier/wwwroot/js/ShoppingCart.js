@@ -6,6 +6,8 @@
             // 'result' here is the HTML for the ViewComponent
             console.log(result)
             $('#cart-container').html(result);
+            $("#ShoppingCartCount").load("/Customer/Cart/GetShoppingCartCount");
+            $("#PriceDetails").load("/Customer/Cart/GetPriceDetailsComponent");
         },
         error: function () {
             alert("Error updating cart. Please try again.");

@@ -174,8 +174,6 @@ namespace BulkyNTier.Areas.Customer.Controllers
                         PreviousDefaultAddress.IsDefaultAddress = false;
                         _unitOfWork.ShippingAddressRepository.Update(PreviousDefaultAddress);
                     }
-
-                   
                 }
                 _unitOfWork.ShippingAddressRepository.Add(address);
                 _unitOfWork.Save();
@@ -261,15 +259,21 @@ namespace BulkyNTier.Areas.Customer.Controllers
         [HttpGet]
         public IActionResult GetPriceDetailsComponent()
         {
-            return ViewComponent(nameof(PriceDetailsViewComponent));
+            return ViewComponent("PriceDetails");
         }
 
 
 
         [HttpGet]
-        public IActionResult ShoppingCartCount()
+        public IActionResult GetShoppingCartCount()
         {
-            return ViewComponent(nameof(CartCountViewComponent));
+            return ViewComponent("CartCount");
+        }
+
+        [HttpGet]
+        public IActionResult GetCartTableComponent(bool isReadOnly = false)
+        {
+            return ViewComponent("CartTable");
         }
 
 

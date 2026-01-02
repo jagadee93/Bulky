@@ -4,8 +4,7 @@
 
 @{
     ViewData["Title"] = "Shopping Cart";
-    double total = 0;
-   
+
 }
 
 <div class="container cart-container py-4">
@@ -71,7 +70,7 @@
             </div>
 
             <!-- RIGHT: summary -->
-            <div class="col-lg-4">
+            <div class="col-lg-4" id="PriceDetails">
                 @await Component.InvokeAsync("PriceDetails")
 
             </div>
