@@ -1,0 +1,15 @@
+﻿@model OrderHeader
+<div class="container row pt-4">
+    <div class="col-12 text-center">
+        <h1>Order Placed Successfully</h1>
+        <p>Your OrderNumber is @Model.Id</p>
+        <div>
+            <p>Your order will be delivered to :@Model.ShippingAddress.StreetAddress</p>
+            <p> @Model.ShippingAddress.City</p><p> @Model.ShippingAddress.State</p>
+        </div>
+        <p>Thankyou for shopping with us..</p>
+
+
+        <a asp-action="Index" asp-controller="Home">Continue shopping</a>
+    </div>
+</div>

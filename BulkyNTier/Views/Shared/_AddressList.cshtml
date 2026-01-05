@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ShippingAddress>
+
+@foreach (var address in Model)
+{
+    <div class="address-card @(address.IsDefaultAddress ? "active" : "")">
+        <div class="d-flex align-items-start">
+            <input type="radio"
+                   name="SelectedShippingAddressId"
+                   value="@address.Id"
+                   class="address-radio-input me-3 mt-1"
+                   @(address.IsDefaultAddress ? "checked" : "") />
+
+            <div class="address-content w-100">
+                <div class="address-header d-flex justify-content-between">
+                    <strong>@address.Name</strong>
+                    <span class="badge address-type bg-light text-dark">
+                        @address.AddressType
+                    </span>
+                </div>
+
+                <div class="address-text small text-muted">
+                    @address.StreetAddress, @address.City, @address.State - @address.PostalCode
+                </div>
+
+                <button type="button"
+                        class="btn btn-orange btn-sm mt-2 deliver-btn"
+                        data-id="@address.Id"
+                        data-name="@address.Name"
+                        data-type="@address.AddressType"
+                        data-full="@($"{address.StreetAddress}, {address.City}, {address.State} - {address.PostalCode}")">
+                    Deliver Here
+                </button>
+            </div>
+        </div>
+    </div>
+}

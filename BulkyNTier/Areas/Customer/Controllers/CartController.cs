@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using BulkyNTier.Utilities;
 using BulkyNTier.ViewComponents;
+using Newtonsoft.Json;
 
 namespace BulkyNTier.Areas.Customer.Controllers
 {
@@ -31,7 +32,7 @@ namespace BulkyNTier.Areas.Customer.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var claimsIdentity = User.Identity as ClaimsIdentity;
+            var claimsIdentity =  User.Identity as ClaimsIdentity;
 
             var userId = claimsIdentity?
                 .FindFirst(ClaimTypes.NameIdentifier)?
@@ -39,7 +40,7 @@ namespace BulkyNTier.Areas.Customer.Controllers
 
             if (userId != null)
             {
-                IEnumerable<ShippingAddress> shippingAddresses = _unitOfWork.ShippingAddressRepository.GetAll(u => u.ApplicationUserId == userId, includeProperties: null).OrderByDescending(u => u.IsDefaultAddress);
+                IEnumerable<ShippingAddress> shippingAddresses =  _unitOfWork.ShippingAddressRepository.GetAll(u => u.ApplicationUserId == userId, includeProperties: null).OrderByDescending(u => u.IsDefaultAddress);
                 if (shippingAddresses == null)
                 {
                     shippingAddresses = new List<ShippingAddress>();
@@ -185,6 +186,43 @@ namespace BulkyNTier.Areas.Customer.Controllers
 
 
         [HttpPost]
+        public IActionResult AddAddressAjax([FromBody] ShippingAddress address)
+        {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            var userId = claimsIdentity?
+                .FindFirst(ClaimTypes.NameIdentifier)?
+                .Value;
+
+            if (userId == null)
+            {
+                return RedirectToAction(nameof(Index), "Cart");
+            }
+            address.ApplicationUserId = userId;
+
+            if (ModelState.IsValid)
+            {
+                // Handle logic to unset previous default if this is new default
+                if (address.IsDefaultAddress)
+                {
+                    var PreviousDefaultAddress = _unitOfWork.ShippingAddressRepository.GetFirstOrDefault(u => u.ApplicationUserId == userId && u.IsDefaultAddress, includeProperties: null);
+                    if (PreviousDefaultAddress != null)
+                    {
+                        PreviousDefaultAddress.IsDefaultAddress = false;
+                        _unitOfWork.ShippingAddressRepository.Update(PreviousDefaultAddress);
+                    }
+                }
+                _unitOfWork.ShippingAddressRepository.Add(address);
+                _unitOfWork.Save();
+
+                return Json(new { success = true, addressId = address.Id, addressName = address.Name });
+            }
+            return Json(new { success = false, message = "Invalid Data" });
+        }
+
+
+
+
+        [HttpPost]
         public IActionResult InitiateCheckout(ShoppingCartListVM shoppingCartListVM)
         {
             TempData["SelectedAddressId"] = shoppingCartListVM.SelectedShippingAddressId;
@@ -192,12 +230,101 @@ namespace BulkyNTier.Areas.Customer.Controllers
         }
 
 
-
+            
         [HttpPost]
-        public IActionResult InitiateOrder(ShoppingCartListVM shoppingCartListVM)
+        public async Task<IActionResult> InitiateOrder(ShoppingCartListVM shoppingCartListVM)
         {
+            var AddressId = shoppingCartListVM.SelectedShippingAddressId;
+            if (AddressId == 0|| AddressId==null)
+            {
+                return View(shoppingCartListVM);
+            }
+
+
+            var orderHeader=new OrderHeader();
+            var user=await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
+            
+            orderHeader.ApplicationUserId = user.Id;
+            orderHeader.ShippingAddressId = (int)AddressId;
+          
+            orderHeader.OrderDate= DateTime.Now;
+            orderHeader.CreatedAt = DateTime.Now;
+            
+
+            //Determine companyUser or not 
+            
+           
+
+
+            IEnumerable<ShoppingCart> carts = _unitOfWork.ShoppingCartRepository.GetAll(u => u.ApplicationUserId == user.Id, includeProperties: "Product");
+            Functions Helpers = new ();
+            foreach (var cart in carts)
+            {
+
+                cart.Price = Helpers.GetPriceBasedOnQuantity(cart);
+                orderHeader.OrderTotal+= (decimal)cart.Price * cart.Count;
+
+            }
+
+            bool isCompanyUser = user.CompanyId != 0 || user.CompanyId != null;
+            if (isCompanyUser)
+            {
+                var today = DateOnly.FromDateTime(DateTime.Today);
+                var after30Days = today.AddDays(30);
+                orderHeader.OrderStatus = OrderStatus.Approved;
+                orderHeader.PaymentStatus = PaymentStatus.ApprovedForDelayedPayment;
+
+            }
+            else
+            {
+                orderHeader.OrderStatus = OrderStatus.Pending;
+                orderHeader.PaymentStatus = PaymentStatus.Pending;
+                orderHeader.PaymentDueDate = DateOnly.FromDateTime(DateTime.Now);
+            }
+
+            _unitOfWork.OrderHeaderRepository.Add(orderHeader);
+            _unitOfWork.Save();
+
+            foreach(var cart in carts)
+            {
+                OrderDetail detail = new()
+                {
+                    ProductId = cart.ProductId,
+                    OrderHeaderId=orderHeader.Id, //we have saved the order Header so it will be populated with Id
+                    Count = cart.Count,
+                    Price = cart.Price,
+                };
+                _unitOfWork.OrderDetailRepository.Add(detail);
+               
+            }
+            _unitOfWork.Save();
+            if (isCompanyUser)
+            {
+                _unitOfWork.ShoppingCartRepository.RemoveRange(carts);
+                _unitOfWork.Save();
+                return RedirectToAction(nameof(OrderConfirmation), new { id = orderHeader.Id });
+            }
+            _unitOfWork.Save();   
+
             return RedirectToAction(nameof(Payment));
         }
+
+
+        public IActionResult OrderConfirmation(int id)
+        {
+           OrderHeader orderHeader= _unitOfWork.OrderHeaderRepository.GetFirstOrDefault(u => u.Id == id, includeProperties: "ShippingAddress");
+            return View(orderHeader);
+        }
+
+
+
+
+
+
 
         [HttpGet]
         public IActionResult Checkout()
@@ -249,7 +376,7 @@ namespace BulkyNTier.Areas.Customer.Controllers
 
 
 
-        public IActionResult Payment()
+        public IActionResult Payment(OrderHeader orderHeader)
         {
             return View();
         }
@@ -277,6 +404,65 @@ namespace BulkyNTier.Areas.Customer.Controllers
         }
 
 
+        [HttpPost]
+        public IActionResult AddAddress([FromBody] ShippingAddress address)
+        {
 
+
+            Console.WriteLine(address);
+            // If binding fails due to Enum or Required fields, address is null
+            if (address == null)
+            {
+                return Json(new { success = false, message = "Could not parse address data. Check Enum values." });
+            }
+
+            
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId != null)
+            {
+                address.ApplicationUserId = userId;
+            }
+            // VERY IMPORTANT: 
+            // Navigation properties must be removed from validation since they aren't in the JSON
+            ModelState.Remove("ApplicationUser");
+            ModelState.Remove("ApplicationUserId"); // Because we set it manually after binding
+
+            if (ModelState.IsValid)
+            {
+                if (address.IsDefaultAddress)
+                {
+                    var oldDefault = _unitOfWork.ShippingAddressRepository.GetFirstOrDefault(
+                        u => u.ApplicationUserId == userId && u.IsDefaultAddress,includeProperties:null);
+                    if (oldDefault != null)
+                    {
+                        oldDefault.IsDefaultAddress = false;
+                        _unitOfWork.ShippingAddressRepository.Update(oldDefault);
+                    }
+                }
+
+                _unitOfWork.ShippingAddressRepository.Add(address);
+                _unitOfWork.Save();
+                return Json(new { success = true });
+            }
+
+            // If we reach here, validation failed. Let's see why:
+            var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+            return Json(new { success = false, message = string.Join(" | ", errors) });
+        }
+
+
+
+        [HttpGet]
+        public IActionResult GetAddressList()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //we dont need to sort by Default address here this after creating new address
+            var addresses = _unitOfWork.ShippingAddressRepository
+                .GetAll(u => u.ApplicationUserId == userId, includeProperties: null)
+                .OrderByDescending(u => u.Id);
+
+            return PartialView("_AddressList", addresses);
+        }
     }
 }

@@ -18,10 +18,10 @@ namespace BulkyNTier.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            if (!HttpContext.User.Identity.IsAuthenticated)
-            {
-                return View(0);
-            }
+            //if (!HttpContext.User.Identity.IsAuthenticated)
+            //{
+            //    return View(0);
+            //}
             var claimsIdentity = User.Identity as ClaimsIdentity;
 
             var userId = claimsIdentity?

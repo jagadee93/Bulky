@@ -13,7 +13,8 @@ namespace BulkyNTier.Models
         Processing,
         Shipped,
         Delivered,
-        Cancelled
+        Cancelled,
+        
     }
 
     public enum PaymentStatus
@@ -21,7 +22,8 @@ namespace BulkyNTier.Models
         Pending,
         Approved,
         Rejected,
-        Refunded
+        Refunded,
+        ApprovedForDelayedPayment
     }
 
     public class OrderHeader

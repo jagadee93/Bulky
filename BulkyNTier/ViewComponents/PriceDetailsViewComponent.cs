@@ -21,10 +21,10 @@ namespace BulkyNTier.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            if (!HttpContext.User.Identity.IsAuthenticated)
-            {
-                return View(new PriceDetailSummaryVM());
-            }
+            //if (!HttpContext.User.Identity.IsAuthenticated)
+            //{
+            //    return View(new PriceDetailSummaryVM());
+            //}
             var claimsIdentity = User.Identity as ClaimsIdentity;
 
             var userId = claimsIdentity?
