@@ -20,6 +20,36 @@ namespace BulkyNTier.DataAccess.Repository
             _appDbContext.OrderHeaders.Update(orderHeader);
         }
 
+        public void UpdateStatus(int id, OrderStatus orderStatus, PaymentStatus paymentStatus = PaymentStatus.Pending)
+        {
 
+            var orderFromDb= _appDbContext.OrderHeaders.FirstOrDefault(u => u.Id == id);
+            if (orderFromDb != null)
+            {
+                orderFromDb.OrderStatus = orderStatus;
+                if(paymentStatus != PaymentStatus.Pending)
+                {
+                    orderFromDb.PaymentStatus = paymentStatus;
+                }
+            }
+            
+        }
+
+        public void UpdateStripePaymentId(int id, string sessionId, string paymentIntentId)
+        {
+            var orderFromDb = _appDbContext.OrderHeaders.FirstOrDefault(u => u.Id == id);
+
+            if (!string.IsNullOrEmpty(sessionId))   
+            {
+                orderFromDb.SessionId=sessionId;
+
+            }
+            if (!string.IsNullOrEmpty(paymentIntentId))
+            {
+                orderFromDb.PaymentIntentId = sessionId;
+                orderFromDb.PaymentDate = DateTime.Now;
+
+            }
+        }
     }
 }

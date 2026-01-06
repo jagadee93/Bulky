@@ -41,3 +41,4 @@ publish/
 # Rider / VSCode
 .idea/
 .vscode/
+/BulkyNTier/appsettings.json

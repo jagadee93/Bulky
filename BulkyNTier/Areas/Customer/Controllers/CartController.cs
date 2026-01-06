@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using BulkyNTier.Utilities;
 using BulkyNTier.ViewComponents;
 using Newtonsoft.Json;
+using Stripe.Checkout;
 
 namespace BulkyNTier.Areas.Customer.Controllers
 {
@@ -270,20 +271,21 @@ namespace BulkyNTier.Areas.Customer.Controllers
 
             }
 
-            bool isCompanyUser = user.CompanyId != 0 || user.CompanyId != null;
+            bool isCompanyUser = user.CompanyId != 0&& user.CompanyId != null;
             if (isCompanyUser)
             {
                 var today = DateOnly.FromDateTime(DateTime.Today);
                 var after30Days = today.AddDays(30);
                 orderHeader.OrderStatus = OrderStatus.Approved;
                 orderHeader.PaymentStatus = PaymentStatus.ApprovedForDelayedPayment;
+                orderHeader.PaymentDueDate = after30Days;
 
             }
             else
             {
                 orderHeader.OrderStatus = OrderStatus.Pending;
                 orderHeader.PaymentStatus = PaymentStatus.Pending;
-                orderHeader.PaymentDueDate = DateOnly.FromDateTime(DateTime.Now);
+              
             }
 
             _unitOfWork.OrderHeaderRepository.Add(orderHeader);
@@ -308,16 +310,84 @@ namespace BulkyNTier.Areas.Customer.Controllers
                 _unitOfWork.Save();
                 return RedirectToAction(nameof(OrderConfirmation), new { id = orderHeader.Id });
             }
-            _unitOfWork.Save();   
 
-            return RedirectToAction(nameof(Payment));
+            var domain = "https://localhost:7294/";
+            var options = new Stripe.Checkout.SessionCreateOptions
+            {
+
+                SuccessUrl = domain + $"Customer/Cart/OrderConfirmation?id={orderHeader.Id}",
+                CancelUrl = domain + "Customer/Cart/Index",
+                LineItems = new List<Stripe.Checkout.SessionLineItemOptions>(),
+                Mode = "payment",
+            };
+            foreach (var cartItem in carts)
+            {
+                var SessionLineItem = new SessionLineItemOptions
+                {
+                    PriceData = new SessionLineItemPriceDataOptions
+                    {
+                        UnitAmount = (long)(cartItem.Price * 100),//20.50 =>2050
+                        Currency = "usd",
+                        ProductData = new SessionLineItemPriceDataProductDataOptions
+                        {
+                            Name = cartItem.Product.Title
+                        }
+                    },
+                    Quantity = cartItem.Count,
+                };
+
+                options.LineItems.Add(SessionLineItem);
+
+
+            }
+
+
+            var service = new Stripe.Checkout.SessionService();
+            Stripe.Checkout.Session session = service.Create(options);
+
+         
+
+             //PaymentIntentId will be populated in session only after payment is successfull
+
+            _unitOfWork.OrderHeaderRepository.UpdateStripePaymentId(orderHeader.Id, session.Id, session.PaymentIntentId);
+
+            _unitOfWork.Save();
+
+
+            Response.Headers.Append("Location", session.Url);
+            return new StatusCodeResult(303);
+
+            //return RedirectToAction(nameof(Payment));
         }
 
 
         public IActionResult OrderConfirmation(int id)
         {
-           OrderHeader orderHeader= _unitOfWork.OrderHeaderRepository.GetFirstOrDefault(u => u.Id == id, includeProperties: "ShippingAddress");
+
+            OrderHeader orderHeader= _unitOfWork.OrderHeaderRepository.GetFirstOrDefault(u => u.Id == id, includeProperties: "ShippingAddress");
+            if (orderHeader.PaymentStatus != PaymentStatus.ApprovedForDelayedPayment)
+            {
+                 //this is an order by customer
+                 var service = new Stripe.Checkout.SessionService();
+                Stripe.Checkout.Session session = service.Get(orderHeader.SessionId);
+                //check the stripe status
+                if (session.PaymentStatus.ToLower() == "paid")
+                {
+                    //update the order status
+                    _unitOfWork.OrderHeaderRepository.UpdateStripePaymentId(id, session.Id, session.PaymentIntentId);
+                    _unitOfWork.OrderHeaderRepository.UpdateStatus(id, OrderStatus.Approved, PaymentStatus.Approved);
+                    _unitOfWork.Save();
+                    orderHeader.PaymentStatus=PaymentStatus.Approved;
+                    orderHeader.OrderStatus=OrderStatus.Approved;
+                }
+                
+            }
+            //clear the shopping cart
+            IEnumerable<ShoppingCart> carts=_unitOfWork.ShoppingCartRepository.GetAll(u=>u.ApplicationUserId==orderHeader.ApplicationUserId,includeProperties:null).ToList();
+            _unitOfWork.ShoppingCartRepository.RemoveRange(carts);
+            _unitOfWork.Save();
             return View(orderHeader);
+
         }
 
 

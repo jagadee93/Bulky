@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using BulkyNTier.Utilities;
 using IEmailSender = Microsoft.AspNetCore.Identity.UI.Services.IEmailSender;
 using BulkyNTier.Models;
+using Stripe;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,9 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
+//Configure stripe keys to settings file
+builder.Services.Configure<StripeSettings>(options => builder.Configuration.GetSection("Stripe"));
 
 //Adding Roles
 builder.Services.AddIdentity<ApplicationUser,IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
@@ -48,6 +52,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<String>();
 
 app.UseRouting();
 

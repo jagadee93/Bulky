@@ -1,4 +1,8 @@
 ﻿@model OrderHeader
+@{
+    ViewData["Title"] = "OrderConfirmation";
+ 
+}
 <div class="container row pt-4">
     <div class="col-12 text-center">
         <h1>Order Placed Successfully</h1>
@@ -6,6 +10,7 @@
         <div>
             <p>Your order will be delivered to :@Model.ShippingAddress.StreetAddress</p>
             <p> @Model.ShippingAddress.City</p><p> @Model.ShippingAddress.State</p>
+            <p>PaymentStatus: @Model.PaymentStatus</p>
         </div>
         <p>Thankyou for shopping with us..</p>
 
