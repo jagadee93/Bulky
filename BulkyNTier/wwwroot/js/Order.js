@@ -41,8 +41,7 @@ function LoadTable(status) {
                 data: "id", width: "2%",
                 render: function (data) {
                     return ` <div class="" role="group">
-                 <a href="/Admin/Product/Upsert/${data}"  class="me-3 btn btn-primary" title="Edit" ><i class="bi bi-pencil-square"></i></a>
-                
+                 <a href="/Admin/Order/details/${data}"  class="me-3 btn btn-primary" title="Edit" ><i class="bi bi-pencil-square"></i></a>
                 </div>`;
                 }
             }
