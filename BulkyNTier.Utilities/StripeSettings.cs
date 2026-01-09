@@ -8,7 +8,7 @@ namespace BulkyNTier.Utilities
 {
     public class StripeSettings
     {
-        public string AppURL { get;set}
+        public string AppURL { get; set; }
         public string PublishableKey { get; set; }
         public string SecretKey {  get; set; }
     }

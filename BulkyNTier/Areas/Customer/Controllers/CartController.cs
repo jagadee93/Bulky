@@ -24,7 +24,7 @@ namespace BulkyNTier.Areas.Customer.Controllers
         private readonly StripeSettings _stripeSettings;
 
 
-        public int shippingAddressId { get; set; }
+        public int ShippingAddressId { get; set; }
 
         public CartController(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager,IOptions<StripeSettings> stripeSettingsAccessor)
         {
