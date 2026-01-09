@@ -11,6 +11,7 @@ using BulkyNTier.Utilities;
 using BulkyNTier.ViewComponents;
 using Newtonsoft.Json;
 using Stripe.Checkout;
+using Microsoft.Extensions.Options;
 
 namespace BulkyNTier.Areas.Customer.Controllers
 {
@@ -20,13 +21,16 @@ namespace BulkyNTier.Areas.Customer.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<ApplicationUser> _userManager;
-        
+        private readonly StripeSettings _stripeSettings;
+
+
         public int shippingAddressId { get; set; }
 
-        public CartController(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager)
+        public CartController(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager,IOptions<StripeSettings> stripeSettingsAccessor)
         {
             _unitOfWork = unitOfWork;
             _userManager = userManager;
+            _stripeSettings = stripeSettingsAccessor.Value;
         }
 
 
@@ -311,7 +315,12 @@ namespace BulkyNTier.Areas.Customer.Controllers
                 return RedirectToAction(nameof(OrderConfirmation), new { id = orderHeader.Id });
             }
 
-            var domain = "https://localhost:7294/";
+
+            var domain = _stripeSettings.AppURL;
+            if (String.IsNullOrEmpty(domain))
+            {
+                throw new Exception("Appsettings json is not set");
+            }
             var options = new Stripe.Checkout.SessionCreateOptions
             {
 
