@@ -23,7 +23,8 @@ namespace BulkyNTier.Models
         Approved,
         Rejected,
         Refunded,
-        ApprovedForDelayedPayment
+        ApprovedForDelayedPayment,
+        Cancelled,
     }
 
     public class OrderHeader

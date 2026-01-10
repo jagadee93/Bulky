@@ -22,7 +22,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
 
 
 //Configure stripe keys to settings file
-builder.Services.Configure<StripeSettings>(options => builder.Configuration.GetSection("Stripe"));
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
 //Adding Roles
 builder.Services.AddIdentity<ApplicationUser,IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();

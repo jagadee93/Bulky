@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Details";
     var isAuthorized = User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee);
-    var PaymentDisable = Model.PaymentStatus == PaymentStatus.Approved ? "disabled" : "";
+    var PaymentDisable = Model.PaymentStatus == PaymentStatus.Approved ? true : false;
 }
 <form method="post">
     <br />
@@ -83,15 +83,29 @@
                             <div class="row my-1">
                                 <div class="col-3">Carrier</div>
                                 <div class="col-9">
-                                    <input asp-for="Carrier" readonly class="form-control editable-field" />
-                                    <span class="text-danger" asp-validation-for="Carrier"></span>
+                                    @if (isAuthorized)
+                                    {
+                                        <input asp-for="Carrier"  class="form-control shipping" />
+                                        <span class="text-danger" asp-validation-for="Carrier"></span>
+                                    }
+                                    else
+                                    {
+                                        <input value="@Model.Carrier" readonly class="form-control shipping" />
+                                    }
                                 </div>
                             </div>
                             <div class="row my-1">
                                 <div class="col-3">Tracking</div>
                                 <div class="col-9">
-                                    <input asp-for="TrackingNumber" readonly class="form-control editable-field" />
-                                    <span class="text-danger" asp-validation-for="TrackingNumber"></span>
+                                    @if (isAuthorized)
+                                    {
+                                        <input asp-for="TrackingNumber" class="form-control shipping" />
+                                        <span class="text-danger" asp-validation-for="TrackingNumber"></span>
+                                    }
+                                    else
+                                    {
+                                        <input value="@Model.TrackingNumber" readonly class="form-control shipping" />
+                                    }
                                 </div>
                             </div>
                             <div class="row my-1">
@@ -120,11 +134,17 @@
 
                             @if (Model.SessionId == null)
                             {
+                               
                                 <div class="row my-1">
                                     <div class="col-3">Payment Due Date</div>
                                     <div class="col-9">
-                                        <input asp-for="PaymentDueDate" type="date" asp-format="{0:yyyy-MM-dd}"  readonly class="form-control editable-field" />
+                                        @if(isAuthorized){
+
+                                        <input asp-for="PaymentDueDate" type="date" asp-format="{0:yyyy-MM-dd}"  readonly class="form-control" />
                                         <span class="text-danger" asp-validation-for="PaymentDueDate"></span>
+                                        }else{
+                                        <input value="PaymentDueDate" type="date" asp-format="{0:yyyy-MM-dd}" readonly class="form-control" />
+                                        }
                                     </div>
                                 </div>
                             }
@@ -147,11 +167,11 @@
                                 </div>
                             </div>
 
-                            @if (isAuthorized)
+                            @* @if (isAuthorized)
                             {
-                                <button type="button" id="btnEdit"  class="btn btn-secondary form-control my-1" data-authorized="@isAuthorized.ToString().ToLower()" onclick="ToggleEdit()">Edit Order</button>
-                                <button type="submit" id="btnUpdate" asp-action="UpdateOrderDetail" class="btn btn-warning form-control my-1">Update Order Details</button>
-                            }
+                                <button type="submit" id="btnEdit" asp-action="UpdateOrderDetail" class="btn btn-secondary form-control my-1">Edit Order</button>
+                                
+                            } *@
                         </div>
 
                         <div class="col-12 col-lg-5 offset-lg-1">
@@ -195,13 +215,33 @@
                                             <h5 class="text-white">$@Model.OrderTotal</h5>
                                         </div>
                                     </div>
-                                </li>
+                                </li>     
                             </ul>
 
-                            <input type="submit" @PaymentDisable class="btn btn-success form-control my-1" value="Pay Now" />
-                            <input type="submit" class="btn btn-primary form-control my-1" value="Start Processing" />
-                            <input type="submit" class="btn btn-primary form-control my-1" value="Ship Order" />
-                            <input type="submit" class="btn btn-danger form-control my-1" value="Cancel Order" />
+                            @if (Model.OrderStatus == OrderStatus.Shipped && Model.PaymentStatus == PaymentStatus.ApprovedForDelayedPayment)
+                            {
+                                <button type="submit" disabled="@(PaymentDisable)" class="btn btn-success form-control my-1">PayNow</button>
+                            }
+
+                            @if (isAuthorized)
+                            {
+
+                                if (Model.OrderStatus==OrderStatus.Approved)
+                                {
+                                    <button type="submit" asp-action="ProcessOrder" class="btn btn-primary form-control my-1">Start Processing</button>
+                                }
+
+
+                                if (Model.OrderStatus == OrderStatus.Processing)
+                                {
+                                    <button type="submit" class="btn btn-primary form-control my-1" asp-action="ShipOrder" onclick="return ValidateShippingDetails()">Ship Order</button>
+                                }
+
+                                if (Model.OrderStatus != OrderStatus.Cancelled && Model.OrderStatus!=OrderStatus.Shipped&& Model.PaymentStatus!=PaymentStatus.Refunded)
+                                {
+                                    <button type="submit" asp-action="Cancel" class="btn btn-danger form-control my-1">Cancel Order</button>
+                                }
+                            }
                         </div>
                     </div>
                 </div>
@@ -211,6 +251,29 @@
 </form>
 @section Scripts {
     <script>
+
+
+        function ValidateShippingDetails(){
+            let fields=$(".shipping");
+            let flag=true;
+            for(i=0;i<fields.length;i++){
+                if(fields[i].value.trim()==""){
+                    flag=false;
+                    break;
+                }
+            }
+            if(!flag){
+                 Swal.fire({
+                        title: "Oops...",
+                        text: "TrackingId and Carrier can not be empty",
+                        icon: "error",
+                       
+                 });
+            }
+            return flag;
+        };
+
+
 
         function ToggleEdit(){
             const btn = $("#btnEdit");
@@ -238,4 +301,8 @@
         }
 
     </script>
+
+    @{
+        <partial name="_ValidationScriptsPartial.cshtml" />
+    }
 }

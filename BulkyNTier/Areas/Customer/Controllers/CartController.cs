@@ -335,7 +335,7 @@ namespace BulkyNTier.Areas.Customer.Controllers
                 {
                     PriceData = new SessionLineItemPriceDataOptions
                     {
-                        UnitAmount = (long)(cartItem.Price * 100),//20.50 =>2050
+                        UnitAmount = (long)(cartItem.Price*100),//20.50 =>2050
                         Currency = "usd",
                         ProductData = new SessionLineItemPriceDataProductDataOptions
                         {

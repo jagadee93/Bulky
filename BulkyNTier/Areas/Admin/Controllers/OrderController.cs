@@ -12,7 +12,7 @@ using System.Security.Claims;
 namespace BulkyNTier.Areas.Admin.Controllers
 {
     [Area("Admin")]
-
+    [Authorize]
     public class OrderController : Controller
     {
         public readonly IUnitOfWork _unitOfWork;
@@ -88,9 +88,66 @@ namespace BulkyNTier.Areas.Admin.Controllers
 
 
         [HttpPost]
-        public IActionResult Details(OrderHeader orderHeader)
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
+
+        public IActionResult ProcessOrder(OrderHeader orderHeader)
         {
-            return View(orderHeader);
+            _unitOfWork.OrderHeaderRepository.UpdateStatus(OrderHeader.Id, OrderStatus.Processing);
+            _unitOfWork.Save();
+            TempData["success"] = "Order details updated successfully";
+            return RedirectToAction("Details", new { id = orderHeader.Id });
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
+        public IActionResult ShipOrder(OrderHeader orderHeader)
+        {
+            var orderHeaderFromDb = _unitOfWork.OrderHeaderRepository.GetFirstOrDefault(u => u.Id == OrderHeader.Id, includeProperties: null);
+
+            orderHeaderFromDb.Carrier=orderHeader.Carrier;
+            orderHeaderFromDb.TrackingNumber=orderHeader.TrackingNumber;
+            if (orderHeaderFromDb.PaymentStatus == PaymentStatus.ApprovedForDelayedPayment)
+            {
+                orderHeaderFromDb.PaymentDueDate = DateOnly.FromDateTime(DateTime.Now).AddDays(30);
+            }
+            orderHeaderFromDb.OrderStatus=OrderStatus.Shipped;
+
+            _unitOfWork.OrderHeaderRepository.Update(orderHeaderFromDb);
+            _unitOfWork.Save();
+            TempData["success"] = "Order shipped successfully";
+            return RedirectToAction("Details", new { id = orderHeader.Id });
+        }
+
+
+
+        [HttpPost]
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
+        public IActionResult Cancel(OrderHeader orderHeader)
+        {
+            var OrderHeaderFromDb = _unitOfWork.OrderHeaderRepository.GetFirstOrDefault(u => u.Id == orderHeader.Id, includeProperties: null);
+
+            if (OrderHeaderFromDb.PaymentStatus == PaymentStatus.Approved && !string.IsNullOrEmpty(OrderHeaderFromDb.PaymentIntentId))
+            {
+                var options = new RefundCreateOptions
+                {
+                    Reason = RefundReasons.RequestedByCustomer,
+                    PaymentIntent = OrderHeaderFromDb.PaymentIntentId
+                };
+
+                var service =new RefundService();
+
+                Refund refund = service.Create(options);
+
+                _unitOfWork.OrderHeaderRepository.UpdateStatus(OrderHeaderFromDb.Id, OrderStatus.Cancelled, PaymentStatus.Refunded);
+            }
+            else
+            {
+                _unitOfWork.OrderHeaderRepository.UpdateStatus(OrderHeaderFromDb.Id, OrderStatus.Cancelled, PaymentStatus.Cancelled);
+            }
+            _unitOfWork.Save();
+            TempData["success"] = "Order cancelled successfully";
+            return RedirectToAction("Details", new { id = orderHeader.Id });
         }
 
 

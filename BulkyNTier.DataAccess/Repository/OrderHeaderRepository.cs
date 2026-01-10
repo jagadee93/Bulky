@@ -46,7 +46,7 @@ namespace BulkyNTier.DataAccess.Repository
             }
             if (!string.IsNullOrEmpty(paymentIntentId))
             {
-                orderFromDb.PaymentIntentId = sessionId;
+                orderFromDb.PaymentIntentId = paymentIntentId;
                 orderFromDb.PaymentDate = DateTime.Now;
 
             }
