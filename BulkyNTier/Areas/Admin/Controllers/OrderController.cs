@@ -5,7 +5,10 @@ using BulkyNTier.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Options;
 using Stripe;
+using Stripe.Checkout;
+using Stripe.Issuing;
 using System.Diagnostics;
 using System.Security.Claims;
 
@@ -15,15 +18,16 @@ namespace BulkyNTier.Areas.Admin.Controllers
     [Authorize]
     public class OrderController : Controller
     {
-        public readonly IUnitOfWork _unitOfWork;
-
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly StripeSettings _stripeSettings;
         [BindProperty]
         public OrderHeader OrderHeader { get; set; }
 
 
-        public OrderController(IUnitOfWork unitOfWork)
+        public OrderController(IUnitOfWork unitOfWork, IOptions<StripeSettings> stripeSettingoptions)
         {
             _unitOfWork = unitOfWork;
+            _stripeSettings = stripeSettingoptions.Value;
         }
 
 
@@ -105,13 +109,13 @@ namespace BulkyNTier.Areas.Admin.Controllers
         {
             var orderHeaderFromDb = _unitOfWork.OrderHeaderRepository.GetFirstOrDefault(u => u.Id == OrderHeader.Id, includeProperties: null);
 
-            orderHeaderFromDb.Carrier=orderHeader.Carrier;
-            orderHeaderFromDb.TrackingNumber=orderHeader.TrackingNumber;
+            orderHeaderFromDb.Carrier = orderHeader.Carrier;
+            orderHeaderFromDb.TrackingNumber = orderHeader.TrackingNumber;
             if (orderHeaderFromDb.PaymentStatus == PaymentStatus.ApprovedForDelayedPayment)
             {
                 orderHeaderFromDb.PaymentDueDate = DateOnly.FromDateTime(DateTime.Now).AddDays(30);
             }
-            orderHeaderFromDb.OrderStatus=OrderStatus.Shipped;
+            orderHeaderFromDb.OrderStatus = OrderStatus.Shipped;
 
             _unitOfWork.OrderHeaderRepository.Update(orderHeaderFromDb);
             _unitOfWork.Save();
@@ -135,7 +139,7 @@ namespace BulkyNTier.Areas.Admin.Controllers
                     PaymentIntent = OrderHeaderFromDb.PaymentIntentId
                 };
 
-                var service =new RefundService();
+                var service = new RefundService();
 
                 Refund refund = service.Create(options);
 
@@ -149,6 +153,98 @@ namespace BulkyNTier.Areas.Admin.Controllers
             TempData["success"] = "Order cancelled successfully";
             return RedirectToAction("Details", new { id = orderHeader.Id });
         }
+
+        [HttpPost]
+        [ActionName("Details")]
+        public IActionResult Details_Pay_Now(OrderHeader orderHeader)
+        {
+            OrderHeader orderHeaderFromDB = _unitOfWork.OrderHeaderRepository.GetFirstOrDefault(u => u.Id == orderHeader.Id, includeProperties:null);
+
+
+            if (orderHeaderFromDB == null)
+            {
+                return NotFound();
+            }
+
+            var domain = _stripeSettings.AppURL;
+
+            if (String.IsNullOrEmpty(domain))
+            {
+                throw new Exception("Appsettings json is not set");
+            }
+            var options = new Stripe.Checkout.SessionCreateOptions
+            {
+
+                SuccessUrl = domain + $"Admin/Order/PaymentConfirmation?orderId={orderHeaderFromDB.Id}",
+                CancelUrl = domain + $"Admin/Order/Details?id={orderHeaderFromDB.Id}",
+                LineItems = new List<Stripe.Checkout.SessionLineItemOptions>(),
+                Mode = "payment",
+            };
+            var carts = _unitOfWork.OrderDetailRepository.GetAll(u => u.OrderHeaderId == orderHeaderFromDB.Id, includeProperties: "Product").ToList() ?? [];
+            foreach (var cartItem in carts)
+            {
+                var SessionLineItem = new SessionLineItemOptions
+                {
+                    PriceData = new SessionLineItemPriceDataOptions
+                    {
+                        UnitAmount = (long)(cartItem.Price * 100),//20.50 =>2050
+                        Currency = "usd",
+                        ProductData = new SessionLineItemPriceDataProductDataOptions
+                        {
+                            Name = cartItem.Product.Title
+                        }
+                    },
+                    Quantity = cartItem.Count,
+                };
+
+                options.LineItems.Add(SessionLineItem);
+            }
+            var service = new Stripe.Checkout.SessionService();
+            Stripe.Checkout.Session session = service.Create(options);
+
+
+
+            //PaymentIntentId will be populated in session only after payment is successfull
+
+            _unitOfWork.OrderHeaderRepository.UpdateStripePaymentId(orderHeader.Id, session.Id, session.PaymentIntentId);
+
+            _unitOfWork.Save();
+
+
+            Response.Headers.Append("Location", session.Url);
+            return new StatusCodeResult(303);
+
+
+        }
+
+
+        public IActionResult PaymentConfirmation(int orderId)
+        {
+            OrderHeader orderHeader = _unitOfWork.OrderHeaderRepository.GetFirstOrDefault(u => u.Id == orderId, includeProperties: "ShippingAddress");
+            if (orderHeader == null)
+            {
+                return NotFound();
+            }
+
+            if (orderHeader.PaymentStatus == PaymentStatus.ApprovedForDelayedPayment)
+            {
+                //retrive the session
+                var service = new Stripe.Checkout.SessionService();
+                Stripe.Checkout.Session session = service.Get(orderHeader.SessionId);
+                if (session.PaymentStatus == "paid")
+                {
+                    _unitOfWork.OrderHeaderRepository.UpdateStripePaymentId(orderHeader.Id, session.Id, session.PaymentIntentId);
+                    //Update Payment Status
+                    _unitOfWork.OrderHeaderRepository.UpdateStatus(orderHeader.Id, orderHeader.OrderStatus, PaymentStatus.Approved);
+                    _unitOfWork.Save();
+
+                    orderHeader.PaymentStatus = PaymentStatus.Approved;
+
+                }
+            }
+            return View(orderHeader);
+        }
+
 
 
 
@@ -171,7 +267,7 @@ namespace BulkyNTier.Areas.Admin.Controllers
                 OrderHeaders = _unitOfWork.OrderHeaderRepository.GetAll(u => u.ApplicationUserId == userId, includeProperties: "ApplicationUser,ShippingAddress");
             }
 
-                
+
 
             switch (status)
             {

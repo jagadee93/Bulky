@@ -1,0 +1,18 @@
+﻿@model OrderHeader
+@{
+    ViewData["Title"] = "OrderConfirmation";
+
+}
+<div class="container row pt-4">
+    <div class="col-12 text-center">
+        <h1>Payment Successfull </h1>
+        <p>Your OrderNumber is @Model.Id</p>
+        <div>
+            <p>Your order will Shipped to :@Model.ShippingAddress.StreetAddress</p>
+            <p> @Model.ShippingAddress.City</p><p> @Model.ShippingAddress.State</p>
+            <p>PaymentStatus: @Model.PaymentStatus</p>
+        </div>
+        <p>Your Payment Has been confirmed .</p>
+        <a asp-action="Index" asp-controller="Home">Continue shopping</a>
+    </div>
+</div>
