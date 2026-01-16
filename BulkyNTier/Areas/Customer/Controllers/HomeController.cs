@@ -16,6 +16,7 @@ namespace BulkyNTier.Areas.Customer.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        
 
 
         public HomeController(ILogger<HomeController> logger,IUnitOfWork unitOfWork,SignInManager<ApplicationUser> signInManager,UserManager<ApplicationUser> userManager)
@@ -39,7 +40,7 @@ namespace BulkyNTier.Areas.Customer.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> AddToCart(ShoppingCart shoppingCart)
+        public async Task<IActionResult> AddToCart(ShoppingCart? shoppingCartfromModel=null, int? productId=null,bool wishList=false)
         {
             var claimsIdentity = User.Identity as ClaimsIdentity;
 
@@ -48,9 +49,30 @@ namespace BulkyNTier.Areas.Customer.Controllers
                 .Value;
             if (userId == null)
             {
-            
-                return RedirectToPage("/Account/Login", new { area = "Identity" });
+             return RedirectToPage("/Account/Login", new { area = "Identity" });
             }
+
+            ShoppingCart shoppingCart = new();
+
+            if (!wishList)
+            {
+                shoppingCart = shoppingCartfromModel;
+            }
+
+
+            if (productId != null&&wishList)
+            {
+                var productFromDb = _unitOfWork.ProductRepository.GetFirstOrDefault(u => u.Id == productId,includeProperties:null);
+                if (productFromDb != null)
+                {
+                    shoppingCart.ProductId = productFromDb.Id;
+                    shoppingCart.Price = productFromDb.Price;
+                    shoppingCart.Count = 1;
+                   
+                }
+                
+            }
+
             shoppingCart.ApplicationUserId = userId;
 
             //check if the Product already Exists
@@ -67,9 +89,23 @@ namespace BulkyNTier.Areas.Customer.Controllers
                 cartFromDb.Count += shoppingCart.Count;
                 _unitOfWork.ShoppingCartRepository.Update(cartFromDb);
             }
-
             _unitOfWork.Save();
-            TempData["success"] = cartFromDb!=null ? "Cart Updated Successfully" : "Added to Cart..";
+
+            if (wishList&&productId!=null)
+            {
+               var ExistingWishListItem= _unitOfWork.WishListRepository.GetFirstOrDefault(u=>u.ProductId==productId,includeProperties:null);
+                if (ExistingWishListItem!=null)
+                {
+                    _unitOfWork.WishListRepository.Remove(ExistingWishListItem);
+                    _unitOfWork.Save();
+                }
+
+                return Json(new { success = true,message="Product moved to cart" });
+               
+            }
+            TempData["success"] = cartFromDb != null ? "Cart Updated Successfully" : "Added to Cart..";
+           
+
             return RedirectToAction("Details", new { id = shoppingCart.ProductId });
         }
 

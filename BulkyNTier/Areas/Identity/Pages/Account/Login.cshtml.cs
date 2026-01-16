@@ -15,6 +15,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using BulkyNTier.Models;
+using BulkyNTier.Utilities;
+using Newtonsoft.Json;
+using BulkyNTier.DataAccess.Repository.IRepository;
+using System.Security.Claims;
 
 namespace BulkyNTier.Areas.Identity.Pages.Account
 {
@@ -22,11 +26,13 @@ namespace BulkyNTier.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger,IUnitOfWork unitOfWork)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -102,6 +108,40 @@ namespace BulkyNTier.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
         }
 
+
+
+
+        private async Task MergeWishlistAfterLogin(string userId)
+        {
+            var sessionData = HttpContext.Session.GetString(SD.WishListSessionKey);
+
+            if (sessionData == null) return;
+
+            var sessionWishlist = JsonConvert.DeserializeObject<List<int>>(sessionData);
+            if (sessionWishlist == null) return;
+
+            foreach (var productId in sessionWishlist)
+            {
+                bool exists = _unitOfWork.WishListRepository
+                    .GetFirstOrDefault(w => w.ApplicationUserId == userId && w.ProductId == productId, includeProperties:null) != null;
+
+                if (!exists)
+                {
+                    _unitOfWork.WishListRepository.Add(new WishList
+                    {
+                        ApplicationUserId =userId,
+                        ProductId = productId
+                    });
+                }
+            }
+
+            _unitOfWork.Save();
+
+            // clear guest wishlist
+            HttpContext.Session.Remove(SD.WishListSessionKey);
+        }
+
+
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
@@ -116,6 +156,10 @@ namespace BulkyNTier.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    //get user id
+                    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                    
+                    await MergeWishlistAfterLogin(userId);
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

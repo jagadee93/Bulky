@@ -61,11 +61,12 @@
                         <span class="text-danger" asp-validation-for="Count"></span>
                     </div>
 
-                    <button class="btn btn-primary px-4" asp-controller="Home" asp-action="AddToCart">
+                    <button type="submit" class="btn btn-primary px-4" asp-controller="Home" asp-action="AddToCart">
                         <i class="bi bi-cart-plus me-1"></i> Add to cart
                     </button>
-                    <button asp-asp-controller="Home" asp-action="AddTowishList" class="btn btn-outline-secondary px-4">
-                        <i class="bi bi-heart me-1"></i> Add to wishlist
+                    <button type="button" id="wishListBtn" data-id="@Model.Product.Id" class="btn btn-outline-secondary px-4">
+                        <i class="bi bi-heart" id="wishlist-icon">
+                          </i> Add to wishlist
                     </button>
                 </div>
             </div>
@@ -73,6 +74,37 @@
     </div>
 </div>
 @section Scripts {
+
+    <script>
+
+        $(document).on("click","#wishListBtn",function (e){
+            e.preventDefault();
+           let btn= $("#wishListBtn");
+           let icon= $("#wishlist-icon");
+           let productId=btn.data("id");
+           if(productId===null) return;
+           $.ajax({
+               url:"/Customer/WishList/ToggleWishListItem",
+               type:"POST",
+               data: { productId: productId },
+               success: function(response){
+                 if (response.success) {
+                        
+                        icon.removeClass("bi-heart").addClass("bi-heart-fill text-danger");
+                 } else {
+                        icon.removeClass("bi-heart-fill text-danger").addClass("bi-heart");
+                       
+                 }
+                 toastr.success(response.message);
+               },
+               error: function () {
+                  toastr.error("Something went wrong");
+               }
+            });
+          });
+    </script>
+
+
     @{
         <partial name="_ValidationScriptsPartial.cshtml" />
     }

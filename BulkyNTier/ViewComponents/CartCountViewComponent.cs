@@ -31,7 +31,7 @@ namespace BulkyNTier.ViewComponents
 
             if (userId!=null)
             {
-                var ShoppingCartCount = _unitOfWork.ShoppingCartRepository.GetAll(u => u.ApplicationUserId == userId, includeProperties: null).Sum(u => u.Count);
+                var ShoppingCartCount = _unitOfWork.ShoppingCartRepository.GetAll(u => u.ApplicationUserId == userId, includeProperties: null).Count();
                 return View(ShoppingCartCount);
             }
 

@@ -9,9 +9,9 @@ namespace BulkyNTier.DataAccess
 {
     public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            
+
         }
 
         public DbSet<Category> Categories { get; set; }
@@ -34,6 +34,9 @@ namespace BulkyNTier.DataAccess
         public DbSet<ShippingAddress> ShippingAddresses { get; set; }
 
 
+        public DbSet<WishList> WishList { get; set; }
+
+
         //public DbSet<IdentityUser> ApplicationUsers { get; set; }
 
         //Creating Table 
@@ -43,33 +46,61 @@ namespace BulkyNTier.DataAccess
             base.OnModelCreating(modelBuilder); //Identity Requirement 
 
             modelBuilder.Entity<OrderHeader>()
-      .HasOne(o => o.ShippingAddress)
-      .WithMany()
-      .HasForeignKey(o => o.ShippingAddressId)
-      .OnDelete(DeleteBehavior.NoAction);
+              .HasOne(o => o.ShippingAddress)
+              .WithMany()
+              .HasForeignKey(o => o.ShippingAddressId)
+              .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<OrderHeader>()
-                .HasOne(o => o.ApplicationUser)
-                .WithMany()
-                .HasForeignKey(o => o.ApplicationUserId)
-                .OnDelete(DeleteBehavior.Restrict);
+              .HasOne(o => o.ApplicationUser)
+              .WithMany()
+              .HasForeignKey(o => o.ApplicationUserId)
+              .OnDelete(DeleteBehavior.Restrict);
 
 
             modelBuilder.Entity<Category>().HasData(
-                   new Category { Id = 1, Name = "Action", DisplayOrder = 1 },
-                    new Category { Id = 2, Name = "Sci-Fi", DisplayOrder = 2 },
-                    new Category { Id = 3, Name = "History", DisplayOrder = 3 }
-                );
+               new Category { Id = 1, Name = "Action", DisplayOrder = 1 },
+               new Category { Id = 2, Name = "Sci-Fi", DisplayOrder = 2 },
+               new Category { Id = 3, Name = "History", DisplayOrder = 3 }
+            );
 
-            modelBuilder.Entity<Product>().HasData(  
-                new Product { Id = 101, Title = "Harry Potter And the Deathly Hallows", Author = "J.K Rowling", Description = "Harry Potter In a Magical world looking to find out sirius Black", ISBN = "127h32g24", ListPrice = 100, Price = 90, Price50 = 60, Price100 = 40 ,CategoryId=1,ImageURL=""},
-                new Product { Id = 102, Title = "Think and Grow Rich", Author = "Napolean Hill", Description = "A Schlor trying to teach Economics", ISBN = "12843jur", ListPrice = 300, Price = 250, Price50 = 200, Price100 = 150,CategoryId=1 ,ImageURL=""}
+            modelBuilder.Entity<Product>().HasData(
+               new Product { 
+                    Id = 101, 
+                    Title = "Harry Potter And the Deathly Hallows", 
+                    Author = "J.K Rowling", Description = "Harry Potter In a Magical world looking to find out sirius Black", 
+                    ISBN = "127h32g24", 
+                    ListPrice = 100, 
+                    Price = 90, 
+                    Price50 = 60, 
+                    Price100 = 40, 
+                    CategoryId = 1, 
+                    ImageURL = "" },
+                new Product { 
+                    Id = 102, 
+                    Title = "Think and Grow Rich", 
+                    Author = "Napolean Hill", 
+                    Description = "A Schlor trying to teach Economics", 
+                    ISBN = "12843jur", 
+                    ListPrice = 300, 
+                    Price = 250, 
+                    Price50 = 200, 
+                    Price100 = 150, 
+                    CategoryId = 1, 
+                    ImageURL = "" }
                 );
 
 
             modelBuilder.Entity<Company>().HasData(
-                new Company { Id = 10933, Name = "TechMahindra", StreetAddress = "KIADBLayout", PhoneNumber = "35747-8484", PostalCode = "560100", City = "Bengaluru", State = "Karnataka" }
-             
+                new Company { 
+                    Id = 10933, 
+                    Name = "TechMahindra", 
+                    StreetAddress = "KIADBLayout", 
+                    PhoneNumber = "35747-8484", 
+                    PostalCode = "560100", 
+                    City = "Bengaluru", 
+                    State = "Karnataka" }
+
                 );
 
         }

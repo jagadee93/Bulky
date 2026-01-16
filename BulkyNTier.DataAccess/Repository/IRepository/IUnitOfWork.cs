@@ -18,6 +18,8 @@ namespace BulkyNTier.DataAccess.Repository.IRepository
         IOrderDetailRepository OrderDetailRepository {  get; }
         IOrderEventRepository  OrderEventRepository { get; }
 
+        IWishListRepository WishListRepository { get; }
+
         void Save();
     }
 }

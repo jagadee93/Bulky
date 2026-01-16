@@ -14,14 +14,13 @@ namespace BulkyNTier.DataAccess.Repository
         public ICompanyRepository CompanyRepository { get; set; }
         public IShoppingCartRepository ShoppingCartRepository { get; set; }
 
-
-
         public IOrderHeaderRepository OrderHeaderRepository {  get; set; }
 
         public IOrderDetailRepository OrderDetailRepository { get; set; }
 
         public IOrderEventRepository OrderEventRepository { get; set; }
 
+        public IWishListRepository WishListRepository { get; set; }
 
         public IApplicationUserRepository ApplicationUserRepository { get; set; }
 
@@ -43,10 +42,12 @@ namespace BulkyNTier.DataAccess.Repository
             OrderHeaderRepository = new OrderHeaderRepository(_db);
             OrderDetailRepository =new OrderDetailRepository(_db);
             OrderEventRepository = new OrderEventRepository(_db);
+            WishListRepository =new WishListRepository(_db);
 
 
 
-           
+
+
         }
 
         
