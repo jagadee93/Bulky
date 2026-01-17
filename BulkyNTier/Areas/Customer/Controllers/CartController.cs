@@ -431,6 +431,10 @@ namespace BulkyNTier.Areas.Customer.Controllers
 
                 IEnumerable<ShoppingCart> carts = _unitOfWork.ShoppingCartRepository.GetAll(u => u.ApplicationUserId == userId, includeProperties: "Product");
 
+                if (!carts.Any())
+                {
+                    return Redirect(nameof(Index));
+                }
                 foreach (var cart in carts)
                 {
                     Functions Helpers = new Functions();

@@ -1,30 +1,9 @@
 ﻿@model CartTableVM
-@{
-    double total = 0;
-}
 
-@if (!Model.ShoppingCartList.Any())
-{
-    <div class="empty-cart text-center p-5 shadow-sm rounded-3">
-        <i class="bi bi-cart-x fs-1 text-secondary"></i>
-        <h5 class="mt-3">Your cart is empty</h5>
-        <p class="text-muted">Add something to make it happy 😊</p>
-
-        <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-primary">
-            Continue Shopping
-        </a>
-    </div>
-}else{
-<table class="table align-middle mb-0 cart-table">
+<table class="table align-middle mb-0 " id="cart-table">
     <tbody>
-
         @foreach (var item in Model.ShoppingCartList)
         {
-            var subtotal = item.Count * item.Price;
-
-            total += item.Count * item.Product.Price;
-
-
             <tr class="cart-row cart-item">
 
                 <td width="120">
@@ -46,21 +25,21 @@
 
                 <td width="170">
                     <div class="qty-control">
-                        <button onclick="UpdateCart('@Url.Action("Minus","Cart",new {cartId=item.Id})')" asp-action="Minus" class="btn btn-sm btn-light">−</button>
+                        <button onclick="UpdateCart('@Url.Action("Minus", "Cart", new { cartId = item.Id })')" asp-action="Minus" class="btn btn-sm btn-light">−</button>
 
                         <span class="qty-box">@item.Count</span>
 
-                        <button onclick="UpdateCart('@Url.Action("Plus","Cart",new {cartId=item.Id})')" class="btn btn-sm btn-light">+</button>
+                        <button onclick="UpdateCart('@Url.Action("Plus", "Cart", new { cartId = item.Id })')" class="btn btn-sm btn-light">+</button>
                     </div>
                 </td>
 
                 <td width="140" class="fw-semibold">
-                    ₹@subtotal
+                    ₹ @((item.Count * item.Price))
                 </td>
 
                 <td width="120">
-                        <button onclick="UpdateCart('@Url.Action("RemoveSingleItemFromCart","Cart",new {cartId=item.Id})')"
-                       class="btn btn-outline-danger btn-sm">
+                    <button onclick="UpdateCart('@Url.Action("RemoveSingleItemFromCart", "Cart", new { cartId = item.Id })')"
+                            class="btn btn-outline-danger btn-sm">
                         Remove
                     </button>
                 </td>
@@ -68,5 +47,3 @@
         }
     </tbody>
 </table>
-
-}
