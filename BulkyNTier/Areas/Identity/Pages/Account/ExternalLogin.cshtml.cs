@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using BulkyNTier.Models;
-
+using BulkyNTier.Utilities;
 namespace BulkyNTier.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
@@ -85,6 +85,9 @@ namespace BulkyNTier.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+
+
+            public string Name { get; set; }
         }
         
         public IActionResult OnGet() => RedirectToPage("./Login");
@@ -132,7 +135,8 @@ namespace BulkyNTier.Areas.Identity.Pages.Account
                 {
                     Input = new InputModel
                     {
-                        Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                        Email = info.Principal.FindFirstValue(ClaimTypes.Email),
+                        Name = info.Principal.FindFirstValue(ClaimTypes.Name)
                     };
                 }
                 return Page();
@@ -156,11 +160,14 @@ namespace BulkyNTier.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                user.Name=Input.Name;
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
                     result = await _userManager.AddLoginAsync(user, info);
+                    //Assign a role to user.
+                    await _userManager.AddToRoleAsync(user, SD.Role_Customer);
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
