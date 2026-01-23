@@ -1,15 +1,22 @@
-﻿@page
+﻿@* @page
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
 }
-
 <h1>@ViewData["Title"]</h1>
 
 <div class="row">
     <div class="col-md-4">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Create a new account.</h2>
+            @if (User.IsInRole(SD.Role_Admin))
+            {
+                <h2> Register New User -ADMIN</h2>
+            }
+            else
+            {
+                <h2>Create a new account.</h2>
+            }
+
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
@@ -27,25 +34,31 @@
                 <label asp-for="Input.ConfirmPassword">Confirm Password</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <div class="form-floating mb-3">
-                <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-control">
-                    <option>--select Role--</option>
-                </select>
 
-            </div>
-           
-            
+
+            @if (User.IsInRole(SD.Role_Admin))
+            {
+                <div class="form-floating mb-3">
+                    <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-control">
+                        <option>--select Role--</option>
+                    </select>
+
+                </div>
+
                 <div class="form-floating mb-3">
                     <select asp-for="Input.CompanyId" style="display:none" asp-items="@Model.Input.CompaniesList" class="form-control">
-                    <option>--select Role--</option>
-                </select>
+                        <option>--select Company--</option>
+                    </select>
+                </div>
 
-            </div>
-           
+            }
+
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
     </div>
-    <div class="col-md-6 col-md-offset-2">
+    @if (!User.IsInRole(SD.Role_Admin))
+    {
+        <div class="col-md-6 col-md-offset-2">
         <section>
             <h3>Use another service to register.</h3>
             <hr />
@@ -54,8 +67,10 @@
                 {
                     <div>
                         <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                                article
+                                about setting up this ASP.NET application to support logging in via external services
+                            </a>.
                         </p>
                     </div>
                 }
@@ -75,22 +90,164 @@
             }
         </section>
     </div>
+
+    }
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 
     <script>
-          $(document).ready(function() {
-            $('#Input_Role').change(function(){
-                var selection=$('#Input_Role Option:Selected').text();
-                if(selection=='Company'){
-                    $('#Input_CompanyId').show();
-                }else{
-                  $('#Input_CompanyId').hide();
-                }
-             })
-          })
-          
+        $(document).ready(function() {
+          $('#Input_Role').change(function(){
+              var selection=$('#Input_Role Option:Selected').text();
+              if(selection=='Company'){
+                  $('#Input_CompanyId').show();
+              }else{
+                $('#Input_CompanyId').hide();
+              }
+           })
+        })
+
+    </script>
+} *@
+
+
+
+@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    bool isAdmin = User.IsInRole(SD.Role_Admin);
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+
+        <!-- REGISTER CARD -->
+        <div class="col-md-5">
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-body p-4">
+
+                    <h3 class="text-center fw-bold mb-2">
+                        @(isAdmin ? "Register New User" : "Create an Account")
+                    </h3>
+
+                    <p class="text-center text-muted mb-4">
+                        @(isAdmin ? "Admin user creation" : "Sign up to get started")
+                    </p>
+
+                    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="text-danger small mb-3"></div>
+
+                        <!-- Email -->
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Email"
+                                   class="form-control rounded-3"
+                                   placeholder="Email" />
+                            <label asp-for="Input.Email"></label>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Password"
+                                   class="form-control rounded-3"
+                                   placeholder="Password" />
+                            <label asp-for="Input.Password"></label>
+                        </div>
+
+                        <!-- Confirm -->
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.ConfirmPassword"
+                                   class="form-control rounded-3"
+                                   placeholder="Confirm Password" />
+                            <label asp-for="Input.ConfirmPassword"></label>
+                        </div>
+
+                        <!-- ADMIN FIELDS -->
+                        @if (isAdmin)
+                        {
+                            <div class="form-floating mb-3">
+                                <select asp-for="Input.Role"
+                                        asp-items="Model.Input.RoleList"
+                                        class="form-select rounded-3"
+                                        id="roleSelect">
+                                    <option value="">Select Role</option>
+                                </select>
+                                <label asp-for="Input.Role"></label>
+                            </div>
+
+                            <div class="form-floating mb-3 d-none" id="companyWrapper">
+                                <select asp-for="Input.CompanyId"
+                                        asp-items="Model.Input.CompaniesList"
+                                        class="form-select rounded-3">
+                                    <option value="">Select Company</option>
+                                </select>
+                                <label asp-for="Input.CompanyId"></label>
+                            </div>
+                        }
+
+                        <button type="submit"
+                                class="btn btn-primary w-100 py-2 rounded-3 fw-semibold">
+                            Register
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXTERNAL LOGIN -->
+        @if (!isAdmin)
+        {
+            <div class="col-md-4 mt-4 mt-md-0">
+                <div class="card border-0 shadow-sm rounded-4 h-100">
+                    <div class="card-body p-4 text-center">
+
+                        <h5 class="fw-semibold mb-3">Or continue with</h5>
+
+                        @if ((Model.ExternalLogins?.Count ?? 0) > 0)
+                        {
+                            <form asp-page="./ExternalLogin"
+                                  asp-route-returnUrl="@Model.ReturnUrl"
+                                  method="post">
+
+                                <div class="d-grid gap-2">
+                                    @foreach (var provider in Model.ExternalLogins!)
+                                    {
+                                        <button type="submit"
+                                                name="provider"
+                                                value="@provider.Name"
+                                                class="btn btn-outline-dark rounded-3 py-2">
+                                            Continue with @provider.DisplayName
+                                        </button>
+                                    }
+                                </div>
+                            </form>
+                        }
+                        else
+                        {
+                            <p class="text-muted small">
+                                No external providers configured
+                            </p>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(function () {
+            $('#roleSelect').on('change', function () {
+                const isCompany = $(this).find('option:selected').text() === 'Company';
+                $('#companyWrapper').toggleClass('d-none', !isCompany);
+            });
+        });
     </script>
 }

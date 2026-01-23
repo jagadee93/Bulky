@@ -176,9 +176,17 @@ namespace BulkyNTier.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        await MergeWishlistAfterLogin(userId);
-
+                        if (User.IsInRole(SD.Role_Admin))
+                        {
+                            TempData["success"] = "New User Created successfully";
+                        }
+                        else
+                        {
+                            await _signInManager.SignInAsync(user, isPersistent: false);
+                            await MergeWishlistAfterLogin(userId);
+                        }
+                       
+                       
                         return LocalRedirect(returnUrl);
                     }
                 }

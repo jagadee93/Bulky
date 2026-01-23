@@ -39,8 +39,8 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 builder.Services.AddAuthentication().AddFacebook(options =>
 {
-    options.AppId = "2452641655171938";
-    options.AppSecret = "5919808603ffcae267fc0d5ae8ef6f12";
+    options.AppId = builder.Configuration["Facebook:AppId"] ?? throw new InvalidOperationException("Facebook AppId is not configured."); ;
+    options.AppSecret = builder.Configuration["Facebook:AppSecret"] ?? throw new InvalidOperationException("Facebook secret is not configured."); ;
 });
 
 builder.Services.AddDistributedMemoryCache();
