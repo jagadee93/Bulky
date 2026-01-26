@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BulkyNTier.Models\BulkyNTier.Models.csproj" />
+    <ProjectReference Include="..\BulkyNTier.Utilities\BulkyNTier.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

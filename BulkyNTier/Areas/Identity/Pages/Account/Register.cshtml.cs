@@ -96,13 +96,7 @@ namespace BulkyNTier.Areas.Identity.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             // ensure roles exist
-            if (!await _roleManager.RoleExistsAsync(SD.Role_Customer))
-            {
-                await _roleManager.CreateAsync(new IdentityRole(SD.Role_Employee));
-                await _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin));
-                await _roleManager.CreateAsync(new IdentityRole(SD.Role_Customer));
-                await _roleManager.CreateAsync(new IdentityRole(SD.Role_Company));
-            }
+          
 
             Input = new InputModel
             {

@@ -7,6 +7,8 @@ using BulkyNTier.Utilities;
 using IEmailSender = Microsoft.AspNetCore.Identity.UI.Services.IEmailSender;
 using BulkyNTier.Models;
 using Stripe;
+using Microsoft.AspNetCore.Razor.Language.Intermediate;
+using BulkyNTier.DataAccess.DbInitializer;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -55,6 +57,8 @@ builder.Services.AddSession(options =>
 builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 //Add Email service
 builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+
 var app = builder.Build();
 
 
@@ -80,6 +84,8 @@ app.UseAuthorization();
 
 app.UseSession();
 
+await seedDatabaseAsync(app);
+
 app.MapRazorPages();
 
 
@@ -88,3 +94,22 @@ app.MapControllerRoute(
     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+
+
+
+
+async Task seedDatabaseAsync(WebApplication app)
+{
+    using var scope = app.Services.CreateScope();
+
+    var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+
+    var AdminDetails = app.Configuration.GetSection("Admin");
+
+    await dbInitializer.InitializeAsync(
+        email: AdminDetails["Email"], 
+        userName: AdminDetails["UserName"], 
+        password: AdminDetails["Password"]
+     );
+}
