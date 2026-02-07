@@ -4,7 +4,7 @@
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2"> Companies List</h2>
+                <h2 class="text-white py-2"> User List</h2>
             </div>
         </div>
     </div>
@@ -12,32 +12,37 @@
         <div class="row pt-4 pb-3">
             <div class="row col-6">
             </div>
-            <div class="col-6 text-end">
-                <a asp-controller="Company" asp-action="Upsert" class="btn btn-primary"> <i class="bi bi-plus-circle"></i>Create New Company</a>
-            </div>
+           
         </div>
-        <table id="companytbl" class="table table-bordered table-striped align-content-center">
+        <table id="usertbl" class="table table-bordered table-striped align-content-center">
             <thead style="text-align:center">
                 <tr>
+
                     <th>
-                        Name
-                    </th>
-                    <th>
-                        Street Address
-                    </th>
-                    <th>
-                        City
-                    </th>
-                    <th>
-                        State
-                    </th>
-                    <th>
-                        Postal Code
+                        userName
                     </th>
 
                     <th>
-                        PhoneNumber
+                        email
                     </th>
+                    <th>
+                        Phone No
+                    </th>
+
+                    <th>
+                        emailConfirmed
+                    </th>
+
+                    <th>
+                        company name
+                    </th>
+                    <th>
+                        company phoneNumber
+                    </th>
+                    <th>
+                      Role
+                    </th>
+                   
                     <th>
                         Actions
                     </th>
@@ -52,5 +57,5 @@
     @{
         <partial name="_ValidationScriptsPartial.cshtml" />
     }
-    <script src="~/js/Company.js"></script>
+    <script src="~/js/Users.js"></script>
 }

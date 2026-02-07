@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BulkyNTier.Models
 {
     public class ApplicationUser:IdentityUser
@@ -25,7 +26,10 @@ namespace BulkyNTier.Models
 
         [ForeignKey("CompanyId")]
         [ValidateNever]
-        public Company Company { get; set; }
+        public Company? Company { get; set; }
+
+        [NotMapped]
+        public string Role {  get; set; }
 
     }
 }

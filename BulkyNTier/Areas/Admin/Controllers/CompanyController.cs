@@ -11,9 +11,9 @@ namespace BulkyNTier.Areas.Admin.Controllers
     public class CompanyController : Controller
     {
 
-      private  IUnitOfWork _unitOfWork { get; set; }
+        private readonly IUnitOfWork _unitOfWork;
 
-      public CompanyController(IUnitOfWork unitOfWork)
+        public CompanyController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -23,9 +23,7 @@ namespace BulkyNTier.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-
-            List<Company> companies = _unitOfWork.CompanyRepository.GetAll(includeProperties: "").ToList();
-            return View(companies);
+            return View();
         }
 
 
@@ -40,7 +38,7 @@ namespace BulkyNTier.Areas.Admin.Controllers
 
 
 
-         
+
 
             return View(new Company());
         }
@@ -52,15 +50,15 @@ namespace BulkyNTier.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 //Update or Create
-                if (company.Id ==0)
+                if (company.Id == 0)
                 {
                     _unitOfWork.CompanyRepository.Add(company);
-                    TempData["success"] = "Product has been Created";
+                    TempData["success"] = "company has been Created";
                 }
                 else
                 {
                     _unitOfWork.CompanyRepository.Update(company);
-                    TempData["success"] = "Product has been updated";
+                    TempData["success"] = "company has been updated";
                 }
                 _unitOfWork.Save();
                 return RedirectToAction("Index");
@@ -74,26 +72,27 @@ namespace BulkyNTier.Areas.Admin.Controllers
         #region
         public IActionResult GetAll()
         {
-            List<Company> companies = _unitOfWork.CompanyRepository.GetAll(includeProperties: null).ToList();
+           IEnumerable<Company> companies = _unitOfWork.CompanyRepository.GetAll(includeProperties: null).ToList();
             return Json(companies);
         }
 
-     
+
 
 
         [HttpDelete]
-        public IActionResult Delete(int? id) {
+        public IActionResult Delete(int? id)
+        {
 
 
-            var Company = _unitOfWork.CompanyRepository.GetFirstOrDefault(u => u.Id == id,includeProperties:null);
+            var Company = _unitOfWork.CompanyRepository.GetFirstOrDefault(u => u.Id == id, includeProperties: null);
             if (Company != null)
             {
                 _unitOfWork.CompanyRepository.Remove(Company);
                 _unitOfWork.Save();
-                return Json(new { success = "True", message = "Company not found" });
+                return Json(new { success = true, message = "Company not found" });
             }
-                
-              return Json(new { success = "False", message = "Company not found" });
+
+            return Json(new { success = true, message = "Company not found" });
         }
 
 

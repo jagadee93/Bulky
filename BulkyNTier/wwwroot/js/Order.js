@@ -27,7 +27,7 @@ var datatable;
 
 
 function LoadTable(status) {
-    DataTable = $('#OrdersTbl').DataTable({
+    datatable = $('#OrdersTbl').DataTable({
         ajax: { url: '/Admin/Order/Getall?status=' + status, dataSrc: '' },
         columns: [
             { data: "id", "width": "1%" },
@@ -38,7 +38,7 @@ function LoadTable(status) {
             { data: "paymentDueDate", "width": "4%" },
             { data: "paymentStatus", width: "6%" },
             {
-                data: "id", width: "2%",
+                data: "id", width: "4%",
                 render: function (data) {
                     return ` <div class="" role="group">
                  <a href="/Admin/Order/details/${data}"  class="me-3 btn btn-primary" title="Edit" ><i class="bi bi-pencil-square"></i></a>

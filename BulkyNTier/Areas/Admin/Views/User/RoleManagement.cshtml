@@ -1,0 +1,72 @@
+﻿@model UpdateUserRoleVM
+
+@{
+    ViewData["Title"] = "Role Management";
+}
+
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2"> Role Management</h2>
+            </div>
+        </div>
+    </div>
+    <form asp-action="RoleManagement" method="post" class="card-body p-4">
+
+        <input asp-for="UserID" type="hidden" />
+
+        <div class="col-12">
+            <div class="form-floating mb-3">
+                <input asp-for="UserName" class="form-control" readonly />
+                <label asp-for="UserName"></label>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-floating mb-3">
+                <select asp-for="Role"
+                        asp-items="Model.RoleList"
+                        class="form-select"
+                        id="roleSelect">
+                    <option value="">-- Select Role --</option>
+                </select>
+                <label asp-for="Role"></label>
+            </div>
+        </div>
+
+        <div class="col-12 d-none" id="companyWrapper">
+            <div class="form-floating mb-3">
+                <select asp-for="CompanyId"
+                        asp-items="Model.CompaniesList"
+                        class="form-select">
+                    <option value="">-- Select Company --</option>
+                </select>
+                <label asp-for="CompanyId"></label>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+
+</div>
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial.cshtml" />
+    }
+    <script>
+        function ToggleCompany() {
+            let CompanyVisibility = $('#roleSelect').val() == 'Company';
+            $("#companyWrapper").toggleClass('d-none', !CompanyVisibility);
+        }
+
+        $(function () {
+            ToggleCompany();
+            $('#roleSelect').on('change', function () {
+                ToggleCompany();
+            });
+        });
+    </script>
+}

@@ -3,7 +3,7 @@
 })
 
 
-var DataTable;
+var datatable;
 
 
 
@@ -21,12 +21,17 @@ function LoadTable() {
             { data: "postalCode", "width": "5%" },
             { data: "phoneNumber", "width": "5%" },
             {
-                data: "id", width: "7%",
+                data: "id", width: "4%",
                 render: function (data) {
-                    return ` <div class="" role="group">
-                 <a href="/Admin/Company/Upsert/${data}"  class="me-3 btn btn-primary" title="Edit" ><i class="bi bi-pencil-square"></i>Edit</a>
-                 <a onClick=deleteCompany('/Admin/Company/delete/${data}')  class="btn btn-danger"><i class="bi bi-x-square"></i>Deletee</a>
-                </div>`;
+                    let updateBtn = ` <a href="/Admin/Company/Upsert/${data}"  class="me-3 btn btn-primary" title="Edit" ><i class="bi bi-pencil-square"></i></a>`;
+                    let deleteBtn = `<button data-id="${data}"  class="company-delete-btn btn btn-danger"><i class="bi bi-x-square"></i></button>`;
+
+                    return `
+                        <div class="d-flex justify-content-center gap-2">
+                            ${updateBtn}
+                            ${deleteBtn}
+                        </div>
+                        `;
                 }
             }
         ]
@@ -35,6 +40,14 @@ function LoadTable() {
 
 
 
+
+
+$(document).on(
+    "click", ".company-delete-btn", function () {
+        var id = $(this).data("id");
+        deleteCompany(`/Admin/Company/delete/${id}`)
+    }
+)
 
 
 
@@ -56,7 +69,12 @@ function deleteCompany(url) {
 
                 success: function (data) {
                     datatable.ajax.reload();
-                    toastr.success(data.message);
+                   
+                    if (data.success) {
+                        toastr.success(data.message);
+                    } else {
+                        toastr.error(data.message);
+                    }
                 }
             })
         }

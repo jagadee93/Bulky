@@ -8,17 +8,25 @@ namespace BulkyNTier.DataAccess.Repository.IRepository
 {
     public interface IUnitOfWork
     {
-        ICategoryRepository CategoryRepository { get; }
-        IProductRepository ProductRepository { get; }
-        ICompanyRepository CompanyRepository { get; }
-        IShoppingCartRepository ShoppingCartRepository { get; }
 
-        IShippingAddressRepository ShippingAddressRepository {  get;}
-        IOrderHeaderRepository  OrderHeaderRepository { get; }
-        IOrderDetailRepository OrderDetailRepository {  get; }
-        IOrderEventRepository  OrderEventRepository { get; }
+         ICategoryRepository CategoryRepository { get; set; }
+         IProductRepository ProductRepository { get; set; }
+         ICompanyRepository CompanyRepository { get; set; }
+         IShoppingCartRepository ShoppingCartRepository { get; set; }
 
-        IWishListRepository WishListRepository { get; }
+         IOrderHeaderRepository OrderHeaderRepository { get; set; }
+
+         IOrderDetailRepository OrderDetailRepository { get; set; }
+
+         IOrderEventRepository OrderEventRepository { get; set; }
+
+         IWishListRepository WishListRepository { get; set; }
+
+         IApplicationUserRepository ApplicationUserRepository { get; set; }
+
+         IShippingAddressRepository ShippingAddressRepository { get; set; }
+
+
 
         void Save();
     }

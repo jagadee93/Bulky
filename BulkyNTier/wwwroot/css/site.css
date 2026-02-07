@@ -805,3 +805,21 @@ bg-success {
     padding: 0 10px;
     font-weight: 600;
 }
+.btn-lock,
+.btn-permission {
+    min-width: 38px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+}
+
+    .btn-lock:hover {
+        transform: scale(1.05);
+    }
+
+    .btn-permission:hover {
+        background-color: #f8f9fa;
+        border-color: #adb5bd;
+    }
