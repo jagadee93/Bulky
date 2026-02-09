@@ -12,13 +12,13 @@
     </div>
 
     <div class="card-body p-4">
-        <form method="post" asp-action="Upsert" class="row g-3" enctype="multipart/form-data">
+        <form method="post"  asp-action="Upsert" class="row g-3" enctype="multipart/form-data">
             <!-- g-3 gives spacing between fields -->
             @*<div asp-validation-summary="ModelOnly"></div>*@
 
 
             <input asp-for="Product.Id" hidden />
-            <input asp-for="Product.ImageURL" hidden /> 
+            @* <input asp-for="Product.ImageURL" hidden />  *@
             <!-- Each input wrapped in col-12 for small screens, col-lg-6 for large -->
             <div class="col-12 col-lg-12">
                 <div class="form-floating">
@@ -40,7 +40,7 @@
 
                 <!-- Right column: Image -->
                 <div class="col-12 col-lg-4 d-flex align-items-start">
-                    <img src="@Model.Product.ImageURL" class="img-fluid border rounded" width="200" />
+                    @* <img src="@Model.Product.ImageURL" class="img-fluid border rounded" width="200" /> *@
                 </div>
             </div>
 
@@ -54,8 +54,8 @@
 
             <div class="col-12 col-lg-6">
                 <div class="form-floating">
-                    <input type="file" name="file" class="form-control border-0 shadow" />
-                    <label asp-for="Product.ImageURL" class="ms-2"></label>
+                    <input type="file" name="files" class="form-control border-0 shadow" multiple />
+                    <label asp-for="Product.ProductImages" class="ms-2"></label>
 
                 </div>
             </div>

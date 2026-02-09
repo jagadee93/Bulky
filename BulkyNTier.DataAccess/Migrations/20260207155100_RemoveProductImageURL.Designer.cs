@@ -4,6 +4,7 @@ using BulkyNTier.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BulkyNTier.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260207155100_RemoveProductImageURL")]
+    partial class RemoveProductImageURL
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -385,28 +388,6 @@ namespace BulkyNTier.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BulkyNTier.Models.ProductImage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ImageURL")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductImages");
-                });
-
             modelBuilder.Entity("BulkyNTier.Models.ShippingAddress", b =>
                 {
                     b.Property<int>("Id")
@@ -494,7 +475,7 @@ namespace BulkyNTier.DataAccess.Migrations
                     b.ToTable("ShoppingCarts");
                 });
 
-            modelBuilder.Entity("BulkyNTier.Models.WishListItem", b =>
+            modelBuilder.Entity("BulkyNTier.Models.WishList", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -720,17 +701,6 @@ namespace BulkyNTier.DataAccess.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("BulkyNTier.Models.ProductImage", b =>
-                {
-                    b.HasOne("BulkyNTier.Models.Product", "Product")
-                        .WithMany("ProductImages")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("BulkyNTier.Models.ShippingAddress", b =>
                 {
                     b.HasOne("BulkyNTier.Models.ApplicationUser", "ApplicationUser")
@@ -761,7 +731,7 @@ namespace BulkyNTier.DataAccess.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("BulkyNTier.Models.WishListItem", b =>
+            modelBuilder.Entity("BulkyNTier.Models.WishList", b =>
                 {
                     b.HasOne("BulkyNTier.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
@@ -834,11 +804,6 @@ namespace BulkyNTier.DataAccess.Migrations
             modelBuilder.Entity("BulkyNTier.Models.OrderHeader", b =>
                 {
                     b.Navigation("OrderDetails");
-                });
-
-            modelBuilder.Entity("BulkyNTier.Models.Product", b =>
-                {
-                    b.Navigation("ProductImages");
                 });
 #pragma warning restore 612, 618
         }

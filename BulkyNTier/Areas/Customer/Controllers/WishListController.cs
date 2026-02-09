@@ -130,7 +130,7 @@ namespace BulkyNTier.Areas.Customer.Controllers
                     {
                         return Json(new { success = false, message = "Cound not find the product" });
                     }
-                    _unitOfWork.WishListRepository.Add(new WishList { ApplicationUserId=userId,ProductId=productId });
+                    _unitOfWork.WishListRepository.Add(new WishListItem { ApplicationUserId=userId,ProductId=productId });
                     _unitOfWork.Save();
                    
                     return Json(new { success = true,message="Product added to wish list" });

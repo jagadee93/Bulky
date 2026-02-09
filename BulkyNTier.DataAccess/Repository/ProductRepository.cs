@@ -37,10 +37,17 @@ namespace BulkyNTier.DataAccess.Repository
                 objFromDB.Author=product.Author;
 
 
-                if (product.ImageURL != null)
+                if (product.ProductImages!=null)
                 {
-                    objFromDB.ImageURL=product.ImageURL;
+                    objFromDB.ProductImages = product.ProductImages;
                 }
+
+
+               
+                //if (product.ImageURL != null)
+                //{
+                //    objFromDB.ImageURL=product.ImageURL;
+                //}
 
                 
 

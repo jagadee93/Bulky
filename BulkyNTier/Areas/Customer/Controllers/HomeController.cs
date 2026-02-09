@@ -1,5 +1,7 @@
+using BulkyNTier.DataAccess;
 using BulkyNTier.DataAccess.Repository.IRepository;
 using BulkyNTier.Models;
+using BulkyNTier.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,20 +18,36 @@ namespace BulkyNTier.Areas.Customer.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
-        
+        private readonly AppDbContext _db;
 
 
-        public HomeController(ILogger<HomeController> logger,IUnitOfWork unitOfWork,SignInManager<ApplicationUser> signInManager,UserManager<ApplicationUser> userManager)
+        public HomeController(ILogger<HomeController> logger,IUnitOfWork unitOfWork,SignInManager<ApplicationUser> signInManager,UserManager<ApplicationUser> userManager,AppDbContext db)
         {
             _unitOfWork=unitOfWork;
             _logger = logger;
             _signInManager=signInManager;
             _userManager=userManager;
+            _db=db;
         }
 
         public IActionResult Index()
         {
-            List<Product> products = _unitOfWork.ProductRepository.GetAll(includeProperties: "Category").ToList();
+           // List<Product> products = _unitOfWork.ProductRepository.GetAll(includeProperties: "Category,ProductImage").ToList();
+
+
+            IEnumerable<ProductCardVM> products = _db.Products.Select(p => new ProductCardVM
+            {
+                Id = p.Id,
+                Title = p.Title,
+                Price = p.Price,
+                Author= p.Author,
+                DiscoutPercentage=(int) ((1 - (p.Price / p.ListPrice)) * 100),
+                ListPrice= p.ListPrice,
+                ImageURL = p.ProductImages
+                            .Select(i => i.ImageURL)
+                            .FirstOrDefault()
+
+            });
             return View(products);
         }
 

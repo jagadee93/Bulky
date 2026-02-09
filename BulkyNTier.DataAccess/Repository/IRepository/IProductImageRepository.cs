@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace BulkyNTier.DataAccess.Repository.IRepository
 {
-    public interface IWishListRepository:IRepository<WishListItem>
+    public interface IProductImageRepository:IRepository<ProductImage>
     {
-        void Update(WishListItem wishList);
+        void Update(ProductImage obj);
     }
-
 }

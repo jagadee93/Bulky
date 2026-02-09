@@ -28,7 +28,7 @@ out/
 publish/
 **/wwwroot/lib/
 **/wwwroot/js/
-
+**/wwwroot/images/
 # Logs
 *.log
 

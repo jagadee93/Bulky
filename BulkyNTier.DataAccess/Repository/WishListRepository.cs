@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace BulkyNTier.DataAccess.Repository
 {
-    public class WishListRepository : Repository<WishList>, IWishListRepository
+    public class WishListRepository : Repository<WishListItem>, IWishListRepository
     {
         private readonly AppDbContext _appDbContext;
         public WishListRepository(AppDbContext appDbContext) : base(appDbContext)
         {
             _appDbContext = appDbContext;
         }
-        void Update(WishList wishList)
+        void Update(WishListItem wishList)
         {
            _appDbContext.WishList.Update(wishList);
         }

@@ -34,8 +34,10 @@ namespace BulkyNTier.DataAccess
         public DbSet<ShippingAddress> ShippingAddresses { get; set; }
 
 
-        public DbSet<WishList> WishList { get; set; }
+        public DbSet<WishListItem> WishList { get; set; }
 
+
+        public DbSet<ProductImage> ProductImages { get; set; }
 
         //public DbSet<IdentityUser> ApplicationUsers { get; set; }
 
@@ -58,6 +60,14 @@ namespace BulkyNTier.DataAccess
               .OnDelete(DeleteBehavior.Restrict);
 
 
+            modelBuilder.Entity<ProductImage>()
+                .HasOne(pi => pi.Product)
+                .WithMany(pi => pi.ProductImages)
+                .HasForeignKey(pi => pi.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+
             modelBuilder.Entity<Category>().HasData(
                new Category { Id = 1, Name = "Action", DisplayOrder = 1 },
                new Category { Id = 2, Name = "Sci-Fi", DisplayOrder = 2 },
@@ -75,7 +85,7 @@ namespace BulkyNTier.DataAccess
                     Price50 = 60, 
                     Price100 = 40, 
                     CategoryId = 1, 
-                    ImageURL = "" },
+                    },
                 new Product { 
                     Id = 102, 
                     Title = "Think and Grow Rich", 
@@ -87,7 +97,7 @@ namespace BulkyNTier.DataAccess
                     Price50 = 200, 
                     Price100 = 150, 
                     CategoryId = 1, 
-                    ImageURL = "" }
+                     }
                 );
 
 

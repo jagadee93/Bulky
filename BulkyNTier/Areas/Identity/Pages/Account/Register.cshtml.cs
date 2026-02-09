@@ -247,7 +247,7 @@ namespace BulkyNTier.Areas.Identity.Pages.Account
 
                 if (!exists)
                 {
-                    _unitOfWork.WishListRepository.Add(new WishList
+                    _unitOfWork.WishListRepository.Add(new WishListItem
                     {
                         ApplicationUserId = userId,
                         ProductId = productId

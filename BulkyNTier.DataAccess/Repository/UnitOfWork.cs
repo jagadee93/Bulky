@@ -27,6 +27,8 @@ namespace BulkyNTier.DataAccess.Repository
         public IShippingAddressRepository ShippingAddressRepository { get; set; }
 
 
+        public IProductImageRepository ProductImageRepository { get; set; }
+
 
         private readonly AppDbContext _db;
         public UnitOfWork(AppDbContext db) {
@@ -43,8 +45,7 @@ namespace BulkyNTier.DataAccess.Repository
             OrderDetailRepository =new OrderDetailRepository(_db);
             OrderEventRepository = new OrderEventRepository(_db);
             WishListRepository =new WishListRepository(_db);
-
-
+            ProductImageRepository=new ProductImageRepository(_db);
 
 
 

@@ -26,7 +26,7 @@ namespace BulkyNTier.DataAccess.Repository.IRepository
 
          IShippingAddressRepository ShippingAddressRepository { get; set; }
 
-
+         IProductImageRepository ProductImageRepository { get; set; }
 
         void Save();
     }
