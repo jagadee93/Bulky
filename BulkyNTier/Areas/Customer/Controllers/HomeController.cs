@@ -131,12 +131,19 @@ namespace BulkyNTier.Areas.Customer.Controllers
 
         public IActionResult Details(int id)
         {
+             var images = _unitOfWork.ProductImageRepository.GetAll(u => u.ProductId == id, includeProperties: null);
+
             ShoppingCart shoppingCart = new()
             {
-                Product = _unitOfWork.ProductRepository.GetFirstOrDefault(u => u.Id == id, includeProperties: "Category"),
+                Product = _unitOfWork.ProductRepository.GetFirstOrDefault(u => u.Id == id, includeProperties: "Category,ProductImages"),
                 ProductId = id,
-                Count = 1
+                Count = 1,
+                
             };
+
+       
+
+           
             return View(shoppingCart);
         }
 

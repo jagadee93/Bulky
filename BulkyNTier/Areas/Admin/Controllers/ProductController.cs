@@ -5,13 +5,14 @@ using BulkyNTier.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BulkyNTier.Areas.Admin.Controllers
 {
-        [Area("Admin")]
-        [Authorize(Roles = SD.Role_Admin)]
-        public class ProductController : Controller
-        {
+    [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
+    public class ProductController : Controller
+    {
 
         private IUnitOfWork _unitOfWork;
         private IWebHostEnvironment _webHostEnvironment;//This already Injected By Default .
@@ -27,7 +28,7 @@ namespace BulkyNTier.Areas.Admin.Controllers
         public IActionResult Index()
         {
 
-            List<Product> products = _unitOfWork.ProductRepository.GetAll(includeProperties: "Category").ToList();
+            IEnumerable<Product> products = _unitOfWork.ProductRepository.GetAll(includeProperties: "Category").ToList();
             return View(products);
         }
 
@@ -39,12 +40,12 @@ namespace BulkyNTier.Areas.Admin.Controllers
         {
             ProductVM productVM = new()
             {
-                CategoryList = _unitOfWork.CategoryRepository.GetAll(includeProperties:null).
-                  Select(u => new SelectListItem
-                  {
-                      Text = u.Name,
-                      Value = u.Id.ToString()
-                  }),
+                CategoryList = _unitOfWork.CategoryRepository.GetAll(includeProperties: null)
+                .Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                }),
                 Product = new Product()
             };
 
@@ -55,16 +56,16 @@ namespace BulkyNTier.Areas.Admin.Controllers
             }
             else
             {
-                productVM.Product = _unitOfWork.ProductRepository.GetFirstOrDefault(u=>u.Id == id,includeProperties:null);
-             
+                productVM.Product = _unitOfWork.ProductRepository.GetFirstOrDefault(u => u.Id == id, includeProperties: "ProductImages");
+
                 return View(productVM);
 
             }
-           
+
         }
 
         [HttpPost]
-        public IActionResult Upsert(ProductVM productVM,List<IFormFile> files)
+        public IActionResult Upsert(ProductVM productVM, List<IFormFile> files)
         {
             string wwwRootPath = _webHostEnvironment.WebRootPath;
             if (productVM.Product.Id == 0)
@@ -75,12 +76,12 @@ namespace BulkyNTier.Areas.Admin.Controllers
                 //    productVM.Product.ImageURL =" ";
 
                 //}
-              _unitOfWork.ProductRepository.Add(productVM.Product);
-              _unitOfWork.Save();
-               
+                _unitOfWork.ProductRepository.Add(productVM.Product);
+                _unitOfWork.Save();
+
             }
-           
-           
+
+
             if (ModelState.IsValid)
             {
 
@@ -95,18 +96,6 @@ namespace BulkyNTier.Areas.Admin.Controllers
                     foreach (IFormFile file in files)
                     {
                         string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file?.FileName);
-                        //if ()
-                        //{
-                        //    //delete the old image
-                        //    //Delete the forword slash
-                        //    string pathOfImageTobeDeleted = Path.Combine(wwwRootPath, productVM.Product.ImageURL.TrimStart('/'));
-                        //    if (System.IO.File.Exists(pathOfImageTobeDeleted))
-                        //    {
-                        //        System.IO.File.Delete(pathOfImageTobeDeleted);
-                        //    }
-                        //}
-                        //Copy the original File to images Folder
-
                         using (var fileStream = new FileStream(Path.Combine(productImgPath, fileName), FileMode.Create))
                         {
                             file?.CopyTo(fileStream);
@@ -116,7 +105,7 @@ namespace BulkyNTier.Areas.Admin.Controllers
                         var productImage = new ProductImage()
                         {
                             ProductId = productVM.Product.Id,
-                            ImageURL =$"/{productPath}/" + fileName,
+                            ImageURL = $"/{productPath}/" + fileName,
                         };
 
                         if (productVM.Product.ProductImages == null)
@@ -127,7 +116,7 @@ namespace BulkyNTier.Areas.Admin.Controllers
 
                         productVM.Product.ProductImages.Add(productImage);
                         //save productImage
-                      // _unitOfWork.ProductImageRepository.Add(productImage);
+                        // _unitOfWork.ProductImageRepository.Add(productImage);
                     }
                     _unitOfWork.ProductRepository.Update(productVM.Product);
                 }
@@ -135,10 +124,40 @@ namespace BulkyNTier.Areas.Admin.Controllers
                 TempData["success"] = "Product has been updated";
                 return RedirectToAction("Index");
             }
-            return View(productVM);    
+            return View(productVM);
         }
 
-        
+
+
+
+        public IActionResult DeleteImage(int? id)
+        {
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
+            var ImageToBeDeleted = _unitOfWork.ProductImageRepository.GetFirstOrDefault(u => u.Id == id, includeProperties: null);
+
+            if (ImageToBeDeleted == null)
+            {
+                TempData["error"] = "Image not found..";
+                return RedirectToAction(nameof(Index));
+            }
+            int productId = ImageToBeDeleted.ProductId;
+
+            var relativePath = ImageToBeDeleted.ImageURL
+                .TrimStart('/', '\\'); // Handles both slash types
+            string imgFilePath = Path.Combine(wwwRootPath,relativePath);
+            if (System.IO.File.Exists(imgFilePath))
+            {
+                System.IO.File.Delete(imgFilePath);
+            }
+
+            _unitOfWork.ProductImageRepository.Remove(ImageToBeDeleted);
+            _unitOfWork.Save();
+            TempData["success"] = "Image deleted successfully..";
+            return RedirectToAction(nameof(Upsert), new { id = ImageToBeDeleted.ProductId });
+
+        }
+
+
 
         //[HttpPost]
         //public IActionResult Edit(Product productobjTobeUpdated)
@@ -155,7 +174,7 @@ namespace BulkyNTier.Areas.Admin.Controllers
 
         //public IActionResult Delete(int? id)
         //{
-        //    var productToBeDeleted=_unitOfWork.ProductRepository.GetFirstOrDefault(u=>u.Id == id, includeProperties: null);
+        //    var productToBeDeleted = _unitOfWork.ProductRepository.GetFirstOrDefault(u => u.Id == id, includeProperties: null);
         //    if (productToBeDeleted == null)
         //    {
         //        TempData["error"] = "Product not found";
@@ -168,7 +187,7 @@ namespace BulkyNTier.Areas.Admin.Controllers
         //        //delete the old image
         //        //Delete the forword slash
         //        string wwwRootPath = _webHostEnvironment.WebRootPath;
-        //        string imgFilePath=Path.Combine(wwwRootPath, productToBeDeleted.ImageURL.TrimStart('\\'));
+        //        string imgFilePath = Path.Combine(wwwRootPath, productToBeDeleted.ImageURL.TrimStart('\\'));
         //        if (System.IO.File.Exists(imgFilePath))
         //        {
         //            System.IO.File.Delete(imgFilePath);
@@ -180,41 +199,50 @@ namespace BulkyNTier.Areas.Admin.Controllers
         //    return RedirectToAction("Index");
         //}
 
+
+
+
         #region API CALLS
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Product> products1 = _unitOfWork.ProductRepository.GetAll(includeProperties:"Category").ToList();
+            List<Product> products1 = _unitOfWork.ProductRepository.GetAll(includeProperties: "Category").ToList();
             return Json(products1);
         }
+
+
+
+
 
         [HttpDelete]
         public IActionResult Delete(int? id)
         {
             var productToBeDeleted = _unitOfWork.ProductRepository.GetFirstOrDefault(u => u.Id == id, includeProperties: null);
 
+            if (productToBeDeleted == null)
+            {
+                return Json(new { success = "false", message = "Product not found" });
+            }
 
-            //if (productToBeDeleted!=null)
-            //{
-            //    if (!string.IsNullOrEmpty(productToBeDeleted.ImageURL))
-            //    {
-            //        //delete the old image
-            //        //Delete the forword slash
-            //        string wwwRootPath = _webHostEnvironment.WebRootPath;
-            //        string imgFilePath = Path.Combine(wwwRootPath, productToBeDeleted.ImageURL.TrimStart('/'));
-            //        if (System.IO.File.Exists(imgFilePath))
-            //        {
-            //            System.IO.File.Delete(imgFilePath);
-            //        }
-            //    }
-            //    _unitOfWork.ProductRepository.Remove(productToBeDeleted);
-            //    _unitOfWork.Save();
-            //    return Json( new {success="True", message="Product has been deleted" });
+            string productPath = @"images/products/product-" + id;
+            string productImgPath = Path.Combine(_webHostEnvironment.WebRootPath, productPath);
 
-            //}
+            //delete every file in dir before dir deletion
+            if (Directory.Exists(productImgPath))
+            {
+                string[] filePaths = Directory.GetFiles(productImgPath);
+                for (int i = 0; i < filePaths.Length; i++)
+                {
+                    System.IO.File.Delete(filePaths[i]);
+                }
+                Directory.Delete(productImgPath);
+            }
+            _unitOfWork.ProductRepository.Remove(productToBeDeleted);
+            _unitOfWork.Save();
+            return Json(new { success = "true", message = "Product has been deleted" });
 
-            return Json(new { success = "False", message = "Product not found" });
         }
+
         #endregion
 
     }

@@ -1,142 +1,203 @@
 ﻿@model ProductVM
 
 
+<div class="container mt-4">
+    <div class="card shadow-lg border-0">
 
-<div class="card shadow border-0 mt-4">
-    <div class="card-header bg-secondary bg-gradient py-3">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h2 class="text-white py-2">@(Model.Product.Id!=0?"Edit":"Create")Product</h2>
-            </div>
+        <!-- HEADER -->
+        <div class="card-header bg-dark text-white py-3 text-center">
+            <h3 class="mb-0">
+                @(Model.Product.Id != 0 ? "Edit Product" : "Create Product")
+            </h3>
         </div>
-    </div>
 
-    <div class="card-body p-4">
-        <form method="post"  asp-action="Upsert" class="row g-3" enctype="multipart/form-data">
-            <!-- g-3 gives spacing between fields -->
-            @*<div asp-validation-summary="ModelOnly"></div>*@
+        <div class="card-body p-4">
+
+            <form method="post"
+                  asp-action="Upsert"
+                  enctype="multipart/form-data">
+
+                <input asp-for="Product.Id" hidden />
+
+                <div class="row g-4">
+
+                    <!-- LEFT COLUMN (FORM DATA) -->
+                    <div class="col-lg-8">
+
+                        <h5 class="border-bottom pb-2 mb-3">Product Information</h5>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Product.Title" class="form-control shadow-sm" />
+                            <label asp-for="Product.Title"></label>
+                            <span asp-validation-for="Product.Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Product.Description" class="fw-semibold"></label>
+                            <textarea asp-for="Product.Description"
+                                      class="form-control"
+                                      rows="6"></textarea>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input asp-for="Product.Author" class="form-control shadow-sm" />
+                                    <label asp-for="Product.Author"></label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input asp-for="Product.ISBN" class="form-control shadow-sm" />
+                                    <label asp-for="Product.ISBN"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="border-bottom pb-2 mt-4 mb-3">Pricing</h5>
+
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input asp-for="Product.ListPrice" class="form-control shadow-sm" />
+                                    <label asp-for="Product.ListPrice"></label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input asp-for="Product.Price" class="form-control shadow-sm" />
+                                    <label asp-for="Product.Price"></label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input asp-for="Product.Price50" class="form-control shadow-sm" />
+                                    <label asp-for="Product.Price50"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input asp-for="Product.Price100" class="form-control shadow-sm" />
+                                    <label asp-for="Product.Price100"></label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select asp-for="Product.CategoryId"
+                                            asp-items="Model.CategoryList"
+                                            class="form-select shadow-sm">
+                                        <option disabled selected>Select Category</option>
+                                    </select>
+                                    <label asp-for="Product.CategoryId"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ACTION BUTTONS -->
+                        <div class="mt-4 border-top pt-3 d-flex gap-3">
+                            <a asp-controller="Product"
+                               asp-action="Index"
+                               class="btn btn-outline-secondary px-4">
+                                Cancel
+                            </a>
+
+                            <button type="submit" class="btn btn-primary px-5">
+                                @(Model.Product.Id != 0 ? "Update" : "Create")
+                            </button>
+                        </div>
+
+                    </div>
 
 
-            <input asp-for="Product.Id" hidden />
-            @* <input asp-for="Product.ImageURL" hidden />  *@
-            <!-- Each input wrapped in col-12 for small screens, col-lg-6 for large -->
-            <div class="col-12 col-lg-12">
-                <div class="form-floating">
-                    <input asp-for="Product.Title" class="form-control border-0 shadow" />
-                    <label asp-for="Product.Title" class="ms-2"></label>
-                    <span class="text-danger" asp-validation-for="Product.Title"></span>
+                    <!-- RIGHT COLUMN (IMAGES PANEL) -->
+                    <div class="col-lg-4">
+
+                        <div class="image-panel p-3 border rounded shadow-sm">
+
+                            <h6 class="fw-bold mb-3">Product Images</h6>
+
+                            <div class="image-gallery d-flex flex-wrap gap-2 mb-3">
+                                @if (Model.Product.ProductImages?.Any() == true)
+                                {
+                                    foreach (var img in Model.Product.ProductImages)
+                                    {
+                                        <div>
+                                        <img src="@img.ImageURL"
+                                             class="img-thumbnail product-thumb"
+                                             data-bs-toggle="modal"
+                                             data-bs-target="#imagePreviewModal"
+                                             data-img-url="@img.ImageURL"
+                                             style="width: 80px; height: 100px; object-fit: cover; cursor: pointer;" />
+                                            <a asp-action="DeleteImage" asp-route-id="@img.Id"><i class="bi bi-trash"></i></a>
+                                        </div>
+                                        
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="text-muted">No images uploaded</span>
+                                }
+                            </div>
+                            <div class="upload-wrapper">
+
+                                <input type="file"
+                                       id="fileUpload"
+                                       name="files"
+                                       class="d-none"
+                                       multiple />
+
+                                <label for="fileUpload" class="upload-box text-center">
+                                    <div>
+                                        <i class="bi bi-cloud-arrow-up fs-2"></i>
+                                        <p class="mb-1 fw-semibold">Click or Drag Images Here</p>
+                                        <small class="text-muted">PNG, JPG, WEBP allowed</small>
+                                    </div>
+                                </label>
+
+                                <div id="fileList" class="mt-2 small text-muted"></div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
                 </div>
-            </div>
+            </form>
 
-            <div class="row">
-                <!-- Left column: Description -->
-                <div class="col-12 col-lg-8">
-                    <label asp-for="Product.Description" class="ms-2"></label>
-                    <textarea asp-for="Product.Description"
-                              class="form-control text-muted"
-                              rows="8"
-                              cols="40"></textarea>
-                </div>
-
-                <!-- Right column: Image -->
-                <div class="col-12 col-lg-4 d-flex align-items-start">
-                    @* <img src="@Model.Product.ImageURL" class="img-fluid border rounded" width="200" /> *@
-                </div>
-            </div>
-
-            <div class="col-12 col-lg-6">
-                <div class="form-floating">
-                    <input asp-for="Product.Author" class="form-control border-0 shadow" />
-                    <label asp-for="Product.Author" class="ms-2"></label>
-                    <span class="text-danger" asp-validation-for="Product.Author"></span>
-                </div>
-            </div>
-
-            <div class="col-12 col-lg-6">
-                <div class="form-floating">
-                    <input type="file" name="files" class="form-control border-0 shadow" multiple />
-                    <label asp-for="Product.ProductImages" class="ms-2"></label>
-
-                </div>
-            </div>
-
-            <div class="col-12 col-lg-6">
-                <div class="form-floating">
-                    <input asp-for="Product.ISBN" class="form-control border-0 shadow" />
-                    <label asp-for="Product.ISBN" class="ms-2"></label>
-                    <span class="text-danger" asp-validation-for="Product.ISBN"></span>
-                </div>
-            </div>
-
-            <div class="col-12 col-lg-6">
-                <div class="form-floating">
-                    <input asp-for="Product.ListPrice" class="form-control border-0 shadow" />
-                    <label asp-for="Product.ListPrice" class="ms-2"></label>
-                    <span class="text-danger" asp-validation-for="Product.ListPrice"></span>
-                </div>
-            </div>
-
-            <div class="col-12 col-lg-6">
-                <div class="form-floating">
-                    <input asp-for="Product.Price" class="form-control border-0 shadow" />
-                    <label asp-for="Product.Price" class="ms-2"></label>
-                    <span class="text-danger" asp-validation-for="Product.Price"></span>
-                </div>
-            </div>
-
-            <div class="col-12 col-lg-6">
-                <div class="form-floating">
-                    <input asp-for="Product.Price50" class="form-control border-0 shadow" />
-                    <label asp-for="Product.Price50" class="ms-2"></label>
-                    <span class="text-danger" asp-validation-for="Product.Price50"></span>
-                </div>     
-            </div>
-
-            <div class="col-12 col-lg-6">
-                <div class="form-floating">
-                    <input asp-for="Product.Price100" class="form-control border-0 shadow" />
-                    <label asp-for="Product.Price100" class="ms-2"></label>
-                    <span class="text-danger" asp-validation-for="Product.Price100"></span>
-                </div>
-            </div>
-
-
-
-
-            <div class="col-12 col-lg-6">
-                <div class="form-floating">
-                  @* <select asp-for="CategoryId" asp-items="ViewBag.CategoryList" class="form-select border-0 shadow-1"> *@
-                 @* <select asp-for="CategoryId" asp-items="@(ViewData["CategoryList"] as IEnumerable<SelectListItem> )" class="form-select border-0 shadow-1"> *@
-                    <select asp-for="@Model.Product.CategoryId" asp-items="@Model.CategoryList" class="form-select border-0 shadow-1">
-                        <option disabled>Select Category</option>
-                    </select>
-                    <label asp-for="@Model.Product.CategoryId" class="ms-2"></label>
-                    
-                </div>
-            </div>
-
-
-
-            <!-- Buttons -->
-
-            <div class="col-12 d-flex justify-content-start gap-3 pt-3">
-
-                @if (Model.Product.Id != 0)
-                {
-                    <button type="submit" asp-action="Upsert" class="btn btn-primary px-4">Update</button>
-                }
-                else
-                {
-                    <button type="submit" asp-action="Upsert" class="btn btn-primary px-4">Create</button>
-                }
-                
-                <a asp-area="Customer" asp-controller="Product" asp-action="Index"
-                   class="btn btn-outline-primary border-black px-4">Back to List</a>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
+
+
+<div class="modal fade" id="imagePreviewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0 shadow">
+
+            <div class="modal-header border-0">
+                <h5 class="modal-title">Image Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body text-center">
+                <img id="modalImage"
+                     src=""
+                     class="img-fluid rounded"
+                     style="max-height: 80vh;" />
+            </div>
+
+        </div>
+    </div>
+</div>
 
 
 
@@ -146,4 +207,19 @@
     @{
         <partial name="_ValidationScriptsPartial.cshtml" />
     }
+    <script>
+           $(document).on("click", ".img-thumbnail", function () {
+            $("#modalImage").attr("src", $(this).data("img-url"));
+        });
+
+
+
+        $("#fileUpload").on("change",function(){
+            let fileNames=[];
+
+        });
+
+
+    </script>
 }
+

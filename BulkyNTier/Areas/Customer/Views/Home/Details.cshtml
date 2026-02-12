@@ -12,11 +12,15 @@
     <div class="row g-4 align-items-start">
         <!-- LEFT: Cover -->
         <div class="col-md-4">
-            <div class="card border-0 shadow-sm book-card">
-                @* <img src="@Model.Product.ImageURL"
+
+            @foreach (var imgObj in Model.Product.ProductImages)
+            {
+                <div class="card border-0 shadow-sm book-card">
+                    <img src="@imgObj.ImageURL"
                      alt="@Model.Product.Title"
-                     class="card-img-top book-image-large" /> *@
+                     class="card-img-top book-image-large" />
             </div>
+            }
         </div>
 
         <!-- RIGHT: Details -->
